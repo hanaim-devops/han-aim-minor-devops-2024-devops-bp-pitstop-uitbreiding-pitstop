@@ -1,5 +1,9 @@
 <Project>
   <ItemGroup>
+    <PackageVersion Include="Sentry" Version="4.12.1" />
+    <PackageVersion Include="Sentry.AspNet" Version="4.12.1" />
+    <PackageVersion Include="Sentry.AspNetCore" Version="4.12.1" />
+    <PackageVersion Include="Sentry.Profiling" Version="4.12.1" />
     <PackageVersion Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.6" />
     <PackageVersion Include="Microsoft.AspNetCore.HealthChecks" Version="1.0.0" />

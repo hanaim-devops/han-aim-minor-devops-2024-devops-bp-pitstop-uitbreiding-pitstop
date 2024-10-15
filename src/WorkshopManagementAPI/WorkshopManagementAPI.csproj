@@ -12,6 +12,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <PackageReference Include="Dapper" />
+    <PackageReference Include="Sentry" />
+    <PackageReference Include="Sentry.AspNet" />
+    <PackageReference Include="Sentry.AspNetCore" />
+    <PackageReference Include="Sentry.Profiling" />
     <PackageReference Include="System.Data.SqlClient" />
     <PackageReference Include="Microsoft.AspNetCore.HealthChecks" />
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" />
