@@ -7,14 +7,5 @@ public class MaintenanceHistory
     public string Description { get; set; }
     public MaintenanceTypes MaintenanceType { get; set; }
     public Guid MaintenanceJobId { get; set; }
-
-    public enum MaintenanceTypes
-    {
-        Onderhoud,
-        APK,
-        Schadeherstel,
-        Bandenwissel,
-        Overig
-    }
 }
 
