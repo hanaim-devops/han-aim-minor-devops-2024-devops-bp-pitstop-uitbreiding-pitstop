@@ -1,8 +1,8 @@
 global using MaintenanceHistoryAPI.Model;
-/*global using Pitstop.VehicleManagement.Events;
-global using Pitstop.VehicleManagement.Commands;
-global using Pitstop.VehicleManagementAPI.Mappers;
-global using Pitstop.VehicleManagement.DataAccess;*/
+/*global using Pitstop.MaintenanceHistoryAPI.Events;
+global using Pitstop.MaintenanceHistoryAPI.Commands;
+global using Pitstop.MaintenanceHistoryAPI.Mappers;
+global using Pitstop.MaintenanceHistoryAPI.DataAccess;*/
 global using Pitstop.Infrastructure.Messaging;
 global using Pitstop.Infrastructure.Messaging.Configuration;
 global using Microsoft.EntityFrameworkCore;
