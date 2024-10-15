@@ -1,23 +1,28 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["MaintenanceHistoryAPI/MaintenanceHistoryAPI.csproj", "MaintenanceHistoryAPI/"]
-RUN dotnet restore "MaintenanceHistoryAPI/MaintenanceHistoryAPI.csproj"
-COPY . .
-WORKDIR "/src/MaintenanceHistoryAPI"
-RUN dotnet build "MaintenanceHistoryAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
-
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "MaintenanceHistoryAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
+FROM pitstop-dotnet-sdk-base:1.0 AS build-env
 WORKDIR /app
-COPY --from=publish /app/publish .
+
+# Copy necessary files and restore as distinct layer
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM pitstop-dotnet-aspnet-base:1.0
+WORKDIR /app
+COPY --from=build-env /app/out .
+
+# Expose ports
+EXPOSE 5400/tcp
+ENV ASPNETCORE_URLS http://*:5400
+HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:5000/hc || exit 1
+
+# Start
 ENTRYPOINT ["dotnet", "MaintenanceHistoryAPI.dll"]
+

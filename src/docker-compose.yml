@@ -112,6 +112,16 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Production
 
+  historymaintananceapi:
+    image: pitstop/maintenancehistoryapi:1.0
+    build: MaintenanceHistoryAPI
+    container_name: maintenancehistoryapi
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
   workshopmanagementeventhandler:
     image: pitstop/workshopmanagementeventhandler:1.0
     build: WorkshopManagementEventHandler
