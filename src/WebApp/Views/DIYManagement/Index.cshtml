@@ -1,0 +1,24 @@
+﻿@model Pitstop.WebApp.ViewModels.DIYManagementViewModel
+@{
+    ViewData["Title"] = "DIY Overview";
+}
+<h3 id="PageTitle">DIY Management - overview</h3>
+
+<h1>DIY Management WOW</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>DIY Name</th>
+            <th>DIY Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var diy in Model.DIYAvonden)
+        {
+            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "DIYManagement", new { id = diy.Id }))'">
+                <td>@diy.Name</td>
+                <td>@diy.Description</td>
+            </tr>
+        }
+</tbody>
