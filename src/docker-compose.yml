@@ -117,7 +117,7 @@ services:
     build: MaintenanceHistoryAPI
     container_name: maintenancehistoryapi
     ports:
-      - "5400"
+      - "5400:5400"
     depends_on:
       - rabbitmq
       - sqlserver
