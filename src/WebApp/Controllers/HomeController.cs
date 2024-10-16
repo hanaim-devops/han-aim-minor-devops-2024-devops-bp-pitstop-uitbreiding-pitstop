@@ -1,4 +1,4 @@
-﻿namespace PitStop.Controllers;
+﻿namespace Pitstop.WebApp.Controllers;
 
 public class HomeController : Controller
 {
