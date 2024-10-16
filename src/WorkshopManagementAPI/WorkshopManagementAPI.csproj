@@ -5,6 +5,7 @@
     <AssemblyName>Pitstop.WorkshopManagementAPI</AssemblyName>
     <RootNamespace>Pitstop.WorkshopManagementAPI</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsContainerApp>true</IsContainerApp>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 

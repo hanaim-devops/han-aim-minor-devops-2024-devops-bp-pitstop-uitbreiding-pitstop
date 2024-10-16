@@ -5,6 +5,7 @@
     <AssemblyName>Pitstop.WebApp</AssemblyName>
     <RootNamespace>Pitstop.WebApp</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsContainerApp>true</IsContainerApp>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   

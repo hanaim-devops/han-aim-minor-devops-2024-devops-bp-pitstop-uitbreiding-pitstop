@@ -6,6 +6,7 @@
     <AssemblyName>Pitstop.NotificationService</AssemblyName>
     <RootNamespace>Pitstop.NotificationService</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsContainerApp>true</IsContainerApp>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 

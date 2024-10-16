@@ -6,6 +6,7 @@
     <AssemblyName>Pitstop.AuditlogService</AssemblyName>
     <RootNamespace>Pitstop.AuditlogService</RootNamespace>   
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsContainerApp>true</IsContainerApp>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
