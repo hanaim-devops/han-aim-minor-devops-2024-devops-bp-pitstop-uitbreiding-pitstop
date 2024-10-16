@@ -1,5 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Voeg de vereiste services toe voor controllers
+builder.Services.AddControllers();
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -20,5 +23,9 @@ var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=DIY}/{action=Index}/{id?}");
 
 app.Run();
