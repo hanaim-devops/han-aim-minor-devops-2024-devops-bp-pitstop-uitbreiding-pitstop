@@ -116,6 +116,8 @@ services:
     image: pitstop/maintenancehistoryapi:1.0
     build: MaintenanceHistoryAPI
     container_name: maintenancehistoryapi
+    ports:
+      - "5400"
     depends_on:
       - rabbitmq
       - sqlserver

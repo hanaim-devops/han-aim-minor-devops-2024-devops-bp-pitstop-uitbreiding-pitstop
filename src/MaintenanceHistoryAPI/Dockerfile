@@ -24,5 +24,4 @@ ENV ASPNETCORE_URLS http://*:5400
 HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:5000/hc || exit 1
 
 # Start
-ENTRYPOINT ["dotnet", "MaintenanceHistoryAPI.dll"]
-
+ENTRYPOINT ["dotnet", "Pitstop.MaintenanceHistoryAPI.dll"]

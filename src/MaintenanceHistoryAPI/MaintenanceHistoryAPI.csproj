@@ -28,12 +28,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <Reference Include="Microsoft.EntityFrameworkCore">
         <HintPath>..\..\..\..\..\..\.nuget\packages\microsoft.entityframeworkcore\8.0.6\lib\net8.0\Microsoft.EntityFrameworkCore.dll</HintPath>
       </Reference>
@@ -43,6 +37,12 @@
       <Reference Include="Polly">
         <HintPath>..\..\..\..\..\..\.nuget\packages\polly\8.4.0\lib\net6.0\Polly.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

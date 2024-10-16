@@ -9,11 +9,16 @@ builder.Host.UseSerilog((context, logContext) =>
         .Enrich.WithMachineName()
 );
 
+builder.Services.AddControllers();
+
 // Add services to the container.
 
 // sql connection string
 var sqlConnectionString = builder.Configuration.GetConnectionString("MaintenanceHistoryCN");
 builder.Services.AddDbContext<MaintenanceHistoryContext>(options => options.UseSqlServer(sqlConnectionString));
+
+// add messagepublisher
+builder.Services.UseRabbitMQMessagePublisher(builder.Configuration);
 
 // Register the Swagger generator, defining one or more Swagger documents
 builder.Services.AddSwaggerGen(c =>
@@ -36,9 +41,20 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+// Enable middleware to serve generated Swagger as a JSON endpoint.
+app.UseSwagger();
+
+// Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MaintenanceHistory API - v1");
+});
 
 // auto migrate the database
 using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -47,6 +63,8 @@ using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().Creat
 }
 
 app.UseHttpsRedirection();
+
+app.UseHealthChecks("/hc");
 
 app.UseAuthorization();
 
