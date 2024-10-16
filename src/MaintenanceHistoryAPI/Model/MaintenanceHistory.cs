@@ -1,4 +1,4 @@
-namespace MaintenanceHistoryAPI.Model;
+namespace Pitstop.MaintenanceHistoryAPI.Model;
 
 public class MaintenanceHistory
 {

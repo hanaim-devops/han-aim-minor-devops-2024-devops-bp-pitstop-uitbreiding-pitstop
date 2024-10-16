@@ -1,4 +1,4 @@
-namespace MaintenanceHistoryAPI.Enums;
+namespace Pitstop.MaintenanceHistoryAPI.Enums;
 
 public enum MaintenanceTypes
 {

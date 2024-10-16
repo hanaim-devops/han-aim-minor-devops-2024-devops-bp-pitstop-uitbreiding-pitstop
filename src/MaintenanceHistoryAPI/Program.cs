@@ -1,5 +1,3 @@
-using MaintenanceHistoryAPI.DataAccess;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // setup logging

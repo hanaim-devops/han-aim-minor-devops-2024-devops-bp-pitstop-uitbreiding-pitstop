@@ -1,4 +1,6 @@
-global using MaintenanceHistoryAPI.Model;
+global using Pitstop.MaintenanceHistoryAPI.Model;
+global using Pitstop.MaintenanceHistoryAPI.Enums;
+global using Pitstop.MaintenanceHistoryAPI.DataAccess;
 /*global using Pitstop.MaintenanceHistoryAPI.Events;
 global using Pitstop.MaintenanceHistoryAPI.Commands;
 global using Pitstop.MaintenanceHistoryAPI.Mappers;
@@ -12,4 +14,3 @@ global using Microsoft.OpenApi.Models;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Text.RegularExpressions;
 global using Polly;
-global using MaintenanceHistoryAPI.Enums;
