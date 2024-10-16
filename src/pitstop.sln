@@ -45,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "persoonlijke-bijdrage", "pe
 		..\docs\luuk.md = ..\docs\luuk.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceHistoryAPI", "MaintenanceHistoryAPI\MaintenanceHistoryAPI.csproj", "{60302DD4-3289-4701-AF52-37F5ED7C6F6C}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\build\_build.csproj", "{DDF299A2-B295-402A-BB02-B3E77B7161F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build & Deploy", "Build & Deploy", "{39C7EEA2-D866-45D4-99CE-7E32A27225F8}"
@@ -108,12 +110,14 @@ Global
 		{53DCDC74-1B80-4EA2-8DF2-01DA5265A8CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53DCDC74-1B80-4EA2-8DF2-01DA5265A8CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53DCDC74-1B80-4EA2-8DF2-01DA5265A8CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60302DD4-3289-4701-AF52-37F5ED7C6F6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60302DD4-3289-4701-AF52-37F5ED7C6F6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60302DD4-3289-4701-AF52-37F5ED7C6F6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60302DD4-3289-4701-AF52-37F5ED7C6F6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DE329AD2-663E-4303-A6FB-85A60FC944E3} = {465F15A5-E1A8-4D9A-A95F-7F951CF77EC0}
 		{A14A5099-EA92-4018-8135-35765A16B9F9} = {465F15A5-E1A8-4D9A-A95F-7F951CF77EC0}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 		{DDF299A2-B295-402A-BB02-B3E77B7161F7} = {39C7EEA2-D866-45D4-99CE-7E32A27225F8}
 	EndGlobalSection
 EndGlobal

@@ -9,6 +9,30 @@ builder.Host.UseSerilog((context, logContext) =>
         .Enrich.WithMachineName()
 );
 
+builder.WebHost.UseSentry(o =>
+{
+    o.Dsn = builder.Configuration["Sentry:DSN"];
+    // When configuring for the first time, to see what the SDK is doing:
+    o.Debug = true;
+    // Set TracesSampleRate to 1.0 to capture 100%
+    // of transactions for tracing.
+    // We recommend adjusting this value in production
+    o.TracesSampleRate = 1.0;
+    // Sample rate for profiling, applied on top of othe TracesSampleRate,
+    // e.g. 0.2 means we want to profile 20 % of the captured transactions.
+    // We recommend adjusting this value in production.
+    o.ProfilesSampleRate = 1.0;
+    // Requires NuGet package: Sentry.Profiling
+    // Note: By default, the profiler is initialized asynchronously. This can
+    // be tuned by passing a desired initialization timeout to the constructor.
+    o.AddIntegration(new ProfilingIntegration(
+        // During startup, wait up to 500ms to profile the app startup code.
+        // This could make launching the app a bit slower so comment it out if you
+        // prefer profiling to start asynchronously.
+        TimeSpan.FromMilliseconds(500)
+    ));
+});
+
 builder.Services.AddControllers();
 
 // Add services to the container.
