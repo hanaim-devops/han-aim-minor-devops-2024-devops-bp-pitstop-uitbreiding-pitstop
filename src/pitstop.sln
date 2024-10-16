@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "persoonlijke-bijdrage", "pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceHistoryAPI", "MaintenanceHistoryAPI\MaintenanceHistoryAPI.csproj", "{60302DD4-3289-4701-AF52-37F5ED7C6F6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceHistoryAPI", "MaintenanceHistoryAPI\MaintenanceHistoryAPI.csproj", "{60302DD4-3289-4701-AF52-37F5ED7C6F6C}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\build\_build.csproj", "{DDF299A2-B295-402A-BB02-B3E77B7161F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build & Deploy", "Build & Deploy", "{39C7EEA2-D866-45D4-99CE-7E32A27225F8}"
