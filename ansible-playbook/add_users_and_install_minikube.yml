@@ -1,0 +1,42 @@
+---
+- hosts: vps
+  become: yes
+  tasks:
+
+    - name: Voeg nieuwe gebruikers toe
+      user:
+        name: "{{ item.name }}"
+        password: "{{ item.password | password_hash('sha512') }}"
+        shell: /bin/bash
+        state: present
+      with_items:
+        - { name: "daan", password: "q2M#9n(H4Nt1a" }
+        - { name: "mark", password: "[d43?6Baa^`82NQe" } 
+        - { name: "luuk", password: "52Pfk2D6@Kr" }
+        - { name: "jochem", password: "vBM4?3z}60" }
+
+    - name: Installeer vereiste pakketten voor Minikube
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - conntrack 
+
+    - name: Download Minikube
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /usr/local/bin/minikube
+        mode: '0755'
+
+    - name: Verifieer Minikube installatie
+      command: minikube version
+      register: minikube_version
+
+    - name: Print Minikube versie
+      debug:
+        msg: "Minikube versie: {{ minikube_version.stdout }}"
