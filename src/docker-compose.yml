@@ -133,7 +133,15 @@ services:
       - sqlserver
     environment:
       - DOTNET_ENVIRONMENT=Production
-
+  maintenancehistoryeventhandler:
+    image: pitstop/maintenancehistoryeventhandler:1.0
+    build: MaintanenceHistoryEventHandler
+    container_name: maintenancehistoryeventhandler
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    environment:
+      - DOTNET_ENVIRONMENT=Production
   webapp:
     image: pitstop/webapp:1.0
     build: WebApp

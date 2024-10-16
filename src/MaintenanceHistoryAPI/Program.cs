@@ -41,6 +41,7 @@ builder.Services.AddDbContext<MaintenanceHistoryContext>(options => options.UseS
 
 // add messagepublisher
 builder.Services.UseRabbitMQMessagePublisher(builder.Configuration);
+builder.Services.AddTransient<IMessageHandler, RabbitMQMessageHandler>();
 
 // Register the Swagger generator, defining one or more Swagger documents
 builder.Services.AddSwaggerGen(c =>

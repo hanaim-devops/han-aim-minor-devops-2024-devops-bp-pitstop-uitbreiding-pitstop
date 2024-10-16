@@ -16,7 +16,7 @@ public class TimeWorker : IHostedService
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        _task = Task.Run(() => Worker(), _cancellationTokenSource.Token);
+        _task = Task.Run(Worker, _cancellationTokenSource.Token);
         return Task.CompletedTask;
     }
 
