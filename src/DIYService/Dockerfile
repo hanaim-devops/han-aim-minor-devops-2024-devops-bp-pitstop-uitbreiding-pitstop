@@ -27,4 +27,4 @@ COPY --from=build /app/out ./
 EXPOSE 80
 
 # Set the entry point for the application
-ENTRYPOINT ["dotnet", "Pitstop.DIYService.dll"]
+ENTRYPOINT ["dotnet", "DIYService.dll"]
