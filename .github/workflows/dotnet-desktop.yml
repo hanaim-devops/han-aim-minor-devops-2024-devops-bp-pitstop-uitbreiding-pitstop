@@ -1,0 +1,24 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # Unit tests for core domain
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore dependencies
+        run: dotnet restore src/WorkshopManagement.UnitTests/WorkshopManagement.UnitTests.csproj
+      - name: Build the solution
+        run: dotnet build src/pitstop.sln --configuration Release
+      - name: Run unit tests
+        run: dotnet test src/WorkshopManagement.UnitTests/WorkshopManagement.UnitTests.csproj --verbosity normal
