@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<DiyTestModelService>();
 builder.Services.AddScoped<DiyTestModelDAO>();
 
-var connectionString = builder.Configuration.GetConnectionString("DIYManagement");
+var connectionString = builder.Configuration.GetConnectionString("DIYManagementCN");
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
 
 
