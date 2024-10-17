@@ -2,5 +2,6 @@
 {
     public class DIYManagementNewRegistrationViewModel
     {
+        public DIYRegistration DIYRegistration { get; set; }
     }
 }
