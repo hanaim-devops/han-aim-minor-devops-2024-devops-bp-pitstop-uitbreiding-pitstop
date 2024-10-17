@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using RentalCarManagementAPI.Models;
 
 namespace RentalCarManagementAPI.Controller;
 
@@ -7,4 +9,9 @@ namespace RentalCarManagementAPI.Controller;
 public class RentalCarController : ControllerBase
 {
     // Todo: implement methods for retrieving rental cars.
+    [HttpGet]
+    public List<RentalCar> GetRentalCars()
+    {
+        return [];
+    }
 }

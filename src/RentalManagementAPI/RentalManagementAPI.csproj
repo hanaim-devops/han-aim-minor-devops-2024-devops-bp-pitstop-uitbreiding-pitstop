@@ -2,8 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <AssemblyName>Pitstop.RentalManagementAPI</AssemblyName>
+        <RootNamespace>Pitstop.RentalManagementAPI</RootNamespace>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
