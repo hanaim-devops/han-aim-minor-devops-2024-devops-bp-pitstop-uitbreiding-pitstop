@@ -48,9 +48,8 @@
         {
             return await _resiliencyHelper.ExecuteResilient(async () =>
             {
-                //RegisterCustomer cmd = inputModel.MapToRegisterCustomer();
-                //await _customerManagementAPI.RegisterCustomer(cmd);
-                //await _DIYManagamentAPI.RegisterDIYAvondCustomer(cmd);
+                RegisterDIYRegistration cmd = inputModel.MapToDIYRegistration();
+                await _DIYManagamentAPI.RegisterDIYAvondCustomer(cmd);
                 return RedirectToAction("Index");
             }, View("Offline", new CustomerManagementOfflineViewModel()));
         }
