@@ -19,6 +19,21 @@ public class MaintenanceHistoryController : Controller
     }
     
     [HttpGet]
+    [Route("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var history = await _dbContext.MaintenanceHistories
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (history == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(history);
+    }
+    
+    [HttpGet]
     [Route("{licenseNumber}")]
     public async Task<IActionResult> GetByLicenseNumber(string licenseNumber)
     {

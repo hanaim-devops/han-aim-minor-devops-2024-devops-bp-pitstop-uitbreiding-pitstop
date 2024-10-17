@@ -15,14 +15,31 @@ public class MaintenanceHistoryAPI : IMaintenanceHistoryAPI
                 ContentSerializer = new NewtonsoftJsonContentSerializer()
             });
     }
-    
-    public async Task<List<MaintenanceHistory>> GetHistoryByLicenseNumber(string licenseNumber)
+
+    public async Task<MaintenanceHistory> GetHistoryById(int id)
     {
-        //TODO: Status code check naar try verplaatsen zodat niet elke vehicle aan knop krijgt
         try
         {
-            var response = await _restClient.GetHistoryByLicenseNumber(licenseNumber);
-            return response;
+            return await _restClient.GetHistoryById(id);
+        }
+        catch (ApiException ex)
+        {
+            if (ex.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+            else
+            {
+                throw;
+            }
+        }
+    }
+
+    public async Task<List<MaintenanceHistory>> GetHistoryByLicenseNumber(string licenseNumber)
+    {
+        try
+        {
+            return await _restClient.GetHistoryByLicenseNumber(licenseNumber);
         }
         catch (ApiException ex)
         {

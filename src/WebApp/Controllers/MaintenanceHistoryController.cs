@@ -24,7 +24,22 @@ public class MaintenanceHistoryController : Controller
     
         var model = new MaintenanceHistoryViewModel
         {
-            LicenseNumber = licenseNumber
+            LicenseNumber = licenseNumber,
+            MaintenanceHistories = maintenanceHistory
+        };
+        return View(model);
+    }
+    
+    public async Task<IActionResult> Details(int id)
+    {
+        var history = await _maintenanceHistoryAPI.GetHistoryById(id);
+
+        var model = new MaintenanceHistoryDetailsViewModel
+        {
+            Id = history.Id,
+            LicenseNumber = history.LicenseNumber,
+            MaintenanceDate = history.MaintenanceDate,
+            Description = history.Description,
         };
         return View(model);
     }

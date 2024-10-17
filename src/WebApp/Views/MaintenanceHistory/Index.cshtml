@@ -8,13 +8,15 @@
 <table class="table">
     <thead>
     <tr>
+        <th>License No.</th>
         <th>Date</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var maintenance in Model.MaintenanceHistories)
     {
-        <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "MaintenanceHistory", new { maintenance = maintenance }))'">
+        <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "MaintenanceHistory", new { id = maintenance.Id }))'">
+            <td>@maintenance.LicenseNumber</td>
             <td>@maintenance.MaintenanceDate</td>
         </tr>
     }
