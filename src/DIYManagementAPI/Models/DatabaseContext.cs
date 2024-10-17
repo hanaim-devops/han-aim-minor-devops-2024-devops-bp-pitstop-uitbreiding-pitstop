@@ -11,6 +11,8 @@ namespace DIYManagementAPI.Models
 
         public DbSet<DiyTestModel> DiyTestModels { get; set; }
 
+        public DbSet<DIYRegistration> DIYRegistrations { get; set; }
+
         public void MigrateDB()
         {
             Policy

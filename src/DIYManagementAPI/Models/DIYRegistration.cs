@@ -2,7 +2,7 @@
 
 namespace DIYManagementAPI.Models
 {
-    public class DIYAvondRegistration
+    public class DIYRegistration
     {
         [Key]
         public int DIYAvondID {  get; set; } 
