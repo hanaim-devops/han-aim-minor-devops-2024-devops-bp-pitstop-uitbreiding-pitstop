@@ -1,0 +1,27 @@
+﻿@model Pitstop.WebApp.ViewModels.RentalCarManagementDetailsViewModel
+@{
+    ViewData["Title"] = "Rental Car Details";
+}
+
+<h3 id="PageTitle">Rental Car Management - details</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td width="150">License Number :</td>
+            <td><b>@Model.RentalCar.LicenseNumber</b></td>
+        </tr>
+        <tr>
+            <td width="150">Brand :</td>
+            <td><b>@Model.RentalCar.Model.Brand.Name</b></td>
+        </tr>
+        <tr>
+            <td width="150">Type :</td>
+            <td><b>@Model.RentalCar.Model.Name</b></td>
+        </tr>
+    </tbody>
+</table>
+<span><a id="BackButton" asp-action="Index" asp-controller="RentalCarManagement" class="btn btn-default">Back</a></span>
+
+
+
