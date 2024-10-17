@@ -34,7 +34,7 @@
         {
             DIYRegistration = new DIYRegistration
             {
-                DIYAvondId = diyAvondId
+                DIYEveningId = diyAvondId
             }
         };
 

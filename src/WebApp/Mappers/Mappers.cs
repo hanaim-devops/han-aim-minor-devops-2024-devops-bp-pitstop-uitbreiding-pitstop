@@ -24,7 +24,7 @@ public static class Mappers
 
     public static RegisterDIYRegistration MapToDIYRegistration(this DIYManagementNewRegistrationViewModel source) => new RegisterDIYRegistration(
         Guid.NewGuid(),
-        source.DIYRegistration.DIYAvondId,
+        source.DIYRegistration.DIYEveningId,
         source.DIYRegistration.CustomerName,
         source.DIYRegistration.Reparations
     );

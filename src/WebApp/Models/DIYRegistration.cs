@@ -2,7 +2,7 @@ namespace Pitstop.WebApp.Models
 {
     public class DIYRegistration
     {
-        public int DIYAvondId { get; set; }
+        public int DIYEveningId { get; set; }
 
         [Display(Name = "Customer name")]
         public string CustomerName { get; set; }

@@ -17,9 +17,9 @@ public class DIYManagementAPI : IDIYManagementAPI
             });
     }
 
-    public Task<DIYAvond> GetDIYAvondById([AliasAs("id")] int diyAvondId)
+    public async Task<DIYAvond> GetDIYAvondById([AliasAs("id")] int diyEveningId)
     {
-        throw new NotImplementedException();
+        return await _restClient.GetDIYAvondById(diyEveningId);
     }
 
     public async Task<List<DIYAvond>> GetDIYAvonden()
