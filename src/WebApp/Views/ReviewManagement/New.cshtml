@@ -1,0 +1,26 @@
+﻿@model Pitstop.WebApp.ViewModels.CustomerManagementNewViewModel
+@{
+    ViewData["Title"] = "New Review";
+}
+
+
+<h3 id="PageTitle">Review Management - new review</h3>
+
+<form asp-controller="ReviewManagement" asp-action="New" method="post">
+        <input value="@(Model.CustomerId)" asp-for="customerId" type="hidden" class="form-control" />
+
+    <div class="form-group">
+        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+            <option selected>Open this select menu</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <label for="floatingSelect">Rate Pitstop from 1 to 5 stars</label>
+    </div>
+    
+    <span><button id="SubmitButton" type="submit" class="btn btn-default">New Review</button></span>
+    <span><a id="CancelButton" asp-action="Index" asp-controller="ReviewManagement" class="btn btn-default">Cancel</a></span>
+</form>
