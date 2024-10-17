@@ -21,7 +21,8 @@ kubectl apply -f ./pipeline/build-and-deploy.yaml
 #kubectl delete pipelinerun invoiceservice-build-run
 #kubectl delete pipelinerun auditlogservice-build-run
 #kubectl delete pipelinerun workshopmanagementapi-build-run
-kubectl delete pipelinerun vehiclemanagementapi-build-run
+#kubectl delete pipelinerun vehiclemanagementapi-build-run
+kubectl delete pipelinerun rentalmanagementapi-build-run
 #kubectl apply -f ./pipeline-run/dotnet-aspnet-base-build-run.yaml
 #kubectl apply -f ./pipeline-run/dotnet-runtime-base-build-run.yaml
 #kubectl apply -f ./pipeline-run/dotnet-sdk-base-build-run.yaml
@@ -33,7 +34,8 @@ kubectl delete pipelinerun vehiclemanagementapi-build-run
 #kubectl apply -f ./pipeline-run/invoiceservice-build-run.yaml
 #kubectl apply -f ./pipeline-run/auditlogservice-build-run.yaml
 #kubectl apply -f ./pipeline-run/workshopmanagementapi-build-run.yaml
-kubectl apply -f ./pipeline-run/vehiclemanagementapi-build-run.yaml
+#kubectl apply -f ./pipeline-run/vehiclemanagementapi-build-run.yaml
+kubectl apply -f ./pipeline-run/rentalmanagementapi-build-run.yaml
 
 #tkn pipelinerun logs dotnet-aspnet-base-build-run --follow
 #tkn pipelinerun describe dotnet-aspnet-base-build-run
@@ -68,5 +70,8 @@ kubectl apply -f ./pipeline-run/vehiclemanagementapi-build-run.yaml
 #tkn pipelinerun logs workshopmanagementapi-build-run --follow
 #tkn pipelinerun describe workshopmanagementapi-build-run
 
-tkn pipelinerun logs vehiclemanagementapi-build-run --follow
-tkn pipelinerun describe vehiclemanagementapi-build-run
+#tkn pipelinerun logs vehiclemanagementapi-build-run --follow
+#tkn pipelinerun describe vehiclemanagementapi-build-run
+
+tkn pipelinerun logs rentalmanagementapi-build-run --follow
+tkn pipelinerun describe rentalmanagementapi-build-run
