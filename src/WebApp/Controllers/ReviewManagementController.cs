@@ -52,9 +52,11 @@ public class ReviewManagementController : Controller
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
+            var customers = await _customerManagementAPI.GetCustomers();
+
             var model = new ReviewManagementNewViewModel
             {
-
+                Customers = customers.Select(c => new SelectListItem { Value = c.CustomerId, Text = c.Name })
             };
             return View(model);
         }, View("Offline", new ReviewManagementOfflineViewModel()));

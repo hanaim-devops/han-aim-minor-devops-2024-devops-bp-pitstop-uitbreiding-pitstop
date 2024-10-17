@@ -2,7 +2,9 @@
 
 public class ReviewManagementNewViewModel
 {
-    public int CustomerId { get; set; }
+    public IEnumerable<SelectListItem> Customers { get; set; }
+    public string SelectedCustomerId { get; set; }
+    
     public int Stars { get; set; }
     
     
