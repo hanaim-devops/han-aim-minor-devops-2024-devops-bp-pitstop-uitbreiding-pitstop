@@ -1,10 +1,10 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+﻿FROM luukjp/pitstop-dotnet-aspnet-base:1.0 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM luukjp/pitstop-dotnet-sdk-base:1.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["RentalManagementEventHandler/RentalManagementEventHandler.csproj", "RentalManagementEventHandler/"]
