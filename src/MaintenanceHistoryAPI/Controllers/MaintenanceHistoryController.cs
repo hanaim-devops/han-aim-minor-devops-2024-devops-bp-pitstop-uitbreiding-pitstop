@@ -22,11 +22,15 @@ public class MaintenanceHistoryController : Controller
     [Route("{licenseNumber}")]
     public async Task<IActionResult> GetByLicenseNumber(string licenseNumber)
     {
-        var history = await _dbContext.MaintenanceHistories.FirstOrDefaultAsync(c => c.LicenseNumber == licenseNumber);
-        if (history == null)
+        var history = await _dbContext.MaintenanceHistories
+            .Where(c => c.LicenseNumber == licenseNumber)
+            .ToListAsync();
+    
+        if (!history.Any())
         {
             return NotFound();
         }
+        
         return Ok(history);
     }
 }

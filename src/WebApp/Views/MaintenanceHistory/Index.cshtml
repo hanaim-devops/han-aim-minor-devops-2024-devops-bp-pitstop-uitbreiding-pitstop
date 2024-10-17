@@ -4,3 +4,19 @@
 }
 
 <h3 id="PageTitle">History Management for @Model.LicenseNumber</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var maintenance in Model.MaintenanceHistories)
+    {
+        <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "MaintenanceHistory", new { maintenance = maintenance }))'">
+            <td>@maintenance.MaintenanceDate</td>
+        </tr>
+    }
+    </tbody>
+</table>

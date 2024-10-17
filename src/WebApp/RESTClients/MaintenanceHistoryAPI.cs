@@ -16,12 +16,13 @@ public class MaintenanceHistoryAPI : IMaintenanceHistoryAPI
             });
     }
     
-    public async Task<MaintenanceHistory> GetHistoryById(string licenseNumber)
+    public async Task<List<MaintenanceHistory>> GetHistoryByLicenseNumber(string licenseNumber)
     {
-        //TODO: Status code check naar try verplaatsen
+        //TODO: Status code check naar try verplaatsen zodat niet elke vehicle aan knop krijgt
         try
         {
-            return await _restClient.GetHistoryById(licenseNumber);
+            var response = await _restClient.GetHistoryByLicenseNumber(licenseNumber);
+            return response;
         }
         catch (ApiException ex)
         {

@@ -31,7 +31,7 @@
 
             foreach (var vehicle in allVehicles)
             {
-                var maintenanceHistory = _maintenanceHistoryAPI.GetHistoryById(vehicle.LicenseNumber);
+                var maintenanceHistory = await _maintenanceHistoryAPI.GetHistoryByLicenseNumber(vehicle.LicenseNumber);
 
                 Boolean hasMaintenanceHistory = maintenanceHistory != null;
 

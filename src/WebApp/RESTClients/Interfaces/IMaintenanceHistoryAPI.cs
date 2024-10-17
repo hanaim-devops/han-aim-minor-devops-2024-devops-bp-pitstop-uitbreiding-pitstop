@@ -3,5 +3,5 @@
 public interface IMaintenanceHistoryAPI
 {
     [Get("/maintenancehistory/{licenseNumber}")]
-    Task<MaintenanceHistory> GetHistoryById(string licenseNumber);
+    Task<List<MaintenanceHistory>> GetHistoryByLicenseNumber(string licenseNumber);
 }
