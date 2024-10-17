@@ -11,5 +11,6 @@ public class RentalCarManagementDBContext : DbContext
     
     public RentalCarManagementDBContext(DbContextOptions<RentalCarManagementDBContext> options) : base(options)
     {
+        
     }
 }
