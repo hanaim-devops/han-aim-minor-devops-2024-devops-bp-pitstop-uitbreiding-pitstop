@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: dotnet-sdk-base-build-run
+spec:
+  pipelineRef:
+    name: build-and-deploy
+  params:
+    - name: service
+      value: dotnet-sdk-base # Case Sensitive
+    - name: revision
+      value: "main"
+    - name: repo-url
+      value: "https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-tbd"
+    - name: image-url
+      value: "luukjp/dotnet-sdk-base:1.0"
+  workspaces:
+    - name: output
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+    - name: dockerconfig
+      secret:
+        secretName: regcred
+        items:
+        - key: .dockerconfigjson
+          path: config.json
+
