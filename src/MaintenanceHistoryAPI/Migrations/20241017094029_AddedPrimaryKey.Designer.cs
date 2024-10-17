@@ -9,29 +9,37 @@ using Pitstop.MaintenanceHistoryAPI.DataAccess;
 
 #nullable disable
 
-namespace MaintenanceHistoryAPI.Migrations
+namespace Pitstop.MaintenanceHistoryAPI.Migrations
 {
     [DbContext(typeof(MaintenanceHistoryContext))]
-    [Migration("20241015133956_AddedMaintenanceJobId")]
-    partial class AddedMaintenanceJobId
+    [Migration("20241017094029_AddedPrimaryKey")]
+    partial class AddedPrimaryKey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0-rc.2.24474.1")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("MaintenanceHistoryAPI.Model.MaintenanceHistory", b =>
                 {
-                    b.Property<string>("LicenseNumber")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LicenseNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("MaintenanceDate")
@@ -43,7 +51,7 @@ namespace MaintenanceHistoryAPI.Migrations
                     b.Property<int>("MaintenanceType")
                         .HasColumnType("int");
 
-                    b.HasKey("LicenseNumber");
+                    b.HasKey("Id");
 
                     b.ToTable("MaintenanceHistory", (string)null);
                 });

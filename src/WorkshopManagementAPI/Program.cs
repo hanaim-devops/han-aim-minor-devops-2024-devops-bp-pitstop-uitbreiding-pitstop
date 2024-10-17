@@ -46,9 +46,6 @@ builder.Services.UseRabbitMQMessagePublisher(builder.Configuration);
 // add commandhandlers
 builder.Services.AddCommandHandlers();
 
-builder.Services.AddTransient<IAddHistoryMaintenanceCommandHandler, AddHistoryMaintenanceCommandHandler>();
-
-
 // Add framework services.
 builder.Services
     .AddMvc((options) => options.EnableEndpointRouting = false)

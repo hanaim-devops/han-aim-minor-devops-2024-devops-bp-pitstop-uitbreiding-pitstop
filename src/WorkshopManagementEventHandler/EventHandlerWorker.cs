@@ -1,35 +1,32 @@
-﻿namespace Pitstop.WorkshopManagementEventHandler;
+﻿using MaintenanceHistoryAPI.Enums;
 
-public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
+namespace Pitstop.WorkshopManagementEventHandler;
+
+public class EventHandlerWorker(
+    IMessageHandler messageHandler,
+    WorkshopManagementDBContext workshopManagementDbContext,
+    MaintenanceHistoryContext maintenanceHistoryContext)
+    : IHostedService, IMessageHandlerCallback
 {
-    WorkshopManagementDBContext _dbContext;
-    IMessageHandler _messageHandler;
-
-    public EventHandlerWorker(IMessageHandler messageHandler, WorkshopManagementDBContext dbContext)
-    {
-        _messageHandler = messageHandler;
-        _dbContext = dbContext;
-    }
-
     public void Start()
     {
-        _messageHandler.Start(this);
+        messageHandler.Start(this);
     }
 
     public void Stop()
     {
-        _messageHandler.Stop();
+        messageHandler.Stop();
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        _messageHandler.Start(this);
+        messageHandler.Start(this);
         return Task.CompletedTask;
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
     {
-        _messageHandler.Stop();
+        messageHandler.Stop();
         return Task.CompletedTask;
     }
 
@@ -71,14 +68,14 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
 
         try
         {
-            await _dbContext.Vehicles.AddAsync(new Vehicle
+            await workshopManagementDbContext.Vehicles.AddAsync(new Vehicle
             {
                 LicenseNumber = e.LicenseNumber,
                 Brand = e.Brand,
                 Type = e.Type,
                 OwnerId = e.OwnerId
             });
-            await _dbContext.SaveChangesAsync();
+            await workshopManagementDbContext.SaveChangesAsync();
         }
         catch (DbUpdateException)
         {
@@ -95,13 +92,13 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
 
         try
         {
-            await _dbContext.Customers.AddAsync(new Customer
+            await workshopManagementDbContext.Customers.AddAsync(new Customer
             {
                 CustomerId = e.CustomerId,
                 Name = e.Name,
                 TelephoneNumber = e.TelephoneNumber
             });
-            await _dbContext.SaveChangesAsync();
+            await workshopManagementDbContext.SaveChangesAsync();
         }
         catch (DbUpdateException)
         {
@@ -119,7 +116,8 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
         try
         {
             // determine customer
-            Customer customer = await _dbContext.Customers.FirstOrDefaultAsync(c => c.CustomerId == e.CustomerInfo.Id);
+            Customer customer =
+                await workshopManagementDbContext.Customers.FirstOrDefaultAsync(c => c.CustomerId == e.CustomerInfo.Id);
             if (customer == null)
             {
                 customer = new Customer
@@ -131,7 +129,9 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
             }
 
             // determine vehicle
-            Vehicle vehicle = await _dbContext.Vehicles.FirstOrDefaultAsync(v => v.LicenseNumber == e.VehicleInfo.LicenseNumber);
+            Vehicle vehicle =
+                await workshopManagementDbContext.Vehicles.FirstOrDefaultAsync(v =>
+                    v.LicenseNumber == e.VehicleInfo.LicenseNumber);
             if (vehicle == null)
             {
                 vehicle = new Vehicle
@@ -144,7 +144,7 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
             }
 
             // insert maintetancejob
-            await _dbContext.MaintenanceJobs.AddAsync(new MaintenanceJob
+            await workshopManagementDbContext.MaintenanceJobs.AddAsync(new MaintenanceJob
             {
                 Id = e.JobId,
                 StartTime = e.StartTime,
@@ -154,12 +154,33 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
                 WorkshopPlanningDate = e.StartTime.Date,
                 Description = e.Description
             });
-            await _dbContext.SaveChangesAsync();
+            await workshopManagementDbContext.SaveChangesAsync();
+
+            // insert maintenance history
+
+            var history = new MaintenanceHistory()
+            {
+                LicenseNumber = e.VehicleInfo.LicenseNumber,
+                MaintenanceDate = e.StartTime.Date,
+                MaintenanceType = MaintenanceTypes.Overig,
+                MaintenanceJobId = e.JobId,
+            };
+            await maintenanceHistoryContext.MaintenanceHistories.AddAsync(history);
+
+            Log.Information(
+                "Maintenance history added: {LicenseNumber}, {MaintenanceDate}, {MaintenanceType}, {MaintenanceJobId}, {Description}, {IsCompleted}",
+                history.LicenseNumber, history.MaintenanceDate, history.MaintenanceType, history.MaintenanceJobId,
+                history.Description, history.IsCompleted);
+
+            await maintenanceHistoryContext.SaveChangesAsync();
+
+
         }
-        catch (DbUpdateException)
+        catch (DbUpdateException ex)
         {
             Log.Warning("Skipped adding maintenance job with id {JobId}.", e.JobId);
         }
+        
 
         return true;
     }
@@ -172,11 +193,19 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
         try
         {
             // insert maintetancejob
-            var job = await _dbContext.MaintenanceJobs.FirstOrDefaultAsync(j => j.Id == e.JobId);
+            var job = await workshopManagementDbContext.MaintenanceJobs.FirstOrDefaultAsync(j => j.Id == e.JobId);
             job.ActualStartTime = e.StartTime;
             job.ActualEndTime = e.EndTime;
             job.Notes = e.Notes;
-            await _dbContext.SaveChangesAsync();
+            await workshopManagementDbContext.SaveChangesAsync();
+            
+            // insert maintenance history
+            var maintenanceHistory = await maintenanceHistoryContext.MaintenanceHistories.FirstOrDefaultAsync(m => m.MaintenanceJobId == e.JobId);
+            maintenanceHistory.MaintenanceDate = e.StartTime.Date;
+            maintenanceHistory.Description = e.Notes;
+            maintenanceHistory.MaintenanceType = MaintenanceTypes.Overig;
+            maintenanceHistory.IsCompleted = true;
+            await maintenanceHistoryContext.SaveChangesAsync();
         }
         catch (DbUpdateException)
         {

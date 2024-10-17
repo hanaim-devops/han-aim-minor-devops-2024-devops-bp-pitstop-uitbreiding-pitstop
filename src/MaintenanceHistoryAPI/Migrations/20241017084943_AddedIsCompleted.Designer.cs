@@ -12,15 +12,15 @@ using Pitstop.MaintenanceHistoryAPI.DataAccess;
 namespace MaintenanceHistoryAPI.Migrations
 {
     [DbContext(typeof(MaintenanceHistoryContext))]
-    [Migration("20241015133956_AddedMaintenanceJobId")]
-    partial class AddedMaintenanceJobId
+    [Migration("20241017084943_AddedIsCompleted")]
+    partial class AddedIsCompleted
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0-rc.2.24474.1")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -31,8 +31,10 @@ namespace MaintenanceHistoryAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("MaintenanceDate")
                         .HasColumnType("datetime2");

@@ -6,17 +6,15 @@ public class WorkshopPlanningController : Controller
     private readonly IEventSourceRepository<WorkshopPlanning> _planningRepo;
     private readonly IPlanMaintenanceJobCommandHandler _planMaintenanceJobCommandHandler;
     private readonly IFinishMaintenanceJobCommandHandler _finishMaintenanceJobCommandHandler;
-    private readonly IAddHistoryMaintenanceCommandHandler _addHistoryMaintenanceCommandHandler;
 
     public WorkshopPlanningController(
         IEventSourceRepository<WorkshopPlanning> planningRepo,
         IPlanMaintenanceJobCommandHandler planMaintenanceJobCommandHandler,
-        IFinishMaintenanceJobCommandHandler finishMaintenanceJobCommand, IAddHistoryMaintenanceCommandHandler addHistoryMaintenanceCommandHandler)
+        IFinishMaintenanceJobCommandHandler finishMaintenanceJobCommand)
     {
         _planningRepo = planningRepo;
         _planMaintenanceJobCommandHandler = planMaintenanceJobCommandHandler;
         _finishMaintenanceJobCommandHandler = finishMaintenanceJobCommand;
-        _addHistoryMaintenanceCommandHandler = addHistoryMaintenanceCommandHandler;
     }
 
     [HttpGet]
@@ -86,9 +84,6 @@ public class WorkshopPlanningController : Controller
                     // handle command
                     WorkshopPlanning planning = await
                         _planMaintenanceJobCommandHandler.HandleCommandAsync(planningDate, command);
-                    
-                    await _addHistoryMaintenanceCommandHandler.HandleCommandAsync(command);
-
                     // handle result    
                     if (planning == null)
                     {
