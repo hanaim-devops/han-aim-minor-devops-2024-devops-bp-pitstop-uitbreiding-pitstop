@@ -1,6 +1,7 @@
 ﻿namespace WebApp.RESTClients;
 
-public class IMaintenanceHistoryAPI
+public interface IMaintenanceHistoryAPI
 {
-    
+    [Get("/maintenancehistory/{licenseNumber}")]
+    Task<MaintenanceHistory> GetHistoryById(string licenseNumber);
 }

@@ -20,7 +20,7 @@ public class VehicleManagementAPI : IVehicleManagementAPI
     {
         return await _restClient.GetVehicles();
     }
-    public async Task<Vehicle> GetVehicleByLicenseNumber([AliasAs("id")] string licenseNumber)
+    public async Task<Vehicle> GetVehicleByLicenseNumber(string licenseNumber)
     {
         try
         {

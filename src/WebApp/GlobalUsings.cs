@@ -1,3 +1,4 @@
+global using Pitstop.WebApp.DTOs;
 global using WebApp.RESTClients;
 global using Pitstop.WebApp.Models;
 global using Pitstop.WebApp.ViewModels;

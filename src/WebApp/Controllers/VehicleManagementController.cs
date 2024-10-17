@@ -4,14 +4,18 @@
 {
     private IVehicleManagementAPI _vehicleManagementAPI;
     private ICustomerManagementAPI _customerManagementAPI;
+    private IMaintenanceHistoryAPI _maintenanceHistoryAPI;
+    
     private readonly Microsoft.Extensions.Logging.ILogger _logger;
     private ResiliencyHelper _resiliencyHelper;
 
     public VehicleManagementController(IVehicleManagementAPI vehicleManagementAPI,
-        ICustomerManagementAPI customerManagementAPI, ILogger<VehicleManagementController> logger)
+        ICustomerManagementAPI customerManagementAPI, IMaintenanceHistoryAPI maintenanceHistoryAPI, 
+        ILogger<VehicleManagementController> logger)
     {
         _vehicleManagementAPI = vehicleManagementAPI;
         _customerManagementAPI = customerManagementAPI;
+        _maintenanceHistoryAPI = maintenanceHistoryAPI;
         _logger = logger;
         _resiliencyHelper = new ResiliencyHelper(_logger);
     }
@@ -21,9 +25,31 @@
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
+            var allVehicles = await _vehicleManagementAPI.GetVehicles();
+        
+            var vehicleDtos = new List<VehicleDTO>();
+
+            foreach (var vehicle in allVehicles)
+            {
+                var maintenanceHistory = _maintenanceHistoryAPI.GetHistoryById(vehicle.LicenseNumber);
+
+                Boolean hasMaintenanceHistory = maintenanceHistory != null;
+
+                var vehicleDto = new VehicleDTO
+                {
+                    LicenseNumber = vehicle.LicenseNumber,
+                    Brand = vehicle.Brand,
+                    Type = vehicle.Type,
+                    OwnerId = vehicle.OwnerId,
+                    HasMaintenanceHistory = hasMaintenanceHistory
+                };
+
+                vehicleDtos.Add(vehicleDto);
+            }
+            
             var model = new VehicleManagementViewModel
             {
-                Vehicles = await _vehicleManagementAPI.GetVehicles()
+                Vehicles = vehicleDtos
             };
             return View(model);
         }, View("Offline", new VehicleManagementOfflineViewModel()));

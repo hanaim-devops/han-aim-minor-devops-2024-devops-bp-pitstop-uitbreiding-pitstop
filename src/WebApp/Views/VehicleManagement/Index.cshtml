@@ -10,6 +10,7 @@
         <th>License No.</th>
         <th>Brand</th>
         <th>Type</th>
+        <th>Maintenance</th>
         <th>History</th>
     </tr>
     </thead>
@@ -20,15 +21,18 @@
                 <td>@vehicle.LicenseNumber</td>
                 <td>@vehicle.Brand</td>
                 <td>@vehicle.Type</td>
-                <td>
-                    <a class="btn btn-primary" href="@Url.Action("Index", "MaintenanceHistory", new { licenseNumber = vehicle.LicenseNumber })" onclick="event.stopPropagation();">
-                        History
-                    </a>
-                </td>
+                <td>@vehicle.HasMaintenanceHistory</td>
+                @if (vehicle.HasMaintenanceHistory)
+                {
+                    <td>
+                        <a class="btn btn-primary" href="@Url.Action("Index", "MaintenanceHistory", new { licenseNumber = vehicle.LicenseNumber })" onclick="event.stopPropagation();">
+                            History
+                        </a>
+                    </td>
+                }
             </tr>
         }
-        
-        </tbody>
+    </tbody>
 </table>
 <a id="RegisterVehicleButton" asp-action="New" asp-controller="VehicleManagement" class="btn btn-default">Register vehicle</a>
 

@@ -13,6 +13,12 @@ public class MaintenanceHistoryController : Controller
     }
     
     [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        return Ok(await _dbContext.MaintenanceHistories.ToListAsync());
+    }
+    
+    [HttpGet]
     [Route("{licenseNumber}")]
     public async Task<IActionResult> GetByLicenseNumber(string licenseNumber)
     {

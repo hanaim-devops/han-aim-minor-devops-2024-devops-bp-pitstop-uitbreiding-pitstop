@@ -2,5 +2,5 @@
 
 public class VehicleManagementViewModel
 {
-    public IEnumerable<Vehicle> Vehicles { get; set; }
+    public IEnumerable<VehicleDTO> Vehicles { get; set; }
 }
