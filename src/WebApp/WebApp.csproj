@@ -28,4 +28,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="Views\RentalManagement\Index.cshtml" />
+    <AdditionalFiles Include="Views\RentalManagement\New.cshtml" />
+  </ItemGroup>
+
 </Project>
