@@ -36,8 +36,8 @@ The pipeline will reference this ServiceAccount when running.
 
 ### How to Apply the ServiceAccount
 
-Go to `/serviceaccount/serviceaccount.yaml`, and apply it:
+Go to `/serviceaccount/pipeline-serviceaccount.yaml`, and apply it:
 
 ```bash
-kubectl apply -f serviceaccount.yaml
+kubectl apply -f pipeline-serviceaccount.yaml
 ```
