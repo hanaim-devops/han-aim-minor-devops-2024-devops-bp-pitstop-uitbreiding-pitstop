@@ -18,8 +18,8 @@ spec:
     - name: output
       volumeClaimTemplate:
         spec:
-          accessModes:
-            - ReadWriteOnce
+          storageClassName: local-storage
+          accessModes: ["ReadWriteOnce"]
           resources:
             requests:
               storage: 1Gi
@@ -29,4 +29,7 @@ spec:
         items:
         - key: .dockerconfigjson
           path: config.json
+  podTemplate:
+      securityContext:
+        fsGroup: 65532
 
