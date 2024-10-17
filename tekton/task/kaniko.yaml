@@ -43,21 +43,13 @@ spec:
     - name: IMAGE_URL
       description: URL of the image just built.
   steps:
-    - name: log-dockerfile
-      workingDir: $(workspaces.output.path)
-      image: docker.io/library/bash:latest
-      script: |
-        echo "Dockerfile path is: $(params.DOCKERFILE)"
-        pwd
-        ls -la $(workspaces.output.path)
-        ls -la $(workspaces.output.path)/src
     - name: build-and-push
       workingDir: $(workspaces.output.path)
       image: $(params.BUILDER_IMAGE)
       args:
         - $(params.EXTRA_ARGS)
         - --dockerfile=$(params.DOCKERFILE)
-        - --context=$(workspaces.output.path)/$(params.CONTEXT) # The user does not need to care the workspace and the output.
+        - --context=$(params.CONTEXT) # The user does not need to care the workspace and the output.
         - --destination=$(params.IMAGE)
         - --digest-file=$(results.IMAGE_DIGEST.path)
       # kaniko assumes it is running as root, which means this example fails on platforms
