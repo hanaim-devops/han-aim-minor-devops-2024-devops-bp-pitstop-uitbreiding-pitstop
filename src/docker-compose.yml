@@ -73,7 +73,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
         
   rentalcarmanagementapi:
-    image: pitstop/rentalcarmanagement:1.0
+    image: pitstop/rentalcarmanagementapi:1.0
     build: RentalCarManagementAPI
     depends_on:
       - rabbitmq
@@ -82,9 +82,9 @@ services:
       - "5300"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-        
+
   rentalmanagementapi:
-    image: pitstop/rentalmanagement:1.0
+    image: pitstop/rentalmanagementapi:1.0
     build: RentalManagementAPI
     depends_on:
       - rabbitmq
@@ -152,6 +152,8 @@ services:
       - customermanagementapi
       - vehiclemanagementapi
       - workshopmanagementapi
+      - rentalcarmanagementapi
+      - rentalmanagementapi
     ports:
       - "7005:7005"
     environment:

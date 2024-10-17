@@ -17,7 +17,7 @@
 }
 
 
-<form asp-controller="RentalManagement" asp-action="RegisterMaintenanceJob" method="post">
+<form asp-controller="RentalManagement" asp-action="RegisterCarRental" method="post">
     <div class="form-group">
         <label asp-for="StartDate"></label>
         <input asp-for="StartDate" type="date" class="form-control" />
@@ -39,7 +39,7 @@
         <span asp-validation-for="SelectedCustomerId" class="text-danger"></span>
     </div>
     <span><button id="SubmitButton" type="submit" class="btn btn-default">Register</button></span>
-    <span><a id="CancelButton" asp-action="Index" class="btn btn-default">Cancel</a></span>
+    <span><a id="CancelButton" asp-action="Index" asp-controller="RentalManagement" class="btn btn-default">Cancel</a></span>
 </form>
 
 

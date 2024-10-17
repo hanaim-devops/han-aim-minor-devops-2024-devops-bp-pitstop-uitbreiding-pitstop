@@ -58,7 +58,7 @@ public class RentalManagementController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> RegisterMaintenanceJob([FromForm] RentalManagementNewViewModel inputModel)
+    public async Task<IActionResult> RegisterCarRental([FromForm] RentalManagementNewViewModel inputModel)
     {
         if (ModelState.IsValid)
         {

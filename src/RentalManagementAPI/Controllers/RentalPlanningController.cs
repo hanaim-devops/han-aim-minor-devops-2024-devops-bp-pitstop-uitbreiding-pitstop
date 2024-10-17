@@ -6,5 +6,4 @@ namespace RentalManagementAPI.Controllers;
 [Route("api/[controller]")]
 public class RentalPlanningController : ControllerBase
 {
-    // Todo: implement methods for planning rentals.
 }
