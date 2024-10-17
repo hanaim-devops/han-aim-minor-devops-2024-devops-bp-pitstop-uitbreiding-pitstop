@@ -71,6 +71,28 @@ services:
       - "5200"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+        
+  rentalcarmanagementapi:
+    image: pitstop/rentalcarmanagementapi:1.0
+    build: RentalCarManagementAPI
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5300"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  rentalmanagementapi:
+    image: pitstop/rentalmanagementapi:1.0
+    build: RentalManagementAPI
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5400"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
 
   auditlogservice:
     image: pitstop/auditlogservice:1.0
@@ -130,6 +152,8 @@ services:
       - customermanagementapi
       - vehiclemanagementapi
       - workshopmanagementapi
+      - rentalcarmanagementapi
+      - rentalmanagementapi
     ports:
       - "7005:7005"
     environment:

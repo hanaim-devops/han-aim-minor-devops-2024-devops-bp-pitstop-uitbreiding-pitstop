@@ -1,0 +1,30 @@
+﻿@model Pitstop.WebApp.ViewModels.RentalManagementViewModel
+@{
+    ViewData["Title"] = "Rental Management";
+}
+<h3 id="PageTitle">Rental Management - overview</h3>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>License No.</th>
+        <th>Customer</th>
+        <th>Start</th>
+        <th>End</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var rental in Model.Rentals)
+    {
+    <tr>
+        <td>@rental.Vehicle.LicenseNumber</td>
+        <td>@rental.Customer.Name</td>
+        <td>@rental.StartDate</td>
+        <td>@rental.EndDate</td>
+    </tr>
+    }
+    </tbody>
+</table>
+
+<a id="RegisterRentCarButton" asp-action="New" asp-controller="RentalManagement" class="btn btn-default">Rent a car</a>
