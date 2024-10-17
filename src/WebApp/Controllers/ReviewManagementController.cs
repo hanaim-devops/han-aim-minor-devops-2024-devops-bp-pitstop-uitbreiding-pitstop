@@ -46,4 +46,30 @@ public class ReviewManagementController : Controller
             return View(model);
         }, View("Offline", new ReviewManagementOfflineViewModel()));
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> New()
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            var customers = await _customerManagementAPI.GetCustomers();
+
+            var model = new ReviewManagementNewViewModel
+            {
+                Customers = customers.Select(c => new SelectListItem { Value = c.CustomerId, Text = c.Name })
+            };
+            return View(model);
+        }, View("Offline", new ReviewManagementOfflineViewModel()));
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> New([FromForm] ReviewManagementNewViewModel inputModel)
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            //back-end moet nog gemaakt worden en hier geimplementeerd worden.
+            
+            return RedirectToAction("Index");
+        }, View("Offline", new ReviewManagementOfflineViewModel()));
+    }
 }

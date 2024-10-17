@@ -21,4 +21,11 @@ public static class Mappers
         source.Vehicle.Type,
         source.SelectedCustomerId
     );
+    
+    public static RegisterRentalCar MapToRegisterRentalCar(this RentalCarManagementNewViewModel source) => new RegisterRentalCar(
+        Guid.NewGuid(),
+        source.RentalCar.LicenseNumber,
+        source.RentalCar.Model.Brand.Name,
+        source.RentalCar.Model.Name
+    );
 }
