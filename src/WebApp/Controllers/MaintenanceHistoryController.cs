@@ -40,6 +40,8 @@ public class MaintenanceHistoryController : Controller
             LicenseNumber = history.LicenseNumber,
             MaintenanceDate = history.MaintenanceDate,
             Description = history.Description,
+            MaintenanceType = history.MaintenanceType,
+            IsCompleted = history.IsCompleted
         };
         return View(model);
     }
