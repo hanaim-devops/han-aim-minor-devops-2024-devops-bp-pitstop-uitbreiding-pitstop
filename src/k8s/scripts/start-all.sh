@@ -52,3 +52,4 @@ kubectl apply \
     -f ../workshopmanagementapi$MESHPOSTFIX.yaml \
     -f ../webapp$MESHPOSTFIX.yaml \
     -f ../hpa/hpa.yaml
+    -f ../diymanagementapi.yaml \

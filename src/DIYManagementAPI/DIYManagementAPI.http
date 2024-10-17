@@ -1,0 +1,6 @@
+@DIYManagementAPI_HostAddress = http://localhost:5255
+
+GET {{DIYManagementAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
