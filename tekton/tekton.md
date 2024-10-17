@@ -12,18 +12,39 @@ The `docker-registry-secret` contains the credentials for the Docker registry. T
 
 ## Install Guide: Creating a `kubernetes.io/dockerconfigjson` Secret to Push Images to a Registry
 
-Create a Kubernetes secret that allows your pods to push images to a Docker registry.
+Follow these simple steps to create a Kubernetes secret that allows your pods to push images to a Docker registry.
 
-### Create the Kubernetes Secret
+## Steps
+
+### 1. Set Your Registry Credentials
+
+Replace the placeholders with your actual registry URL, username, and password.
+
+```bash
+REGISTRY_URL="your-registry.com"
+USERNAME="your-username"
+PASSWORD="your-password or personal access token"
+AUTH=$(echo -n "${USERNAME}:${PASSWORD}" | base64)
+
+cat <<EOF > config.json
+{
+  "auths": {
+    "${REGISTRY_URL}": {
+      "auth": "${AUTH}"
+    }
+  }
+}
+EOF
+```
+
+### 2. Create the Kubernetes Secret
 
 Use kubectl to create the secret.
 
 ```bash
-kubectl create secret docker-registry regcred \
-  --docker-username=your-username \
-  --docker-password=your-password \
-  --docker-email=docker-email \
-  --docker-server=your-registry.com
+kubectl create secret generic regcred \
+  --type=kubernetes.io/dockerconfigjson \
+  --from-file=.dockerconfigjson=config.json
 ```
 
-Note: Replace your-registry.com, your-username, your-password, and docker-email
+Note: Replace your-registry.com, your-username, your-password, and your-image:tag with your actual registry details.
