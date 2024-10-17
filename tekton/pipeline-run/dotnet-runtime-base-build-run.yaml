@@ -13,7 +13,7 @@ spec:
     - name: repo-url
       value: "https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-tbd"
     - name: image-url
-      value: "luukjp/dotnet-runtime-base:1.0"
+      value: "luukjp/pitstop-dotnet-runtime-base:1.0"
   workspaces:
     - name: output
       volumeClaimTemplate:
