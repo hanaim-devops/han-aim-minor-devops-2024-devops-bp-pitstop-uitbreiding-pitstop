@@ -10,34 +10,41 @@ The pipeline requires Docker registry credentials to authenticate with a Docker 
 
 The `docker-registry-secret` contains the credentials for the Docker registry. This secret is referenced by the pipeline via a `ServiceAccount` to enable secure authentication for pushing images.
 
-### How to Create the Docker Registry Secret
+## Install Guide: Creating a `kubernetes.io/dockerconfigjson` Secret to Push Images to a Registry
 
-You can create the secret in Kubernetes by running the following command:
+Follow these simple steps to create a Kubernetes secret that allows your pods to push images to a Docker registry.
 
-```bash
-kubectl create secret docker-registry docker-registry-secret \
-  --docker-username=<your-username> \
-  --docker-password=<your-password> \
-  --docker-email=<your-email@example.com> \
-  --docker-server=<registry-url>
-```
+## Steps
 
-Parameters:
-`<your-username>`: Your Docker registry username (e.g., Docker Hub username).
-`<your-password>`: Your Docker registry password or access token.
-`<your-email@example.com>`: The email associated with your Docker account.
-`<registry-url>`: The URL of the Docker registry
+### 1. Set Your Registry Credentials
 
-## 2. Access to the Secret via ServiceAccount
-
-To ensure that the pipeline can use the docker-registry-secret, a ServiceAccount must be created.
-
-The pipeline will reference this ServiceAccount when running.
-
-### How to Apply the ServiceAccount
-
-Go to `/serviceaccount/pipeline-serviceaccount.yaml`, and apply it:
+Replace the placeholders with your actual registry URL, username, and password.
 
 ```bash
-kubectl apply -f pipeline-serviceaccount.yaml
+REGISTRY_URL="your-registry.com"
+USERNAME="your-username"
+PASSWORD="your-password or personal access token"
+AUTH=$(echo -n "${USERNAME}:${PASSWORD}" | base64)
+
+cat <<EOF > config.json
+{
+  "auths": {
+    "${REGISTRY_URL}": {
+      "auth": "${AUTH}"
+    }
+  }
+}
+EOF
 ```
+
+### 2. Create the Kubernetes Secret
+
+Use kubectl to create the secret.
+
+```bash
+kubectl create secret generic regcred \
+  --type=kubernetes.io/dockerconfigjson \
+  --from-file=.dockerconfigjson=config.json
+```
+
+Note: Replace your-registry.com, your-username, your-password, and your-image:tag with your actual registry details.
