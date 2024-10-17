@@ -28,7 +28,7 @@
     }
 
     [HttpGet]
-    public IActionResult NewRegistration(string diyAvondId)
+    public IActionResult NewRegistration(int diyAvondId)
     {
         var model = new DIYManagementNewRegistrationViewModel
         {
@@ -55,7 +55,7 @@
         }
         else
         {
-            return View("New", inputModel);
+            return View("NewRegistration", inputModel);
         }
     }
 

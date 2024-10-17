@@ -6,7 +6,7 @@ public interface IDIYManagementAPI
     Task<List<DIYAvond>> GetDIYAvonden();
 
     [Get("/diyavonden/{id}")]
-    Task<DIYAvond> GetDIYAvondById([AliasAs("id")] string diyAvondId);
+    Task<DIYAvond> GetDIYAvondById([AliasAs("id")] int diyAvondId);
 
     //[Post("/diyavonden")]
     //Task RegisterDIYAvond(RegisterDIYAvond command);

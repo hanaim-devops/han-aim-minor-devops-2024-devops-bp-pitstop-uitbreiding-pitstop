@@ -17,7 +17,7 @@ public class DIYManagementAPI : IDIYManagementAPI
             });
     }
 
-    public Task<DIYAvond> GetDIYAvondById([AliasAs("id")] string diyAvondId)
+    public Task<DIYAvond> GetDIYAvondById([AliasAs("id")] int diyAvondId)
     {
         throw new NotImplementedException();
     }

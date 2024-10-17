@@ -2,10 +2,12 @@ namespace Pitstop.WebApp.Models
 {
     public class DIYRegistration
     {
-        public string DIYAvondId { get; set; }
+        public int DIYAvondId { get; set; }
 
+        [Display(Name = "Customer name")]
         public string CustomerName { get; set; }
 
-        public string ReparationType { get; set; }
+        [Display(Name = "Reparations")]
+        public string Reparations { get; set; }
     }
 }

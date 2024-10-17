@@ -26,6 +26,6 @@ public static class Mappers
         Guid.NewGuid(),
         source.DIYRegistration.DIYAvondId,
         source.DIYRegistration.CustomerName,
-        source.DIYRegistration.ReparationType
+        source.DIYRegistration.Reparations
     );
 }
