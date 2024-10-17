@@ -1,4 +1,5 @@
-﻿namespace Pitstop.Application.CustomerManagementAPI.Controllers;
+﻿
+namespace Pitstop.Application.CustomerManagementAPI.Controllers;
 
 [Route("/api/[controller]")]
 public class CustomersController : Controller
