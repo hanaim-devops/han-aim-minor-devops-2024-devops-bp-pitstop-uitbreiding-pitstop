@@ -1,0 +1,35 @@
+﻿@model Pitstop.WebApp.ViewModels.ReviewManagementViewModel
+@{
+    ViewData["Title"] = "Review Overview";
+}
+<h3 id="PageTitle">Review Management - overview</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Stars</th>
+        <th>Reviewer</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.Reviews == null)
+    {
+        <tr>
+            <td colspan="3">No reviews found</td>
+        </tr>
+    }
+    else
+    {
+        @foreach (var review in Model.Reviews)
+        {
+            <tr>
+                <td>@review.Title</td>
+                <td>@review.Stars</td>
+                <td>@review.Customer.Name</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+<a id="CreateReviewButton" asp-action="New" asp-controller="ReviewManagement" class="btn btn-default">Create review</a>
