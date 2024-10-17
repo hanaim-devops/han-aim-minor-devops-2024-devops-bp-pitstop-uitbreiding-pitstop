@@ -133,7 +133,7 @@ services:
     ports:
       - "7005:7005"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
 
 volumes:
   sqlserverdata:
