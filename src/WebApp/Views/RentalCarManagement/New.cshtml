@@ -1,0 +1,40 @@
+﻿@model Pitstop.WebApp.ViewModels.RentalCarManagementNewViewModel
+@{
+    ViewData["Title"] = "Create New Rental Car";
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+<h3 id="PageTitle">Rental Car Management - create new rental car</h3>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="well-sm alert-danger">
+        <label>Unable to register: @Model.Error</label>
+    </div>
+}
+
+
+<form asp-controller="RentalCarManagement" asp-action="Register" method="post">
+    <div class="form-group">
+        <label asp-for="RentalCar.LicenseNumber"></label>
+        <input asp-for="RentalCar.LicenseNumber" type="text" class="form-control" />
+        <span asp-validation-for="RentalCar.LicenseNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RentalCar.Model.Brand.Name"></label>
+        <input asp-for="RentalCar.Model.Brand.Name" type="text" class="form-control" />
+        <span asp-validation-for="RentalCar.Model.Brand.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RentalCar.Model.Name"></label>
+        <input asp-for="RentalCar.Model.Name" type="text" class="form-control" />
+        <span asp-validation-for="RentalCar.Model.Name" class="text-danger"></span>
+    </div>
+    <span><button id="SubmitButton" type="submit" class="btn btn-default">Register</button></span>
+    <span><a id="CancelButton" asp-action="Index" asp-controller="RentalCarManagement" class="btn btn-default">Cancel</a></span>
+</form>
+
+
