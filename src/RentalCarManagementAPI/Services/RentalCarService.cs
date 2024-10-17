@@ -18,6 +18,9 @@ public class RentalCarService(RentalCarManagementDBContext dbContext, IModelServ
     
     public RentalCar Add(RegisterRentalCar command)
     {
+        var existingCar = _dbContext.RentalCars.FirstOrDefault(c => c.LicenseNumber == command.LicenseNumber);
+        if (existingCar != null) throw new LicensePlateAlreadyRegistered();
+        
         var model = _modelService.GetByName(command.Brand, command.Model);
         var rentalCar = new RentalCar()
         {

@@ -13,4 +13,10 @@ public class RentalCarManagementDBContext : DbContext
     {
         
     }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Brand>().HasIndex(b => b.Name).IsUnique();
+        modelBuilder.Entity<RentalCar>().HasIndex(c => c.LicenseNumber).IsUnique();
+    }
 }

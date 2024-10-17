@@ -1,4 +1,6 @@
-﻿namespace RentalCarManagementAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace RentalCarManagementAPI.Models;
 
 public class RentalCar
 {
