@@ -28,4 +28,10 @@ public static class Mappers
         source.RentalCar.Model.Brand.Name,
         source.RentalCar.Model.Name
     );
+    
+    public static CreateReview MapToCreateReview(this ReviewManagementNewViewModel source) => new CreateReview(
+        source.SelectedCustomerId,   // Assuming this is the reviewer name or ID.
+        $"Customer review with {source.Stars} stars",  // Simple placeholder content for the review based on the stars.
+        source.Stars                // The rating is the number of stars.
+    );
 }
