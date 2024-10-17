@@ -18,7 +18,8 @@ kubectl apply -f ./pipeline/build-and-deploy.yaml
 #kubectl delete pipelinerun workshopmanagementeventhandler-build-run
 #kubectl delete pipelinerun timeservice-build-run
 #kubectl delete pipelinerun notificationservice-build-run
-kubectl delete pipelinerun invoiceservice-build-run
+#kubectl delete pipelinerun invoiceservice-build-run
+kubectl delete pipelinerun auditlogservice-build-run
 #kubectl apply -f ./pipeline-run/dotnet-aspnet-base-build-run.yaml
 #kubectl apply -f ./pipeline-run/dotnet-runtime-base-build-run.yaml
 #kubectl apply -f ./pipeline-run/dotnet-sdk-base-build-run.yaml
@@ -27,7 +28,8 @@ kubectl delete pipelinerun invoiceservice-build-run
 #kubectl apply -f ./pipeline-run/workshopmanagementeventhandler-build-run.yaml
 #kubectl apply -f ./pipeline-run/timeservice-build-run.yaml
 #kubectl apply -f ./pipeline-run/notificationservice-build-run.yaml
-kubectl apply -f ./pipeline-run/invoiceservice-build-run.yaml
+#kubectl apply -f ./pipeline-run/invoiceservice-build-run.yaml
+kubectl apply -f ./pipeline-run/auditlogservice-build-run.yaml
 
 #tkn pipelinerun logs dotnet-aspnet-base-build-run --follow
 #tkn pipelinerun describe dotnet-aspnet-base-build-run
@@ -53,5 +55,8 @@ kubectl apply -f ./pipeline-run/invoiceservice-build-run.yaml
 #tkn pipelinerun logs notificationservice-build-run --follow
 #tkn pipelinerun describe notificationservice-build-run
 
-tkn pipelinerun logs invoiceservice-build-run --follow
-tkn pipelinerun describe invoiceservice-build-run
+#tkn pipelinerun logs invoiceservice-build-run --follow
+#tkn pipelinerun describe invoiceservice-build-run
+
+tkn pipelinerun logs auditlogservice-build-run --follow
+tkn pipelinerun describe auditlogservice-build-run
