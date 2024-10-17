@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalCarManagementAPI", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalManagementEventHandler", "RentalManagementEventHandler\RentalManagementEventHandler.csproj", "{51700FC5-6AA8-4484-A579-5D292054C3F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewManagmentAPI", "ReviewManagmentAPI\ReviewManagmentAPI.csproj", "{6F4F643F-3BBB-429A-B782-745E633C8D3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,5 +104,9 @@ Global
 		{51700FC5-6AA8-4484-A579-5D292054C3F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51700FC5-6AA8-4484-A579-5D292054C3F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51700FC5-6AA8-4484-A579-5D292054C3F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4F643F-3BBB-429A-B782-745E633C8D3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4F643F-3BBB-429A-B782-745E633C8D3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4F643F-3BBB-429A-B782-745E633C8D3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4F643F-3BBB-429A-B782-745E633C8D3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
