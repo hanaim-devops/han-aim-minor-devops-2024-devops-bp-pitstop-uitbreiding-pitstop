@@ -9,9 +9,4 @@ namespace RentalCarManagementAPI.Controller;
 public class RentalCarController : ControllerBase
 {
     // Todo: implement methods for retrieving rental cars.
-    [HttpGet]
-    public List<RentalCar> GetRentalCars()
-    {
-        return [];
-    }
 }
