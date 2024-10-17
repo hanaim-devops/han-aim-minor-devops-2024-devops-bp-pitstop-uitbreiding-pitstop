@@ -4,6 +4,7 @@ using Pitstop.UITest.PageModel.Pages.CustomerManagement;
 using Pitstop.UITest.PageModel.Pages.VehicleManagement;
 using Pitstop.UITest.PageModel.Pages.WorkshopManagement;
 using Pitstop.UITest.PageModel.Pages.RentalManagement;
+using Pitstop.UITest.PageModel.Pages.ReviewManagement;
 
 namespace Pitstop.UITest.PageModel
 {
@@ -46,6 +47,12 @@ namespace Pitstop.UITest.PageModel
             return new RentalManagement(_pitStop);
         }
 
+        public ReviewManagementPage ReviewManagement()
+        {
+            _pitStop.WebDriver.FindElement(By.Id("MainMenu.ReviewManagement")).Click();
+            return new ReviewManagementPage(_pitStop);
+        }
+        
         public AboutPage About()
         {
             _pitStop.WebDriver.FindElement(By.Id("MainMenu.About")).Click();
