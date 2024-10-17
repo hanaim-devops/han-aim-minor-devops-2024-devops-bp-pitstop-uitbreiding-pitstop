@@ -10,14 +10,16 @@ kubectl apply -f ./task-run/git-clone-run.yaml
 kubectl delete pipeline build-and-deploy
 kubectl apply -f ./pipeline/build-and-deploy.yaml
 
-kubectl delete pipelinerun dotnet-aspnet-base-build-run
-kubectl delete pipelinerun dotnet-runtime-base-build-run
-kubectl delete pipelinerun dotnet-sdk-base-build-run
-kubectl delete pipelinerun customermanagementapi-build-run
-kubectl apply -f ./pipeline-run/dotnet-aspnet-base-build-run.yaml
-kubectl apply -f ./pipeline-run/dotnet-runtime-base-build-run.yaml
-kubectl apply -f ./pipeline-run/dotnet-sdk-base-build-run.yaml
-kubectl apply -f ./pipeline-run/customermanagementapi-build-run.yaml
+#kubectl delete pipelinerun dotnet-aspnet-base-build-run
+#kubectl delete pipelinerun dotnet-runtime-base-build-run
+#kubectl delete pipelinerun dotnet-sdk-base-build-run
+#kubectl delete pipelinerun customermanagementapi-build-run
+kubectl delete pipelinerun webapp-build-run
+#kubectl apply -f ./pipeline-run/dotnet-aspnet-base-build-run.yaml
+#kubectl apply -f ./pipeline-run/dotnet-runtime-base-build-run.yaml
+#kubectl apply -f ./pipeline-run/dotnet-sdk-base-build-run.yaml
+#kubectl apply -f ./pipeline-run/customermanagementapi-build-run.yaml
+kubectl apply -f ./pipeline-run/webapp-build-run.yaml
 
 tkn pipelinerun logs dotnet-aspnet-base-build-run --follow
 tkn pipelinerun describe dotnet-aspnet-base-build-run
@@ -30,3 +32,6 @@ tkn pipelinerun describe dotnet-sdk-base-build-run
 
 tkn pipelinerun logs customermanagementapi-build-run --follow
 tkn pipelinerun describe customermanagementapi-build-run
+
+tkn pipelinerun logs webapp-build-run --follow
+tkn pipelinerun describe webapp-build-run
