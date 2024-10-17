@@ -17,7 +17,7 @@ Beschrijf hier kort je bijdrage vanuit je rol, developer (Dev) of infrastructure
 
 Competenties: *DevOps-2 Orchestration, Containerization*
 
-Beschrijf en geef hier links naar je minimaal 2 en maximaal 4 grootste bijdragen qua configuratie, of bijdrage qua 12factor app of container Dockerfiles en/of .yml bestanden of vergelijkbare config (rondom containerization en orchestration).
+Ik heb configuratie van de VPS toegepast met met ansible, dit is te zien in [deze commit](https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-tbd/commit/cf188f5ef18a1034dbabd97f06a755692d29e7e0).
 
 ## 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 
@@ -31,11 +31,8 @@ NB Het gebruik van *versiebeheer* ((e.g. git)) hoort bij je standaardtaken en de
 
 Competenties: *Nieuwsgierige houding*
 
-Beschrijf hier voor het Course BP kort je onderzochte technologie met een link naar je blog post, of het toepassen ervan gelukt is en hoe, of waarom niet. Beschrijf evt. kort extra leerervaringen met andere technologieen of verdieping sinds het blog.
+Ik heb voor mijn onderzoek gekeken naar Ansible, dit is een tool om op afstand configuratie toe te passen op een server. In dit beroepsproduct heb ik dit toegepast om de configuratie van de vps vanaf mijn lokale omgeving te doen. Dit is te zien in [deze commit](https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-tbd/commit/cf188f5ef18a1034dbabd97f06a755692d29e7e0). Hierin zie je dat ik een playbook heb toegevoegd, deze playbook beschrijft het toevoegen van nieuwe gebruikers, en het installeren van minikube op de vps.
 
-Tijdens het grote project beschrijf je hier onderzoek naar het domein en nieuwe onderzochte/gebruikte DevOps technologieën. Wellicht heb je nogmaals de voor blog onderzochte technologie kunnen toepassen in een andere context. Verder heb je nu een complex domein waar je in moet verdiepen en uitvragen bij de opdrachtgever. Link bijvoorbeeld naar repo's met POC's of, domein modellen of beschrijf andere onderwerpen en link naar gebruikte bronnen.
-
-Als de tijdens course onderzochte technologie wel toepasbaar is kun je dit uiteraard onder dit punt noemen. Of wellicht was door een teamgenoot onderzochte technologie relevant, waar jij je nu verder in verdiept hebt en mee gewerkt hebt, dus hier kunt beschrijven. Tot slot kun je hier ook juist een korte uitleg geef over WAAROM  jouw eerder onderzochte technologie dan precies niet relevant of inpasbaar was. Dit is voor een naieve buitenstaander niet altijd meteen duidelijk, maar kan ook heel interessant zijn. Bijvoorbeeld dat [gebruik van Ansible in combi met Kubernetes](https://www.ansible.com/blog/how-useful-is-ansible-in-a-cloud-native-kubernetes-environment) niet handig blijkt. Ook als je geen uitgebreid onderzoek hebt gedaan of ADR hebt waar je naar kunt linken, dan kun je onder dit kopje wel alsnog kort conceptuele kennis duidelijk maken.
 
 ## 5. Bijdrage code review/kwaliteit anderen en security
 
