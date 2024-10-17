@@ -8,12 +8,13 @@
 
 <form asp-controller="ReviewManagement" asp-action="New" method="post">
     <div class="form-group">
-        <label asp-for="SelectedCustomerId"></label>
+        <label asp-for="SelectedCustomerId">Customer</label>
         <select asp-for="SelectedCustomerId" asp-items="Model.Customers" class="form-control"></select>
         <span asp-validation-for="SelectedCustomerId" class="text-danger"></span>
     </div>
     
     <div class="form-group">
+        <label for="floatingSelect">Rate Pitstop from 1 to 5 stars</label><br/>
         <select asp-for="Stars" class="form-select" id="floatingSelect" aria-label="Floating label select example">
             <option selected>Open this select menu</option>
             <option value="1">1</option>
@@ -22,10 +23,9 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-        <label for="floatingSelect">Rate Pitstop from 1 to 5 stars</label>
         <span asp-validation-for="Stars" class="text-danger"></span>
     </div>
     
-    <span><button id="SubmitButton" type="submit" class="btn btn-default">New Review</button></span>
+    <span><button id="SubmitButton" type="submit" class="btn btn-default">Submit</button></span>
     <span><a id="CancelButton" asp-action="Index" asp-controller="ReviewManagement" class="btn btn-default">Cancel</a></span>
 </form>

@@ -61,4 +61,15 @@ public class ReviewManagementController : Controller
             return View(model);
         }, View("Offline", new ReviewManagementOfflineViewModel()));
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> New([FromForm] ReviewManagementNewViewModel inputModel)
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            //back-end moet nog gemaakt worden en hier geimplementeerd worden.
+            
+            return RedirectToAction("Index");
+        }, View("Offline", new ReviewManagementOfflineViewModel()));
+    }
 }
