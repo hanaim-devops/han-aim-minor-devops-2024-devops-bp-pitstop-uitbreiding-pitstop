@@ -28,11 +28,14 @@
     }
 
     [HttpGet]
-    public IActionResult NewRegistration()
+    public IActionResult NewRegistration(string diyAvondId)
     {
         var model = new DIYManagementNewRegistrationViewModel
         {
-            DIYRegistration = new DIYRegistration()
+            DIYRegistration = new DIYRegistration
+            {
+                DIYAvondId = diyAvondId
+            }
         };
 
         return View(model);
@@ -47,6 +50,7 @@
             {
                 //RegisterCustomer cmd = inputModel.MapToRegisterCustomer();
                 //await _customerManagementAPI.RegisterCustomer(cmd);
+                //await _DIYManagamentAPI.RegisterDIYAvondCustomer(cmd);
                 return RedirectToAction("Index");
             }, View("Offline", new CustomerManagementOfflineViewModel()));
         }

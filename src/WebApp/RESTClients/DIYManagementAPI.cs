@@ -1,4 +1,5 @@
-﻿namespace WebApp.RESTClients;
+﻿
+namespace WebApp.RESTClients;
 
 public class DIYManagementAPI : IDIYManagementAPI
 {
@@ -24,5 +25,10 @@ public class DIYManagementAPI : IDIYManagementAPI
     public async Task<List<DIYAvond>> GetDIYAvonden()
     {
         return await _restClient.GetDIYAvonden();
+    }
+
+    public async Task RegisterDIYAvondCustomer(RegisterDIYRegistration command)
+    {
+        await _restClient.RegisterDIYAvondCustomer(command);
     }
 }

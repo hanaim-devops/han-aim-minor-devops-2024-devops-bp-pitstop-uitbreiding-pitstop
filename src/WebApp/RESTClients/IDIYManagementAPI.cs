@@ -10,4 +10,7 @@ public interface IDIYManagementAPI
 
     //[Post("/diyavonden")]
     //Task RegisterDIYAvond(RegisterDIYAvond command);
+
+    [Post("/diyavonden/registercustomer")]
+    Task RegisterDIYAvondCustomer(RegisterDIYRegistration command);
 }
