@@ -1,6 +1,5 @@
-﻿namespace Pitstop.WebApp.Views.DIYManagement
-{
-    public class Details
-    {
-    }
+﻿@model Pitstop.WebApp.ViewModels.DIYManagementDetailsViewModel
+@{
+    ViewData["Title"] = "DIY Details";
 }
+<a id="RegisterCustomerButton" asp-action="NewRegistration" asp-route-diyAvondId="@Model.DIYAvond.Id" asp-controller="DIYManagement" class="btn btn-default">Register customer</a>

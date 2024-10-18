@@ -2,7 +2,7 @@
 
 namespace PitStop.WebApp.Controllers;
 
-    public class DIYManagementController : Controller
+public class DIYManagementController : Controller
 {
     private IDIYManagementAPI _DIYManagamentAPI;
     private readonly Microsoft.Extensions.Logging.ILogger _logger;
@@ -24,12 +24,24 @@ namespace PitStop.WebApp.Controllers;
             {
                 DIYEvening = await _DIYManagamentAPI.GetDIYEvening()
             };
-            
+
             return View(model);
         }, View("Offline", new DIYManagementOfflineViewModel()));
     }
 
     [HttpGet]
+    public IActionResult NewRegistration(int diyAvondId)
+    {
+        var model = new DIYManagementNewRegistrationViewModel
+        {
+            DIYRegistration = new DIYRegistration
+            {
+                DIYEveningId = diyAvondId
+            }
+        };
+        return View(model);
+    }
+
     public IActionResult New()
     {
         var model = new DIYNewViewModel
@@ -37,6 +49,24 @@ namespace PitStop.WebApp.Controllers;
             DIYEvening = new DIYEvening(),
         };
         return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RegisterCustomer([FromForm] DIYManagementNewRegistrationViewModel inputModel)
+    {
+        if (ModelState.IsValid)
+        {
+            return await _resiliencyHelper.ExecuteResilient(async () =>
+            {
+                RegisterDIYRegistration cmd = inputModel.MapToDIYRegistration();
+                await _DIYManagamentAPI.RegisterDIYAvondCustomer(cmd);
+                return RedirectToAction("Index");
+            }, View("Offline", new CustomerManagementOfflineViewModel()));
+        }
+        else
+        {
+            return View("NewRegistration", inputModel);
+        }
     }
 
     [HttpPost]
