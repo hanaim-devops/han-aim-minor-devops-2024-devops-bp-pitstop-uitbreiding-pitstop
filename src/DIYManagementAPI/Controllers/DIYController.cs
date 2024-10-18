@@ -39,7 +39,7 @@ namespace DIYManagementAPI.Controllers
         }
 
         [HttpPost("registerfeedback")]
-        public async Task<ActionResult<DIYEveningModel>> CreateDIYFeedback([FromBody] DIYFeedbackCreateDto dto)
+        public async Task<ActionResult<DIYEveningModel>> RegisterDIYFeedback([FromBody] DIYFeedbackCreateDto dto)
         {
             Console.WriteLine($"Received feedback: DIYEveningId = {dto.DIYEveningId}, CustomerName = {dto.CustomerName}, Feedback = {dto.Feedback}");
 

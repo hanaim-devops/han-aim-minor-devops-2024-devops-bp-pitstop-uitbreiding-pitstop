@@ -4,8 +4,8 @@
     {
         public int DIYEveningId { get; set; }
 
-        public string CustomerName { get; set; }
+        public required string CustomerName { get; set; }
 
-        public string Feedback { get; set; }
+        public required string Feedback { get; set; }
     }
 }

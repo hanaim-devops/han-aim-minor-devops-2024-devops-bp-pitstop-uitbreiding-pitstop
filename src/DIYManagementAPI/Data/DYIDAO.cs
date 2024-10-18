@@ -14,21 +14,17 @@ namespace DIYManagementAPI.Data
 
         public async Task<DIYEveningModel> CreateDIYEvening(DIYEveningModel diyEvening)
         {
-            // TODO: reparateurs ophalen uit de database en zetten
-
             _context.DIYEveningModels.Add(diyEvening);
             await _context.SaveChangesAsync();
-
             return diyEvening;
         }
 
-        // public async Task<DIYEveningModel> CreateDIYFeedback(DIYFeedbackModel diyFeedback)
-        // {   
-        //     _context.DIYFeedbackModels.Add(diyFeedback);
-        //     await _context.SaveChangesAsync();
-
-        //     return diyFeedback;
-        // }
+        public async Task<DIYFeedback> RegisterDIYFeedback(DIYFeedback diyFeedback)
+        {   
+            _context.DIYFeedback.Add(diyFeedback);
+            await _context.SaveChangesAsync();
+            return diyFeedback;
+        }
 
         public async Task<IEnumerable<DIYEveningModel>> GetDIYEvenings()
         {
