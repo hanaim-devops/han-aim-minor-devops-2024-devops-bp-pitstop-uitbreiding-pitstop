@@ -46,8 +46,32 @@ namespace DIYManagementAPI.Controllers
             return Ok(result);
         }
 
-        // TODO: get specific DIYAvondModel by id
+        [HttpGet("{id}")]
+        public async Task<ActionResult<DIYEveningModel>> GetDIYEveningById(int id)
+        {
+            var result = await _service.GetDIYEveningById(id);
+            return Ok(result);
+        }
         // TODO: Annuleer meeting
         // TODO: meld aan als klant
+        [HttpPost("registercustomer")]
+        public async Task<ActionResult> RegisterDIYAvondCustomer([FromBody] DIYRegistrationCreateDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var registration = new DIYRegistration
+            {
+                DIYAvondID = dto.DIYEveningId,
+                CustomerName = dto.CustomerName,
+                Reparations = dto.Reparations
+            };
+
+            await _service.RegisterDIYAvondCustomer(registration);
+
+            return StatusCode(StatusCodes.Status201Created);
+        }
     }
 }

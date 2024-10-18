@@ -2,17 +2,17 @@
 {
     public class RegisterDIYRegistration : Command
     {
-        public readonly int DIYAvondId;
+        public readonly int DIYEveningId;
 
         public readonly string CustomerName;
 
-        public readonly string ReparationType;
+        public readonly string Reparations;
 
-        public RegisterDIYRegistration(Guid messageId, int diyAvondId, string customerName, string reperationType) : base(messageId)
+        public RegisterDIYRegistration(Guid messageId, int diyEveningId, string customerName, string reparations) : base(messageId)
         {
-            DIYAvondId = diyAvondId;
+            DIYEveningId = diyEveningId;
             CustomerName = customerName;
-            ReparationType = reperationType;
+            Reparations = reparations;
         }
     }
 }

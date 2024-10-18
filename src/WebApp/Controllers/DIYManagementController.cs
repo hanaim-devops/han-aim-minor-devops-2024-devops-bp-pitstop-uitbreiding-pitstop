@@ -1,4 +1,5 @@
-﻿using Polly;
+﻿using System.Diagnostics;
+using Polly;
 
 namespace PitStop.WebApp.Controllers;
 
@@ -23,6 +24,20 @@ public class DIYManagementController : Controller
             var model = new DIYManagementViewModel
             {
                 DIYEvening = await _DIYManagamentAPI.GetDIYEvening()
+            };
+
+            return View(model);
+        }, View("Offline", new DIYManagementOfflineViewModel()));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            var model = new DIYManagementDetailsViewModel
+            {
+                DIYAvond = await _DIYManagamentAPI.GetDIYEveningById(id.ToString())
             };
 
             return View(model);
@@ -61,7 +76,7 @@ public class DIYManagementController : Controller
                 RegisterDIYRegistration cmd = inputModel.MapToDIYRegistration();
                 await _DIYManagamentAPI.RegisterDIYAvondCustomer(cmd);
                 return RedirectToAction("Index");
-            }, View("Offline", new CustomerManagementOfflineViewModel()));
+            }, View("Offline", new DIYManagementOfflineViewModel()));
         }
         else
         {
@@ -74,7 +89,7 @@ public class DIYManagementController : Controller
     {
         if (ModelState.IsValid)
         {
- 
+
             return await _resiliencyHelper.ExecuteResilient(async () =>
             {
                 RegisterDIYEvening cmd = inputModel.MapToRegisterEvening();
