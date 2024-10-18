@@ -1,4 +1,6 @@
-namespace Pitstop.MaintenanceHistoryAPI.DataAccess
+namespace Pitstop.MaintenanceHistoryAPI.DataAccess;
+
+public class MaintenanceHistoryContext(DbContextOptions<MaintenanceHistoryContext> options) : DbContext(options)
 {
     public DbSet<MaintenanceHistory> MaintenanceHistories { get; set; }
 
