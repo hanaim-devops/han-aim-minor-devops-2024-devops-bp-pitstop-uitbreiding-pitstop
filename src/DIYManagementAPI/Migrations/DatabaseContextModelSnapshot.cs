@@ -53,26 +53,40 @@ namespace DIYManagementAPI.Migrations
                     b.ToTable("DIYEveningModels");
                 });
 
-            modelBuilder.Entity("DIYManagementAPI.Models.DIYRegistration", b =>
+            modelBuilder.Entity("DIYManagementAPI.Models.DIYFeedback", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DIYEveningID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DIYEveningID"));
 
                     b.Property<string>("CustomerName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DIYEveningID");
+
+                    b.ToTable("DIYFeedback");
+                });
+
+            modelBuilder.Entity("DIYManagementAPI.Models.DIYRegistration", b =>
+                {
                     b.Property<int>("DIYEveningID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Reparations")
-                        .IsRequired()
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DIYEveningID"));
+
+                    b.Property<string>("CustomerName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Reparations")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DIYEveningID");
 
                     b.ToTable("DIYRegistrations");
                 });
