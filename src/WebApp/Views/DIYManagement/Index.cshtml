@@ -4,21 +4,25 @@
 }
 <h3 id="PageTitle">DIY Management - overview</h3>
 
-<h1>DIY Management WOW</h1>
-
 <table class="table">
     <thead>
         <tr>
-            <th>DIY Name</th>
+            <th>DIY Title</th>
             <th>DIY Description</th>
+            <th>Start Date & time</th>
+            <th>End Date & time</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var diy in Model.DIYAvonden)
+        @foreach (var diy in Model.DIYEvening)
         {
             <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "DIYManagement", new { id = diy.Id }))'">
-                <td>@diy.Name</td>
-                <td>@diy.Description</td>
+                <td>@diy.Title</td>
+                <td>@diy.ExtraInfo</td>
+                <td>@diy.StartDate</td>
+                <td>@diy.EndDate</td>
             </tr>
         }
-</tbody>
+    </tbody>
+</table>
+<a id="CreateDIYEveningButton" asp-action="New" asp-controller="DIYManagement" class="btn btn-default">Register DIYEvening</a>

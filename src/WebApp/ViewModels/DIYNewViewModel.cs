@@ -2,4 +2,5 @@
 
 public class DIYNewViewModel
 {
+    public DIYEvening DIYEvening { get; set; }
 }

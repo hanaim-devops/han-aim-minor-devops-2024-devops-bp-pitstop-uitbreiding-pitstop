@@ -2,6 +2,6 @@
 {
     public class DIYManagementViewModel
     {
-        public IEnumerable<DIYAvond> DIYAvonden { get; set; }
+        public IEnumerable<DIYEvening> DIYEvening { get; set; }
     }
 }
