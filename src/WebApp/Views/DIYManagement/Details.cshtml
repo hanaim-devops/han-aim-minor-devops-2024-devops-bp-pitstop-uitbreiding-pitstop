@@ -29,5 +29,10 @@
 </table>
 <a id="RegisterCustomerButton" asp-action="NewRegistration" asp-route-diyEveningId="@Model.DIYEvening.Id"
     asp-controller="DIYManagement" class="btn btn-default">Register customer</a>
-<a id="CreateDIYFeedbackButton" asp-action="NewFeedback" asp-controller="DIYManagement" class="btn btn-default">Give feedback</a>
+    
+@if (Model.DIYEvening.StartDate < DateTime.Now)
+{
+    <a id="CreateDIYFeedbackButton" asp-action="NewFeedback" asp-controller="DIYManagement" class="btn btn-default">Give feedback</a>
+}
+
 <a id="CancelButton" asp-action="Index" asp-controller="DIYManagement" class="btn btn-default">Cancel</a>

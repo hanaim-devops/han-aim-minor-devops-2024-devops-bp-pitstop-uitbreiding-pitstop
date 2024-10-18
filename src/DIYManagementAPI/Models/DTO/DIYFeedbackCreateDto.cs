@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DIYManagementAPI.Models.DTO
+﻿namespace DIYManagementAPI.Models.DTO
 {
     public class DIYFeedbackCreateDto
     {
-        public int DIYEveningId;
+        public int DIYEveningId { get; set; }
 
-        public string? CustomerName { get; set; }
+        public string CustomerName { get; set; }
 
-        public string? Feedback { get; set; }
+        public string Feedback { get; set; }
     }
 }
