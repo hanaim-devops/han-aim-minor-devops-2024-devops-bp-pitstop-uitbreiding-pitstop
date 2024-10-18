@@ -32,7 +32,7 @@ builder.WebHost.UseSentry(o =>
 });
 
 // add DBContext
-var sqlConnectionString = builder.Configuration.GetConnectionString("MaintenanceHistoryCN");
+var sqlConnectionString = builder.Configuration.GetConnectionString("VehicleManagementCN");
 builder.Services.AddDbContext<VehicleManagementDBContext>(options => options.UseSqlServer(sqlConnectionString));
 
 // add messagepublisher
