@@ -46,7 +46,15 @@ Als de tijdens course onderzochte technologie wel toepasbaar is kun je dit uiter
  
 ## 5. Bijdrage code review/kwaliteit anderen en security
 
-DEZE WEEK WEL VEEL GEDAAN TODO;
+16-10-2024
+[Code review](https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/17)
+gekeken naar de code over HPA, opmerking gegeven over het feit dat elke service een eigen stuk heeft. Dit kon niet gecombineerd worden, dus de code is goedgekeurd.
+17-10-2024
+[Code review](https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/32)
+Gekeken naar de code over logic voor DIYavond, heb hier opmerkingen gemaakt over de gebruikte datatypes. Deze zijn aangepast. Ook heb ik opmerkingen gemaakt over de gebruikte namen van de variabelen, de naamgeving was afwisselend nederland en engels. Dit is aangepast.
+17-10-2024
+[Code review](https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/33)
+Gekeken naar de code over de logic voor de DIYavond, hier heb ik opmerkingen gemaakt over het gebruik van async zonder await. De datacast van list naar IEnumerable. Ook heb ik een opmerking gegeven dat de propertys die null kunnen zijn nullable moeten zijn in de models. En als laatste heb ik een opmerking gemaakt over een mogelijke fout doordat een waarde null kan zijn. Die is netjes afgevangen.
 
 Competenties: *DevOps-7 - Attitude*, *DevOps-4 DevSecOps*
 
