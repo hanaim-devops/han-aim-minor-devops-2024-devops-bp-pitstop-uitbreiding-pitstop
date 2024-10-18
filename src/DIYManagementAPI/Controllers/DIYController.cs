@@ -9,9 +9,9 @@ namespace DIYManagementAPI.Controllers
     [ApiController]
     public class DIYController : ControllerBase
     {
-        private readonly DYIService _service;
+        private readonly DIYService _service;
 
-        public DIYController(DYIService service)
+        public DIYController(DIYService service)
         {
             _service = service;
         }
@@ -43,6 +43,18 @@ namespace DIYManagementAPI.Controllers
         public async Task<ActionResult<IEnumerable<DIYEveningModel>>> GetDIYEvening()
         {
             var result = await _service.GetDIYEvenings();
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<DIYEveningModel>> CancelDIYEvening(int id)
+        {
+            var result = await _service.CancelDIYEvening(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
             return Ok(result);
         }
 
