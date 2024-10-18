@@ -16,6 +16,11 @@ namespace DIYManagementAPI.Services
             return await _dao.CreateDIYEvening(diyEvening);
         }
 
+        // public async Task<DIYEveningModel> CreateDIYFeedback(DIYFeedbackModel feedback)
+        // {
+        //     return await _dao.CreateDIYFeedback(feedback);
+        // }
+
         public async Task<IEnumerable<DIYEveningModel>> GetDIYEvenings()
         {
             return await _dao.GetDIYEvenings();

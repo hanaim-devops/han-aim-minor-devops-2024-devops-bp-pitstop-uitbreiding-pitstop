@@ -28,6 +28,12 @@ public static class Mappers
         source.DIYRegistration.CustomerName,
         source.DIYRegistration.Reparations
     );
+    public static RegisterDIYFeedback MapToDIYFeedback(this DIYManagementNewFeedbackViewModel source) => new RegisterDIYFeedback(
+        Guid.NewGuid(),
+        source.DIYFeedback.DIYEveningId,
+        source.DIYFeedback.CustomerName,
+        source.DIYFeedback.Feedback
+    );
     public static RegisterDIYEvening MapToRegisterEvening(this DIYNewViewModel source) => new RegisterDIYEvening(
         Guid.NewGuid(),
         source.DIYEvening.Title,

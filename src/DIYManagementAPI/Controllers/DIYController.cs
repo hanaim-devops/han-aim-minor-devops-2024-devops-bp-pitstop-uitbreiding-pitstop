@@ -38,6 +38,14 @@ namespace DIYManagementAPI.Controllers
             return StatusCode(StatusCodes.Status201Created, result);
         }
 
+        [HttpPost("RegisterFeedback")]
+        public async Task<ActionResult<DIYEveningModel>> CreateDIYFeedback([FromBody] DIYFeedbackCreateDto dto)
+        {
+            Console.WriteLine("HET IS GELUKT!!!!!!!!!!!!!!!!!!!");
+
+            return StatusCode(StatusCodes.Status201Created, null);
+        }
+
         // TODO: get all DIYEveningModels
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DIYEveningModel>>> GetDIYEvening()

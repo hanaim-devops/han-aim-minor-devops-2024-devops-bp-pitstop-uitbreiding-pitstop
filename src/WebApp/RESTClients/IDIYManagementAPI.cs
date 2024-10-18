@@ -14,4 +14,7 @@ public interface IDIYManagementAPI
 
     [Post("/diy")]
     Task RegisterDIYEvening(RegisterDIYEvening cmd);
+
+    [Post("/diy")]
+    Task RegisterDIYFeedback(RegisterDIYFeedback cmd);
 }

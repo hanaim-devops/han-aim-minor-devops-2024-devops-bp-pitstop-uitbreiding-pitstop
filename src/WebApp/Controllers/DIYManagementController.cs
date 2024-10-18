@@ -93,4 +93,35 @@ public class DIYManagementController : Controller
     {
         return View();
     }
+
+    [HttpGet]
+    public IActionResult NewFeedback(int diyAvondId)
+    {
+        var model = new DIYManagementNewFeedbackViewModel
+        {
+            DIYFeedback = new DIYFeedback
+            {
+                DIYEveningId = diyAvondId
+            }
+        };
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RegisterFeedback([FromForm] DIYManagementNewFeedbackViewModel inputModel)
+    {
+        if (ModelState.IsValid)
+        {
+            return await _resiliencyHelper.ExecuteResilient(async () =>
+            {
+                RegisterDIYFeedback cmd = inputModel.MapToDIYFeedback();
+                await _DIYManagamentAPI.RegisterDIYFeedback(cmd);
+                return RedirectToAction("Index");
+            }, View("Offline", new CustomerManagementOfflineViewModel()));
+        }
+        else
+        {
+            return View("NewRegistration", inputModel);
+        }
+    }
 }
