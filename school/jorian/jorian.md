@@ -1,4 +1,4 @@
-# Eigen bijdrage <mijn-naam>
+# Eigen bijdrage jorian
  
 Als deliverable voor de individuele bijdrage in het beroepsproduct maak een eigen markdown bestand `<mijn-voornaam>.md` in je repo aan met tekst inclusief linkjes naar code en documentaties bestanden, pull requests, commit diffs. Maak hierin de volgende kopjes met een invulling.
  
@@ -8,6 +8,8 @@ Je begin hier onder het hoofdkopje met een samenvatting van je bijdrage zoals je
 
 
 ## 1. Code/platform bijdrage
+
+Deze week heb ik gewerkt aan de flow van werk in github, ik er voor gezorgd dat er een aantal extra rules zijn bij het mergen van een pull-request, zoals het gebruik van 1 manier en het standaard verwijderen van een branch na het mergen. Voor de standaard manier hebben ik na overleg gekozen voor squash merging, deze keuze heb ik gemaakt omdat meer mensen wisten hoe mergen werkte ten opzichte van rebase. Ook heb ik een [ruleset](https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/settings/rules) aangemaakt die controleert of de pull-request is gereviewd.  
 
 Competenties: *DevOps-1 Continuous Delivery*
 
@@ -29,6 +31,11 @@ NB Het gebruik van *versiebeheer* ((e.g. git)) hoort bij je standaardtaken en de
 
 ## 4. Onderzoek
 
+Ik heb mijn onderzoek gedaan naar keycloak ([keycloak onderzoek](https://github.com/hanaim-devops/devops-blog-jorianroelofsen)), dit heb ik ook in dit project proberen te verwerken.
+Ik heb de eerste week gewerkt aan keycloak, dit ik heb dit niet werkend kunnen krijgen door een aantal [errors](https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/issues/9) die ik niet weg kreeg.
+De 1e comment laat een error zien die ik kreeg na het maken van de 401 error, deze error duid erop dat de manier waarop en de setting die je meegeef geen toegang hebben tot keycloak. De errors uit de 2e comment duiden erop dat ik geen acces heb tot keycloak [issue 1](https://github.com/IdentityServer/IdentityServer4/issues/2337) [issue 2](https://github.com/IdentityServer/IdentityServer4/issues/2672).
+Om deze errors op te lossen heb ik zelfs nog gebruik gemaakt van exact dezelfde code die is gegeven in de [documentatie](https://nikiforovall.github.io/keycloak-authorization-services-dotnet/examples/web-app-mvc.html), maar zelf met deze code kreeg ik dezelfde errors.
+
 Competenties: *Nieuwsgierige houding*
 
 Beschrijf hier voor het Course BP kort je onderzochte technologie met een link naar je blog post, of het toepassen ervan gelukt is en hoe, of waarom niet. Beschrijf evt. kort extra leerervaringen met andere technologieen of verdieping sinds het blog. 
@@ -38,6 +45,8 @@ Tijdens het grote project beschrijf je hier onderzoek naar het domein en nieuwe 
 Als de tijdens course onderzochte technologie wel toepasbaar is kun je dit uiteraard onder dit punt noemen. Of wellicht was door een teamgenoot onderzochte technologie relevant, waar jij je nu verder in verdiept hebt en mee gewerkt hebt, dus hier kunt beschrijven. Tot slot kun je hier ook juist een korte uitleg geef over WAAROM  jouw eerder onderzochte technologie dan precies niet relevant of inpasbaar was. Dit is voor een naieve buitenstaander niet altijd meteen duidelijk, maar kan ook heel interessant zijn. Bijvoorbeeld dat [gebruik van Ansible in combi met Kubernetes](https://www.ansible.com/blog/how-useful-is-ansible-in-a-cloud-native-kubernetes-environment) niet handig blijkt. Ook als je geen uitgebreid onderzoek hebt gedaan of ADR hebt waar je naar kunt linken, dan kun je onder dit kopje wel alsnog kort conceptuele kennis duidelijk maken.
  
 ## 5. Bijdrage code review/kwaliteit anderen en security
+
+DEZE WEEK WEL VEEL GEDAAN TODO;
 
 Competenties: *DevOps-7 - Attitude*, *DevOps-4 DevSecOps*
 
