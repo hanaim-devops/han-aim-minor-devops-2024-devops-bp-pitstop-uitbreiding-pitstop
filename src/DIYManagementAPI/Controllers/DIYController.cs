@@ -38,7 +38,7 @@ namespace DIYManagementAPI.Controllers
             return StatusCode(StatusCodes.Status201Created, result);
         }
 
-        [HttpPost("RegisterFeedback")]
+        [HttpPost("registerfeedback")]
         public async Task<ActionResult<DIYEveningModel>> CreateDIYFeedback([FromBody] DIYFeedbackCreateDto dto)
         {
             Console.WriteLine("HET IS GELUKT!!!!!!!!!!!!!!!!!!!");
