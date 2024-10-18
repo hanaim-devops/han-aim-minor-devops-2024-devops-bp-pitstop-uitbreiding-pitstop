@@ -5,6 +5,7 @@
     <AssemblyName>Pitstop.CustomerManagementAPI</AssemblyName>
     <RootNamespace>Pitstop.CustomerManagementAPI</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsContainerApp>true</IsContainerApp>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 

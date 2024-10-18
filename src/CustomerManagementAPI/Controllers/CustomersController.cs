@@ -57,7 +57,6 @@ public class CustomersController : Controller
                 "Try again, and if the problem persists " +
                 "see your system administrator.");
             return StatusCode(StatusCodes.Status500InternalServerError);
-            throw;
         }
     }
 }

@@ -6,6 +6,7 @@
     <AssemblyName>Pitstop.WorkshopManagementEventHandler</AssemblyName>
     <RootNamespace>Pitstop.WorkshopManagementEventHandler</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsContainerApp>true</IsContainerApp>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 

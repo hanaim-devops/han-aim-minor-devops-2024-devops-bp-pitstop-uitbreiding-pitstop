@@ -5,6 +5,7 @@
     <AssemblyName>Pitstop.VehicleManagementAPI</AssemblyName>
     <RootNamespace>Pitstop.VehicleManagement</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsContainerApp>true</IsContainerApp>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 

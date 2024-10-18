@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUtils", "TestUtils\Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceHistoryAPI", "MaintenanceHistoryAPI\MaintenanceHistoryAPI.csproj", "{B40A72EA-936D-4041-ABEA-7E678880CA44}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\build\_build.csproj", "{DDF299A2-B295-402A-BB02-B3E77B7161F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build & Deploy", "Build & Deploy", "{39C7EEA2-D866-45D4-99CE-7E32A27225F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +42,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDF299A2-B295-402A-BB02-B3E77B7161F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF299A2-B295-402A-BB02-B3E77B7161F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81865206-E463-4C83-8DB3-54837054F6DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81865206-E463-4C83-8DB3-54837054F6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81865206-E463-4C83-8DB3-54837054F6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,5 +96,8 @@ Global
 		{B40A72EA-936D-4041-ABEA-7E678880CA44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B40A72EA-936D-4041-ABEA-7E678880CA44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B40A72EA-936D-4041-ABEA-7E678880CA44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DDF299A2-B295-402A-BB02-B3E77B7161F7} = {39C7EEA2-D866-45D4-99CE-7E32A27225F8}
 	EndGlobalSection
 EndGlobal
