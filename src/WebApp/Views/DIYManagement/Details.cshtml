@@ -32,7 +32,7 @@
 
 @if (Model.DIYEvening.StartDate < DateTime.Now)
 {
-    <a id="RegisterDIYFeedbackButton" asp-action="NewFeedback" asp-controller="DIYManagement" class="btn btn-default">Give feedback</a>
+    <a id="RegisterDIYFeedbackButton" asp-action="NewFeedback" asp-route-diyEveningId="@Model.DIYEvening.Id" asp-controller="DIYManagement" class="btn btn-default">Give feedback</a>
 }
 
 <a id="CancelButton" asp-action="Index" asp-controller="DIYManagement" class="btn btn-default">Cancel</a>

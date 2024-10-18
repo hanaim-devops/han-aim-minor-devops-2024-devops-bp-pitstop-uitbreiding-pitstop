@@ -11,7 +11,7 @@
 <h3 id="PageTitle">DIY Management - new feedback</h3>
 
 <form asp-controller="DIYManagement" asp-action="RegisterFeedback" method="post">
-    <input asp-for="DIYFeedback.DIYEveningId" />
+    <input asp-for="DIYFeedback.DIYEveningId" type="hidden" />
     <div class="form-group">
         <label asp-for="DIYFeedback.CustomerName"></label>
         <input asp-for="DIYFeedback.CustomerName" type="text" class="form-control" />
