@@ -2,12 +2,14 @@
 
 public interface IDIYManagementAPI
 {
-    [Get("/diyavonden")]
-    Task<List<DIYAvond>> GetDIYAvonden();
+    [Get("/diy")]
+    Task<List<DIYEvening>> GetDIYEvening();
 
-    [Get("/diyavonden/{id}")]
-    Task<DIYAvond> GetDIYAvondById([AliasAs("id")] string diyAvondId);
+    //TODO: get eveninging on id
 
-    //[Post("/diyavonden")]
-    //Task RegisterDIYAvond(RegisterDIYAvond command);
+    [Get("/diyevening/{id}")]
+    Task<DIYEvening> GetDIYEveningById([AliasAs("id")] string diyEveningId);
+
+    [Post("/diy")]
+    Task RegisterDIYEvening(RegisterDIYEvening cmd);
 }

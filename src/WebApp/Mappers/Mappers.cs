@@ -21,4 +21,13 @@ public static class Mappers
         source.Vehicle.Type,
         source.SelectedCustomerId
     );
+
+    public static RegisterDIYEvening MapToRegisterEvening(this DIYNewViewModel source) => new RegisterDIYEvening(
+        Guid.NewGuid(),
+        source.DIYEvening.Title,          
+        source.DIYEvening.ExtraInfo,
+        source.DIYEvening.StartDate,
+        source.DIYEvening.EndDate,
+        source.DIYEvening.Mechanic
+        );
 }

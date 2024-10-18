@@ -135,7 +135,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
-  dyimanagementapi:
+  diymanagementapi:
     image: pitstop/diymanagementapi:1.0
     build: DIYManagementAPI
     depends_on:

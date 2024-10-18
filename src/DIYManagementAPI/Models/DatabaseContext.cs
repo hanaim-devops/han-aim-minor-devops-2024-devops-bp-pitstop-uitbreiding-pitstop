@@ -9,8 +9,8 @@ namespace DIYManagementAPI.Models
         {
         }
 
-        public DbSet<DiyTestModel> DiyTestModels { get; set; }
-
+        public DbSet<DIYEveningModel> DIYEveningModels { get; set; }
+        
         public void MigrateDB()
         {
             Policy
