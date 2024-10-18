@@ -18,6 +18,10 @@
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
         <PackageReference Include="Pitstop.Infrastructure.Messaging" />
         <PackageReference Include="Pitstop.Infrastructure.Messaging.Customized" />
+        <PackageReference Include="Sentry" />
+        <PackageReference Include="Sentry.AspNet" />
+        <PackageReference Include="Sentry.AspNetCore" />
+        <PackageReference Include="Sentry.Profiling" />
         <PackageReference Include="Serilog.AspNetCore" />
         <PackageReference Include="Serilog.Enrichers.Environment" />
         <PackageReference Include="Serilog.Settings.Configuration" />
