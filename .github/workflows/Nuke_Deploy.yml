@@ -19,7 +19,7 @@ name: Nuke_Deploy
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   ubuntu-latest:

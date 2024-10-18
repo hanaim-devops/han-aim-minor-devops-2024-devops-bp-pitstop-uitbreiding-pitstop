@@ -10,7 +10,7 @@ using Nuke.Common.IO;
 [GitHubActions(
     "Nuke Deploy",
     GitHubActionsImage.UbuntuLatest,
-    OnPushBranches = ["main"],
+    OnPushBranches = ["master"],
     InvokedTargets = [nameof(Deploy)],
     ImportSecrets = ["DOCR_EU_DEV_PASSWORD", "DOCR_EU_DEV_USERNAME"],
     FetchDepth = 0
