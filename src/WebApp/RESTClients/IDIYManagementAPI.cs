@@ -5,11 +5,10 @@ public interface IDIYManagementAPI
     [Get("/diy")]
     Task<List<DIYEvening>> GetDIYEvening();
 
-    [Post("/diyavonden/registercustomer")]
+    [Post("/diy/registercustomer")]
     Task RegisterDIYAvondCustomer(RegisterDIYRegistration command);
-    //TODO: get eveninging on id
 
-    [Get("/diyevening/{id}")]
+    [Get("/diy/{id}")]
     Task<DIYEvening> GetDIYEveningById([AliasAs("id")] string diyEveningId);
 
     [Post("/diy")]

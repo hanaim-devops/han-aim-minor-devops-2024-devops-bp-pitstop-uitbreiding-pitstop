@@ -2,4 +2,31 @@
 @{
     ViewData["Title"] = "DIY Details";
 }
-<a id="RegisterCustomerButton" asp-action="NewRegistration" asp-route-diyAvondId="@Model.DIYAvond.Id" asp-controller="DIYManagement" class="btn btn-default">Register customer</a>
+<h3 id="PageTitle">DIY Management - details</h3>
+<table class="table">
+    <tbody>
+        <tr>
+            <td width="150">Name :</td>
+            <td><b>@Model.DIYAvond.Title</b></td>
+        </tr>
+        <tr>
+            <td>Description :</td>
+            <td><b>@Model.DIYAvond.ExtraInfo</b></td>
+        </tr>
+        <tr>
+            <td width="150">Start time :</td>
+            <td><b>@Model.DIYAvond.StartDate</b></td>
+        </tr>
+        <tr>
+            <td width="150">End time :</td>
+            <td><b>@Model.DIYAvond.EndDate</b></td>
+        </tr>
+        <tr>
+            <td width="150">Mechanic :</td>
+            <td><b>@Model.DIYAvond.Mechanic</b></td>
+        </tr>
+    </tbody>
+</table>
+<a id="RegisterCustomerButton" asp-action="NewRegistration" asp-route-diyAvondId="@Model.DIYAvond.Id"
+    asp-controller="DIYManagement" class="btn btn-default">Register customer</a>
+<a id="CancelButton" asp-action="Index" asp-controller="DIYManagement" class="btn btn-default">Cancel</a>
