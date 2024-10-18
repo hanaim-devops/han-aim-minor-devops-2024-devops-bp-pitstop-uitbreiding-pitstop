@@ -18,20 +18,22 @@ namespace DIYManagementAPI.Migrations
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
-#pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DIYManagementAPI.Models.DIYEveningRegistration", b =>
+            modelBuilder.Entity("DIYManagementAPI.Models.DIYFeedback", b => // Adjusted to correct model name
                 {
-                    b.Property<int>("DIYEveningID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DIYEveningID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("DIYEveningID")
+                        .HasColumnType("int");
 
                     b.Property<string>("CustomerName")
                         .HasColumnType("nvarchar(max)");
@@ -39,11 +41,10 @@ namespace DIYManagementAPI.Migrations
                     b.Property<string>("Feedback")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("DIYEveningID");
+                    b.HasKey("Id");
 
-                    b.ToTable("DIYRegistrations");
+                    b.ToTable("DIYFeedback");
                 });
-#pragma warning restore 612, 618
         }
     }
 }
