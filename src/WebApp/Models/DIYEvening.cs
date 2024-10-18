@@ -27,5 +27,7 @@
         public string Mechanic { get; set; }
 
         public string Error { get; set; }
+
+        public bool Cancelled { get; set; }
     }
 }
