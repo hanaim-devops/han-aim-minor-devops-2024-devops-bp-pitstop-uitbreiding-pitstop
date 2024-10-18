@@ -40,7 +40,7 @@ if (app.Environment.IsDevelopment())
 
 using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 {
-    scope.ServiceProvider.GetService<DatabaseContext>().MigrateDB();
+    scope.ServiceProvider?.GetService<DatabaseContext>()?.MigrateDB();
 }
 
 app.UseHttpsRedirection();

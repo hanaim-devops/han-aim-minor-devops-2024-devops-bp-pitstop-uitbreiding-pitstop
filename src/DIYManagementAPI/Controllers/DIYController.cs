@@ -41,7 +41,21 @@ namespace DIYManagementAPI.Controllers
         [HttpPost("registerfeedback")]
         public async Task<ActionResult<DIYEveningModel>> CreateDIYFeedback([FromBody] DIYFeedbackCreateDto dto)
         {
-            Console.WriteLine("HET IS GELUKT!!!!!!!!!!!!!!!!!!!");
+            Console.WriteLine($"Received feedback: DIYEveningId = {dto.DIYEveningId}, CustomerName = {dto.CustomerName}, Feedback = {dto.Feedback}");
+            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var feedback = new DIYFeedback
+            {
+                DIYEveningID = dto.DIYEveningId,
+                CustomerName = dto.CustomerName,
+                Feedback = dto.Feedback
+            };
+
+            await _service.RegisterDIYFeedback(feedback);
 
             return StatusCode(StatusCodes.Status201Created, null);
         }
@@ -63,7 +77,7 @@ namespace DIYManagementAPI.Controllers
         // TODO: Annuleer meeting
         // TODO: meld aan als klant
         [HttpPost("registercustomer")]
-        public async Task<ActionResult> RegisterDIYAvondCustomer([FromBody] DIYRegistrationCreateDto dto)
+        public async Task<ActionResult> RegisterDIYEveningCustomer([FromBody] DIYRegistrationCreateDto dto)
         {
             if (!ModelState.IsValid)
             {
@@ -72,12 +86,12 @@ namespace DIYManagementAPI.Controllers
 
             var registration = new DIYRegistration
             {
-                DIYAvondID = dto.DIYEveningId,
+                DIYEveningID = dto.DIYEveningId,
                 CustomerName = dto.CustomerName,
                 Reparations = dto.Reparations
             };
 
-            await _service.RegisterDIYAvondCustomer(registration);
+            await _service.RegisterDIYEveningCustomer(registration);
 
             return StatusCode(StatusCodes.Status201Created);
         }

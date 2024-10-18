@@ -40,7 +40,7 @@ namespace DIYManagementAPI.Data
             return await _context.DIYEveningModels.FindAsync(id);
         }
 
-        public async Task RegisterDIYAvondCustomer(DIYRegistration registration)
+        public async Task RegisterDIYEveningCustomer(DIYRegistration registration)
         {
             _context.DIYRegistrations.Add(registration);
             await _context.SaveChangesAsync();

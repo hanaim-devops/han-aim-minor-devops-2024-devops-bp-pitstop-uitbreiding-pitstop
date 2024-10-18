@@ -2,13 +2,13 @@
 
 namespace DIYManagementAPI.Models
 {
-    public class DIYRegistration
+    public class DIYFeedback
     {
         [Key]
         public int DIYEveningID {  get; set; } 
 
         public string? CustomerName { get; set; }
 
-        public string? Reparations {  get; set; }
+        public string? Feedback {  get; set; }
     }
 }

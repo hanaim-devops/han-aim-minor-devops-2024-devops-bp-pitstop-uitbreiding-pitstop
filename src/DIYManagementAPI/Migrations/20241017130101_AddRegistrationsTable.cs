@@ -14,14 +14,14 @@ namespace DIYManagementAPI.Migrations
                 name: "DIYRegistrations",
                 columns: table => new
                 {
-                    DIYAvondID = table.Column<int>(type: "int", nullable: false)
+                    DIYEveningID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Reparations = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DIYRegistrations", x => x.DIYAvondID);
+                    table.PrimaryKey("PK_DIYRegistrations", x => x.DIYEveningID);
                 });
         }
 

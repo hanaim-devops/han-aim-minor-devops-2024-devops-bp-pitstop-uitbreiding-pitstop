@@ -27,11 +27,11 @@ public class DIYManagementAPI : IDIYManagementAPI
         return await _restClient.GetDIYEvening();
     }
 
-    public async Task RegisterDIYAvondCustomer(RegisterDIYRegistration command)
+    public async Task RegisterDIYEveningCustomer(RegisterDIYRegistration command)
     {
-        await _restClient.RegisterDIYAvondCustomer(command);
+        await _restClient.RegisterDIYEveningCustomer(command);
     }
-    
+
     public async Task RegisterDIYEvening(RegisterDIYEvening cmd)
     {
         await _restClient.RegisterDIYEvening(cmd);

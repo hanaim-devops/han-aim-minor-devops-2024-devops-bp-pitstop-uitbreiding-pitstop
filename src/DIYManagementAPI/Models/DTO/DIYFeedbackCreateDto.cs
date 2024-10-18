@@ -4,10 +4,10 @@ namespace DIYManagementAPI.Models.DTO
 {
     public class DIYFeedbackCreateDto
     {
-        [Required]
-        public required string CustomerName { get; set; }
+        public int DIYEveningId;
 
-        [Required]
-        public required string Feedback { get; set; }
+        public string? CustomerName { get; set; }
+
+        public string? Feedback { get; set; }
     }
 }

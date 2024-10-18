@@ -24,13 +24,13 @@ namespace DIYManagementAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DIYManagementAPI.Models.DIYAvondRegistration", b =>
+            modelBuilder.Entity("DIYManagementAPI.Models.DIYEveningRegistration", b =>
                 {
-                    b.Property<int>("DIYAvondID")
+                    b.Property<int>("DIYEveningID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DIYAvondID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DIYEveningID"));
 
                     b.Property<string>("CustomerName")
                         .HasColumnType("nvarchar(max)");
@@ -38,7 +38,7 @@ namespace DIYManagementAPI.Migrations
                     b.Property<string>("Reparations")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("DIYAvondID");
+                    b.HasKey("DIYEveningID");
 
                     b.ToTable("DIYRegistrations");
                 });

@@ -6,7 +6,7 @@ public interface IDIYManagementAPI
     Task<List<DIYEvening>> GetDIYEvening();
 
     [Post("/diy/registercustomer")]
-    Task RegisterDIYAvondCustomer(RegisterDIYRegistration command);
+    Task RegisterDIYEveningCustomer(RegisterDIYRegistration command);
 
     [Get("/diy/{id}")]
     Task<DIYEvening> GetDIYEveningById([AliasAs("id")] string diyEveningId);
