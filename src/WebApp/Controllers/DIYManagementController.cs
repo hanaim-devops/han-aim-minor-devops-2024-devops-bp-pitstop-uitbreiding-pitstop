@@ -137,7 +137,7 @@ public class DIYManagementController : Controller
         }
         else
         {
-            return View("NewRegistration", inputModel);
+            return View("NewFeedback", inputModel);
         }
     }
 }
