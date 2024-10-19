@@ -35,5 +35,10 @@ namespace DIYManagementAPI.Services
         {
             await _dao.RegisterDIYFeedback(feedback);
         }
+
+        public async Task<List<DIYFeedback>> GetFeedbackAsync(int diyEveningId)
+        {
+            return await _dao.GetFeedbackByDIYEveningIdAsync(diyEveningId);
+        }
     }
 }

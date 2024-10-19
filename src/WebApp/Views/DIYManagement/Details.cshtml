@@ -36,3 +36,26 @@
 }
 
 <a id="CancelButton" asp-action="Index" asp-controller="DIYManagement" class="btn btn-default">Cancel</a>
+
+@if (Model.DIYEvening.StartDate < DateTime.Now)
+{
+    <br>
+    <h6> Given Feedback: </h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CustomerName</th>
+                <th>Feedback</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var diy in Model.DIYFeedback)
+            {
+                <tr>
+                    <td>@diy.CustomerName</td>
+                    <td>@diy.Feedback</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

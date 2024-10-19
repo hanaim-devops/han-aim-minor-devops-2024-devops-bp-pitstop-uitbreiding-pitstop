@@ -41,5 +41,14 @@ namespace DIYManagementAPI.Data
             _context.DIYRegistrations.Add(registration);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<DIYFeedback>> GetFeedbackByDIYEveningIdAsync(int diyEveningId)
+        {
+            var feedback = await _context.DIYFeedback
+            .Where(f => f.DIYEveningID == diyEveningId)
+            .ToListAsync();
+
+            return feedback ?? new List<DIYFeedback>();
+        }
     }
 }
