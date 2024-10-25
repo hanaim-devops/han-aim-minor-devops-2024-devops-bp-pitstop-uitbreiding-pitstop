@@ -22,8 +22,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<DYIService>();
-builder.Services.AddScoped<DYIDAO>();
+builder.Services.AddScoped<DIYService>();
+builder.Services.AddScoped<DIYDAO>();
 
 var connectionString = builder.Configuration.GetConnectionString("DIYManagementCN");
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));

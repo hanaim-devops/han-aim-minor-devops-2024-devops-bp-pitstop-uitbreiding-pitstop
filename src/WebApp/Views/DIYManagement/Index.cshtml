@@ -11,6 +11,7 @@
             <th>DIY Description</th>
             <th>Start Date & time</th>
             <th>End Date & time</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +22,15 @@
                 <td>@diy.ExtraInfo</td>
                 <td>@diy.StartDate</td>
                 <td>@diy.EndDate</td>
+                <td>@if (diy.Cancelled)
+                {
+                    <span class="glyphicon glyphicon-remove" style="color:red"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-ok" style="color:green"></span>
+                }
+                </td>
             </tr>
         }
     </tbody>

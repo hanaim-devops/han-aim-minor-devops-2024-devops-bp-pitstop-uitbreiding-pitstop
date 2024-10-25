@@ -23,5 +23,6 @@ namespace DIYManagementAPI.Models
 
         public required string Mechanic { get; set; }
 
+        public bool Cancelled { get; set; } = false;
     }
 }
