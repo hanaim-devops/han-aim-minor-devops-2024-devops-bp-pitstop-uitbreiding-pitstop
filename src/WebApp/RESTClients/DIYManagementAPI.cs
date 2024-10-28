@@ -42,6 +42,11 @@ public class DIYManagementAPI : IDIYManagementAPI
         return await _restClient.GetRegistrationsForDIYEvening(diyEveningId);
     }
 
+    public async Task CancelRegistration([AliasAs("id")] string diyRegistrationId)
+    {
+        await _restClient.CancelRegistration(diyRegistrationId);
+    }
+    
     public async Task RegisterDIYFeedback(RegisterDIYFeedback cmd)
     {
         await _restClient.RegisterDIYFeedback(cmd);

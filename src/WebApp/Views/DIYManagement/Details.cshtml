@@ -32,6 +32,7 @@
         <tr>
             <th>Name customer</th>
             <th>Reparation(s)</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +41,19 @@
             <tr>
                 <td>@diyRegistration.CustomerName</td>
                 <td>@diyRegistration.Reparations</td>
+                <td>
+                    @if (Model.DIYEvening.StartDate >= DateTime.Now)
+                    {
+                        <form asp-action="CancelRegistration" asp-controller="DIYManagement" method="post" style="display:inline;">
+                            <input type="hidden" name="diyRegistrationId" value="@diyRegistration.Id" />
+                            <button type="submit" class="btn btn-danger">Cancel</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Cannot cancel after the event has started</span>
+                    }
+                </td>
             </tr>
         }
     </tbody>

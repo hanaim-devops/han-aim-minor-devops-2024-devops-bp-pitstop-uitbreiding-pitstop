@@ -57,6 +57,22 @@ namespace DIYManagementAPI.Data
             return diyEvening;
         }
 
+        public async Task<bool> CancelDIYRegistration(int diyRegistrationId)
+        {
+            var registration = await _context.DIYRegistrations.FindAsync(diyRegistrationId);
+
+            if (registration == null)
+            {
+                return false;
+            }
+
+            _context.DIYRegistrations.Remove(registration);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+        
         public async Task<DIYFeedback> RegisterDIYFeedback(DIYFeedback diyFeedback)
         {   
             _context.DIYFeedback.Add(diyFeedback);
