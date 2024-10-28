@@ -1,4 +1,6 @@
-﻿## ADR-001: Klant kan geen eigen reservering maken
+﻿# Architectural Decision Records
+
+## ADR-001: Klant kan geen eigen reservering maken
 
 ### Context
 Het systeem bevat een functie waarmee gebruikers reserveringen kunnen maken. Er was een overweging om klanten zelf een reservering te laten plaatsen in plaats van deze door een medewerker te laten uitvoeren.
@@ -13,3 +15,15 @@ Er is besloten om de mogelijkheid voor klanten om zelf een reservering te maken 
 
 ### Gevolg
 Door klanten geen eigen reserveringen te laten maken, kunnen we ontwikkeltijd inzetten voor andere functionaliteiten die meer waarde toevoegen.
+
+## ADR-002: Met Draw.IO of Structurizr het C4 Model ontwerpen
+
+### Context
+Er moet een keuze gemaakt worden over welk programma gebruikt gaat worden om het C4 Model te ontwerpen.
+
+### Beslissing
+Er is besloten om Draw.IO te gebruiken om het C4 Model te ontwerpen.
+
+### Redenatie
+- **Tijdsbesparing:** Draw.IO is al bekend bij de teamleden en is makkelijk te gebruiken. Er is kort onderzocht naar Structurizr, maar dit programma is niet bekend bij de teamleden en zou meer tijd kosten om te leren en opzetten.
+- **Gebruiksvriendelijkheid:** Draw.IO is een online tool die makkelijk te gebruiken is en waarbij je makkelijk diagrammen kan maken.
