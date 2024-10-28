@@ -4,6 +4,7 @@ using DIYManagementAPI.Services;
 using DIYManagementAPI.Models;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,11 @@ builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(c
 
 var app = builder.Build();
 
+// Use Prometheus metrics middleware to expose metrics at /metrics
+app.UseMetricServer();
+
+app.UseHttpMetrics();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -40,7 +46,7 @@ if (app.Environment.IsDevelopment())
 
 using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 {
-    scope.ServiceProvider.GetService<DatabaseContext>().MigrateDB();
+    scope.ServiceProvider.GetService<DatabaseContext>()?.MigrateDB();
 }
 
 app.UseHttpsRedirection();

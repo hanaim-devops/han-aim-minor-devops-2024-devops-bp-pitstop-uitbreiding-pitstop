@@ -146,6 +146,18 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - "./DIYManagementAPI/prometheus.yml:/etc/prometheus/prometheus.yml"
+    ports:
+      - 9090:9090
+
+  node-exporter:
+    image: prom/node-exporter
+    ports:
+      - 9100:9100
+
 volumes:
   sqlserverdata:
     external: true
