@@ -18,14 +18,14 @@ using Nuke.Common.IO;
 class Build : xBuild,
     //IAnalyzeSolution,
     IRunTests,
-    IPublishContainerImages,
+    //IPublishContainerImages,
     IDeployClusterInfra,
     IDeployKubernetesManifests
 {
     public static int Main() => Execute<Build>(x => x.Build);
     
-    string IPublishContainerImages.ContainerRegistryHost => "docker.io";
-    string IPublishContainerImages.ContainerRegistry => "kslingerland";
+    //string IPublishContainerImages.ContainerRegistryHost => "docker.io";
+    //string IPublishContainerImages.ContainerRegistry => "kslingerland";
     
     AbsolutePath IDeployKubernetesManifests.KubernetesManifestDirectory => RootDirectory / "src" / "k8s";
     
