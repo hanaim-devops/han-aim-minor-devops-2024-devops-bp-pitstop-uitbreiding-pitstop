@@ -23,7 +23,7 @@ public interface IDeployClusterInfra : IGitRepository, IArtifacts, IVersion
         {
             var kubeConfigCluster = Environment.GetEnvironmentVariable("KUBECONFIG_CLUSTER");
             var tempKubeConfigPath = Path.Combine(Path.GetTempPath(), "kubeconfig");
-            var contextName = !IsLocalBuild ? LocalClusterContext : ServerClusterContext;
+            var contextName = IsLocalBuild ? LocalClusterContext : ServerClusterContext;
             
             if (string.IsNullOrEmpty(kubeConfigCluster))
             {
