@@ -22,11 +22,16 @@ public class MaintenanceHistoryController : Controller
     {
         var maintenanceHistory = await _maintenanceHistoryAPI.GetHistoryByLicenseNumber(licenseNumber);
     
+        var orderedMaintenanceHistory = maintenanceHistory
+            .OrderByDescending(m => m.MaintenanceDate)
+            .ToList();
+
         var model = new MaintenanceHistoryViewModel
         {
             LicenseNumber = licenseNumber,
-            MaintenanceHistories = maintenanceHistory
+            MaintenanceHistories = orderedMaintenanceHistory
         };
+    
         return View(model);
     }
     

@@ -13,12 +13,41 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var maintenance in Model.MaintenanceHistories)
-    {
-        <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "MaintenanceHistory", new { id = maintenance.Id }))'">
-            <td>@maintenance.LicenseNumber</td>
-            <td>@maintenance.MaintenanceDate</td>
-        </tr>
-    }
+        @if (Model.MaintenanceHistories != null && Model.MaintenanceHistories.Any())
+        {
+            // Render the first maintenance entry as a detailed view
+            var latestMaintenance = Model.MaintenanceHistories.First();
+
+            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "MaintenanceHistory", new { id = latestMaintenance.Id }))'">
+                <td>@latestMaintenance.LicenseNumber</td>
+                <td>@latestMaintenance.MaintenanceDate.ToShortDateString()</td>
+            </tr>
+
+            // Row for the detailed view
+            <tr class="detailed-view">
+                <td colspan="2">
+                    <div class="maintenance-details">
+                        <h5>Details:</h5>
+                        <strong>Description:</strong> @latestMaintenance.Description <br />
+                        <strong>Type of Maintenance:</strong> @latestMaintenance.MaintenanceType <br />
+                        <strong>Is Completed:</strong> @(latestMaintenance.IsCompleted ? "Yes" : "No") <br />
+                    </div>
+                </td>
+            </tr>
+        
+            foreach (var maintenance in Model.MaintenanceHistories.Skip(1))
+            {
+                <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "MaintenanceHistory", new { id = maintenance.Id }))'">
+                    <td>@maintenance.LicenseNumber</td>
+                    <td>@maintenance.MaintenanceDate.ToShortDateString()</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">No maintenance history available.</td>
+            </tr>
+        }
     </tbody>
 </table>

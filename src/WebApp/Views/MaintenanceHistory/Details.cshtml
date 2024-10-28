@@ -12,4 +12,4 @@
 <p>@Model.MaintenanceType</p>
 
 <h4>Is the maintenance complete?</h4>
-<p>@Model.IsCompleted</p>
+<p>@(Model.IsCompleted ? "Yes" : "No")</p>
