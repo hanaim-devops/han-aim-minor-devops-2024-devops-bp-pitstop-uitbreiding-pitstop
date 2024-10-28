@@ -19,12 +19,15 @@ class Build : xBuild,
     //IAnalyzeSolution,
     IRunTests,
     IPublishContainerImages,
-    IPublishKubernetesManifests
+    IDeployClusterInfra,
+    IDeployKubernetesManifests
 {
     public static int Main() => Execute<Build>(x => x.Build);
     
     string IPublishContainerImages.ContainerRegistryHost => "registry.digitalocean.com";
     string IPublishContainerImages.ContainerRegistry => "docr-eu-dev-monaco";
     
-    AbsolutePath IPublishKubernetesManifests.KubernetesManifestDirectory => RootDirectory / "src" / "k8s";
+    AbsolutePath IDeployKubernetesManifests.KubernetesManifestDirectory => RootDirectory / "src" / "k8s";
+    
+    string IDeployClusterInfra.ServerClusterContext => "groep1";
 }

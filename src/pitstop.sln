@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\build\_build.c
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build & Deploy", "Build & Deploy", "{39C7EEA2-D866-45D4-99CE-7E32A27225F8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{465F15A5-E1A8-4D9A-A95F-7F951CF77EC0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{465F15A5-E1A8-4D9A-A95F-7F951CF77EC0}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\max.md = ..\docs\max.md
 	EndProjectSection

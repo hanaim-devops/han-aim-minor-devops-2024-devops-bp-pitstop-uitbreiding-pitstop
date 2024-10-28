@@ -1,7 +1,6 @@
 using System.IO;
 using Components;
 using Nuke.Common;
-using Nuke.Common.Git;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.ReSharper;
