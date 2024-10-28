@@ -1,4 +1,4 @@
-# Notule sprint review 1
+# Notulen sprint review 1
 
 De schermen voor de reperateur en de klant kunnen mooi worden weergegeven worden in een c4 model, ook al worden de rollen niet daadwerkelijk toegepast.
 
