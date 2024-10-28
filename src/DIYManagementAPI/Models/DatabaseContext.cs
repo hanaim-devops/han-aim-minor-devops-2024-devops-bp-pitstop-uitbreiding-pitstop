@@ -13,6 +13,8 @@ namespace DIYManagementAPI.Models
 
                 public DbSet<DIYEveningModel> DIYEvening { get; set; }
 
+                public DbSet<DIYFeedback> DIYFeedback { get; set; }
+
                 public void MigrateDB()
                 {
                         Policy

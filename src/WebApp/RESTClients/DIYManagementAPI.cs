@@ -41,4 +41,9 @@ public class DIYManagementAPI : IDIYManagementAPI
     {
         return await _restClient.GetRegistrationsForDIYEvening(diyEveningId);
     }
+
+    public async Task RegisterDIYFeedback(RegisterDIYFeedback cmd)
+    {
+        await _restClient.RegisterDIYFeedback(cmd);
+    }
 }
