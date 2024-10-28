@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using Components;
 using Nuke.Common;
 using Nuke.Common.Git;
@@ -23,14 +22,14 @@ public interface IDeployClusterInfra : IGitRepository, IArtifacts, IVersion
         .Executes(() =>
         {
             var kubeConfigCluster = Environment.GetEnvironmentVariable("KUBECONFIG_CLUSTER");
-            var kubeConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".kube", "config");
-            var contextName = IsLocalBuild ? LocalClusterContext : ServerClusterContext;
-
+            var tempKubeConfigPath = Path.Combine(Path.GetTempPath(), "kubeconfig");
+            var contextName = !IsLocalBuild ? LocalClusterContext : ServerClusterContext;
+            
             if (string.IsNullOrEmpty(kubeConfigCluster))
             {
                 if (IsLocalBuild)
                 {
-                    kubeConfigCluster = File.ReadAllText(kubeConfigPath);
+                    kubeConfigCluster = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".kube", "config"));
                 }
                 else
                 {
@@ -38,9 +37,13 @@ public interface IDeployClusterInfra : IGitRepository, IArtifacts, IVersion
                 }
             }
 
-            File.WriteAllText(kubeConfigPath, kubeConfigCluster);
-
-            KubernetesTasks.Kubernetes($"config use-context {contextName} --kubeconfig {kubeConfigPath}");
+            if (!IsLocalBuild)
+                Environment.SetEnvironmentVariable("KUBECONFIG", tempKubeConfigPath);
+            
+            File.WriteAllText(tempKubeConfigPath, kubeConfigCluster);
+            File.SetAttributes(tempKubeConfigPath, FileAttributes.Normal);
+            
+            KubernetesTasks.Kubernetes($"config use-context {contextName} --kubeconfig {tempKubeConfigPath}");
             KubernetesTasks.KubernetesClusterInfo();
         });
     
