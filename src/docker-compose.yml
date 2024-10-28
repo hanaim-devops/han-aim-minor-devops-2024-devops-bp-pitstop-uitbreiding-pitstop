@@ -93,6 +93,17 @@ services:
       - "5400"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+        
+  reviewmanagementapi:
+    image: pitstop/reviewmanagementapi:1.0
+    build: ReviewManagementAPI
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5500"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
 
   auditlogservice:
     image: pitstop/auditlogservice:1.0

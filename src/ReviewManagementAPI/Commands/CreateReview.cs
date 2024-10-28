@@ -1,8 +1,7 @@
-namespace ReviewManagmentAPI.Models;
+namespace ReviewManagementAPI.Commands;
 
-public class Review
+public class CreateReview
 {
-    public string Id { get; set; }
     public string Content { get; set; }
     public int Rating { get; set; }
     public string ReviewerName { get; set; }

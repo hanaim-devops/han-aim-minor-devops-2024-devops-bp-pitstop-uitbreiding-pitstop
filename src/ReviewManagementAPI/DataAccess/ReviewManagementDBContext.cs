@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using ReviewManagmentAPI.Models;
+using ReviewManagementAPI.Models;
 
-namespace ReviewManagmentAPI.DataAccess;
+namespace ReviewManagementAPI.DataAccess;
 
 public class ReviewManagementDBContext : DbContext
 {

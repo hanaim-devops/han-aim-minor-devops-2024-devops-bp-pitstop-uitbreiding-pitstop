@@ -1,9 +1,12 @@
-using ReviewManagmentAPI.Commands;
-using ReviewManagmentAPI.DataAccess;
-using ReviewManagmentAPI.Models;
-using ReviewManagmentAPI.Services.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using ReviewManagementAPI.Commands;
+using ReviewManagementAPI.DataAccess;
+using ReviewManagementAPI.Models;
+using ReviewManagementAPI.Services.Interfaces;
 
-namespace ReviewManagmentAPI.Services
+namespace ReviewManagementAPI.Services
 {
     public class ReviewService : IReviewService
     {

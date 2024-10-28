@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using ReviewManagmentAPI.Commands;
-using ReviewManagmentAPI.Models;
-using ReviewManagmentAPI.Services.Interfaces;
+using ReviewManagementAPI.Commands;
+using ReviewManagementAPI.Models;
+using ReviewManagementAPI.Services.Interfaces;
 
-namespace ReviewManagmentAPI.Models;
+namespace ReviewManagementAPI.Models;
 
 [ApiController]
 [Route("/api/reviews")]
