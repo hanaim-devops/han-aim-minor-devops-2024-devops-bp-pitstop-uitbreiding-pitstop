@@ -70,6 +70,7 @@ public interface IPublishContainerImages : IArtifacts, IDotNet, IGitRepository
     /// Push container images to azure container registry
     /// </summary>
     Target PublishContainerImages => d => d
+        .DependsOn(BuildContainerImages)
         .TryTriggeredBy<xBuild>(b => b.Deploy)
         .OnlyWhenStatic(() => IsServerBuild && Repository.IsOnMasterBranch())
         .Executes(() =>
