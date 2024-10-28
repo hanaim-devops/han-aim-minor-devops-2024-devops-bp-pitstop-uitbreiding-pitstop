@@ -7,7 +7,9 @@ Competenties: *DevOps-1 Continuous Delivery*
 Ik ben Infrastructure specialist omdat ik de taak heb om HPA te implementeren. Onderstaand waar ik aan gewerkt heb:
 - HPA implementeren: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/17
 - Basis app opzetten: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/22/files
-
+- Rancher setup: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/39
+- Feedback toevoegen: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/55
+- Cancel registration: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/56
  
 ## 2. Bijdrage app configuratie/containers/kubernetes
 
@@ -21,13 +23,14 @@ Competenties: *DevOps-2 Orchestration, Containerization*
 Competenties: *DevOps-1 - Continuous Delivery*, *DevOps-3 GitOps*, *DevOps-5 - SlackOps*
 
 - Pipeline opzetten: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/21
+- Metrics server opzetten: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/48/files
 
 ## 4. Onderzoek
 
 Competenties: *Nieuwsgierige houding*
 
 - Link naar blog: https://github.com/hanaim-devops/devops-blog-DirkvanBruxvoort
-- Conclusie: Het is niet gelukt om mijn technologie helemaal correct toe te passen. De configuratie is oke, maar het werkt niet altijd. Soms wel en soms niet. Dan ligt de metrics server eruit, daarom zou ik in het project prometheus gebruiken als metrics server.
+- Conclusie: Het is gelukt om HPA te implementeren.
  
 ## 5. Bijdrage code review/kwaliteit anderen en security
 
@@ -35,13 +38,14 @@ Competenties: *DevOps-7 - Attitude*, *DevOps-4 DevSecOps*
 
 - Review 1: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/35/files
 - Review 2: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/34/files
-- Security:
+- Security: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/48/files
  
 ## 6. Bijdrage documentatie
 
 Competenties: *DevOps-6 Onderzoek*
 
-- ASR prometheus als metrics server: nog te doen.
+- Testplan: .
+- Notulen: https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-knoppert/pull/59.
  
 ## 7. Bijdrage Agile werken, groepsproces, communicatie opdrachtgever en soft skills
 
@@ -56,7 +60,7 @@ Competenties: *DevOps-7 - Attitude*
 
 - Doorzetten: Ik geef niet direct op als het niet lukt.
 - Creativiteit: IK vind creative oplossingen voor problemen.
-- Beter communiceren: Ik had een issue opgepakt zonder te overleggen, dit had ik beter wel kunnen doen.
+- Beter communiceren: Er was een miscommunicatie ontstaan rondom een issue.
 - Om hulp vragen: Ik wil dingen vaak zelf oplossen, maar soms is het beter om hulp te vragen van anderen.
 
 ## 9. Conclusie & feedback
