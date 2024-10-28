@@ -24,21 +24,11 @@ namespace DIYManagementAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var diyEvening = new DIYEveningModel
-            {
-                Title = dto.Title,
-                ExtraInfo = dto.ExtraInfo,
-                StartDate = dto.StartDate,
-                EndDate = dto.EndDate,
-                Mechanic = dto.Mechanic
-            };
-
-            var result = await _service.CreateDIYEvening(diyEvening);
+            var result = await _service.CreateDIYEvening(dto);
 
             return StatusCode(StatusCodes.Status201Created, result);
         }
 
-        // TODO: get all DIYEveningModels
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DIYEveningModel>>> GetDIYEvening()
         {
@@ -46,6 +36,12 @@ namespace DIYManagementAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<DIYEveningModel>> GetDIYEveningById(int id)
+        {
+            var result = await _service.GetDIYEveningById(id);
+            return Ok(result);
+        }
         [HttpPut("cancel/{id}")]
         public async Task<ActionResult<DIYEveningModel>> CancelDIYEvening(int id)
         {
@@ -60,7 +56,17 @@ namespace DIYManagementAPI.Controllers
             }
         }
 
-        // TODO: get specific DIYAvondModel by id
-        // TODO: meld aan als klant
+        [HttpPost("registercustomer")]
+        public async Task<ActionResult> RegisterDIYAvondCustomer([FromBody] DIYRegistrationCreateDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _service.RegisterDIYAvondCustomer(dto);
+
+            return StatusCode(StatusCodes.Status201Created);
+        }
     }
 }

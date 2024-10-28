@@ -2,4 +2,5 @@
 
 public class DIYManagementDetailsViewModel
 {
+    public DIYEvening DIYAvond { get; set; }
 }

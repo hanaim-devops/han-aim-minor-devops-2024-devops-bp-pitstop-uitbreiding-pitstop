@@ -27,6 +27,17 @@ namespace DIYManagementAPI.Data
             return await _context.DIYEvening.ToListAsync();
         }
 
+        public async Task<DIYEveningModel> GetDIYEveningById(int id)
+        {
+            return await _context.DIYEvening.FindAsync(id);
+        }
+
+        public async Task RegisterDIYAvondCustomer(DIYRegistration registration)
+        {
+            _context.DIYRegistrations.Add(registration);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<DIYEveningModel> CancelDIYEvening(int id)
         {
             var diyEvening = await _context.DIYEvening.FindAsync(id);
