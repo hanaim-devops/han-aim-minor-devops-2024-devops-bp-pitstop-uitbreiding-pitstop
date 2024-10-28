@@ -41,3 +41,4 @@ jobs:
         env:
           DOCR_EU_DEV_PASSWORD: ${{ secrets.DOCR_EU_DEV_PASSWORD }}
           DOCR_EU_DEV_USERNAME: ${{ secrets.DOCR_EU_DEV_USERNAME }}
+          KUBECONFIG_CLUSTER: ${{ secrets.KUBECONFIG_CLUSTER }}

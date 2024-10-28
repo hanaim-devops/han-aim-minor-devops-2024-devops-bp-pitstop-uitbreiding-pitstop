@@ -5,7 +5,6 @@ using Components;
 using Nuke.Common;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
-using Nuke.Common.Tooling;
 using Nuke.Common.Tools.Helm;
 using Nuke.Common.Tools.Kubernetes;
 using Serilog;

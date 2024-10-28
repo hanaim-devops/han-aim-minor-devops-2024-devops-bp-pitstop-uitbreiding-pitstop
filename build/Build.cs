@@ -12,7 +12,7 @@ using Nuke.Common.IO;
     GitHubActionsImage.UbuntuLatest,
     OnPushBranches = ["master"],
     InvokedTargets = [nameof(Deploy)],
-    ImportSecrets = ["DOCR_EU_DEV_PASSWORD", "DOCR_EU_DEV_USERNAME"],
+    ImportSecrets = ["DOCR_EU_DEV_PASSWORD", "DOCR_EU_DEV_USERNAME", "KUBECONFIG_CLUSTER"],
     FetchDepth = 0
 )]
 class Build : xBuild,
