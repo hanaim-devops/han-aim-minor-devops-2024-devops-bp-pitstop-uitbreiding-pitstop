@@ -24,8 +24,8 @@ class Build : xBuild,
 {
     public static int Main() => Execute<Build>(x => x.Build);
     
-    string IPublishContainerImages.ContainerRegistryHost => "registry.digitalocean.com";
-    string IPublishContainerImages.ContainerRegistry => "docr-eu-dev-monaco";
+    string IPublishContainerImages.ContainerRegistryHost => "docker.io";
+    string IPublishContainerImages.ContainerRegistry => "kslingerland";
     
     AbsolutePath IDeployKubernetesManifests.KubernetesManifestDirectory => RootDirectory / "src" / "k8s";
     

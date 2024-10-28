@@ -19,6 +19,7 @@ public interface IDeployClusterInfra : IGitRepository, IArtifacts, IVersion
     Target ClusterAuthentication => _ => _
         .TryTriggeredBy<xBuild>(x => x.Deploy)
         .OnlyWhenStatic(() => IsLocalBuild || Repository.IsOnMasterBranch())
+        .TryAfter<IPublishContainerImages>(x => x.PublishContainerImages)
         .Executes(() =>
         {
             var kubeConfigCluster = Environment.GetEnvironmentVariable("KUBECONFIG_CLUSTER");
@@ -51,7 +52,6 @@ public interface IDeployClusterInfra : IGitRepository, IArtifacts, IVersion
         .DependsOn(ClusterAuthentication)
         .OnlyWhenStatic(() => IsLocalBuild || Repository.IsOnMasterBranch())
         .TryTriggeredBy<xBuild>(x => x.Deploy)
-        .TryAfter<IPublishContainerImages>(x => x.PublishContainerImages)
         .Executes(() =>
         {
             HelmTasks.Helm($"version --client");
