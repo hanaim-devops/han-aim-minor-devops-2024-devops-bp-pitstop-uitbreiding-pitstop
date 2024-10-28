@@ -1,6 +1,13 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+// using Pitstop.ReviewManagementAPI.Services;
+// using Pitstop.ReviewManagementAPI.Services.Interfaces;
+using ReviewManagementAPI.DataAccess;
+using ReviewManagementAPI.Services;
+using ReviewManagementAPI.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +16,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IReviewService, ReviewService>();
+
+var sqlConnectionString = builder.Configuration.GetConnectionString("ReviewManagementCN");
+builder.Services.AddDbContext<ReviewManagementDBContext>(options => options.UseSqlServer(sqlConnectionString));
 
 var app = builder.Build();
 
