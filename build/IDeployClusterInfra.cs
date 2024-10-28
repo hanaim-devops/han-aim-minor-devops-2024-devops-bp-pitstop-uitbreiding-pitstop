@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Components;
 using Nuke.Common;
 using Nuke.Common.Git;
@@ -16,39 +17,30 @@ public interface IDeployClusterInfra : IGitRepository, IArtifacts, IVersion
     
     string ServerClusterContext => "server-cluster";
     
-    string LocalClusterServerUrl => "https://127.0.0.1:6443";
-    
     Target ClusterAuthentication => _ => _
         .TryTriggeredBy<xBuild>(x => x.Deploy)
         .OnlyWhenStatic(() => IsLocalBuild || Repository.IsOnMasterBranch())
         .Executes(() =>
         {
             var kubeConfigCluster = Environment.GetEnvironmentVariable("KUBECONFIG_CLUSTER");
-            var tempKubeConfigPath = Path.Combine(Path.GetTempPath(), "kubeconfig");
+            var kubeConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".kube", "config");
             var contextName = IsLocalBuild ? LocalClusterContext : ServerClusterContext;
-            var serverUrl = IsLocalBuild ? LocalClusterServerUrl : null;
-            
+
             if (string.IsNullOrEmpty(kubeConfigCluster))
             {
                 if (IsLocalBuild)
                 {
-                    kubeConfigCluster = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".kube", "config"));
+                    kubeConfigCluster = File.ReadAllText(kubeConfigPath);
                 }
                 else
                 {
                     throw new Exception("KUBECONFIG_CLUSTER environment variable must be set.");
                 }
             }
-            
-            File.WriteAllText(tempKubeConfigPath, kubeConfigCluster);
-            
-            if (IsLocalBuild)
-            {
-                // Update the server URL for the local context
-                KubernetesTasks.Kubernetes($"config set-cluster {contextName} --server={serverUrl} --kubeconfig {tempKubeConfigPath}");
-            }
-            
-            KubernetesTasks.Kubernetes($"config use-context {contextName} --kubeconfig {tempKubeConfigPath}");
+
+            File.WriteAllText(kubeConfigPath, kubeConfigCluster);
+
+            KubernetesTasks.Kubernetes($"config use-context {contextName} --kubeconfig {kubeConfigPath}");
             KubernetesTasks.KubernetesClusterInfo();
         });
     
