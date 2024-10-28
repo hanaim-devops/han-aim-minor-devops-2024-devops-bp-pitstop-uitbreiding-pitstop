@@ -32,10 +32,15 @@ namespace DIYManagementAPI.Data
             return await _context.DIYEvening.FindAsync(id);
         }
 
-        public async Task RegisterDIYAvondCustomer(DIYRegistration registration)
+        public async Task RegisterDIYEveningCustomer(DIYRegistration registration)
         {
             _context.DIYRegistrations.Add(registration);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<DIYRegistration>> GetRegistrationsForDIYEvening(int diyEveningId)
+        {
+            return await _context.DIYRegistrations.Where(r => r.DIYEveningId == diyEveningId).ToListAsync();
         }
 
         public async Task<DIYEveningModel> CancelDIYEvening(int id)

@@ -57,16 +57,23 @@ namespace DIYManagementAPI.Controllers
         }
 
         [HttpPost("registercustomer")]
-        public async Task<ActionResult> RegisterDIYAvondCustomer([FromBody] DIYRegistrationCreateDto dto)
+        public async Task<ActionResult> RegisterDIYEveningCustomer([FromBody] DIYRegistrationCreateDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _service.RegisterDIYAvondCustomer(dto);
+            await _service.RegisterDIYEveningCustomer(dto);
 
             return StatusCode(StatusCodes.Status201Created);
+        }
+
+        [HttpGet("{id}/registrations")]
+        public async Task<ActionResult<IEnumerable<DIYRegistration>>> GetRegistrationsForDIYEvening(int id)
+        {
+            var result = await _service.GetRegistrationsForDIYEvening(id);
+            return Ok(result);
         }
     }
 }

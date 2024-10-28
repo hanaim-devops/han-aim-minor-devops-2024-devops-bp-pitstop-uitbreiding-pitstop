@@ -36,7 +36,7 @@ namespace DIYManagementAPI.Services
             return await _dao.GetDIYEveningById(id);
         }
 
-        public async Task RegisterDIYAvondCustomer(DIYRegistrationCreateDto dto)
+        public async Task RegisterDIYEveningCustomer(DIYRegistrationCreateDto dto)
         {
             var registration = new DIYRegistration
             {
@@ -45,8 +45,14 @@ namespace DIYManagementAPI.Services
                 Reparations = dto.Reparations
             };
 
-            await _dao.RegisterDIYAvondCustomer(registration);
+            await _dao.RegisterDIYEveningCustomer(registration);
         }
+
+        public async Task<IEnumerable<DIYRegistration>> GetRegistrationsForDIYEvening(int diyEveningId)
+        {
+            return await _dao.GetRegistrationsForDIYEvening(diyEveningId);
+        }
+
         public async Task<DIYEveningModel> CancelDIYEvening(int id)
         {
             return await _dao.CancelDIYEvening(id);

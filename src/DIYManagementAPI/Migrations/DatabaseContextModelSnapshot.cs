@@ -79,6 +79,30 @@ namespace DIYManagementAPI.Migrations
 
                     b.ToTable("DIYRegistrations");
                 });
+
+            modelBuilder.Entity("DIYManagementAPI.Models.DIYRegistration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DIYEveningID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reparations")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIYRegistrations");
+                });
 #pragma warning restore 612, 618
         }
     }

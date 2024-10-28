@@ -37,7 +37,8 @@ public class DIYManagementController : Controller
         {
             var model = new DIYManagementDetailsViewModel
             {
-                DIYAvond = await _DIYManagamentAPI.GetDIYEveningById(id.ToString())
+                DIYEvening = await _DIYManagamentAPI.GetDIYEveningById(id.ToString()),
+                DIYRegistrations = await _DIYManagamentAPI.GetRegistrationsForDIYEvening(id.ToString())
             };
 
             return View(model);
@@ -45,13 +46,13 @@ public class DIYManagementController : Controller
     }
 
     [HttpGet]
-    public IActionResult NewRegistration(int diyAvondId)
+    public IActionResult NewRegistration(int diyEveningId)
     {
         var model = new DIYManagementNewRegistrationViewModel
         {
             DIYRegistration = new DIYRegistration
             {
-                DIYEveningId = diyAvondId
+                DIYEveningId = diyEveningId
             }
         };
         return View(model);
@@ -74,7 +75,7 @@ public class DIYManagementController : Controller
             return await _resiliencyHelper.ExecuteResilient(async () =>
             {
                 RegisterDIYRegistration cmd = inputModel.MapToDIYRegistration();
-                await _DIYManagamentAPI.RegisterDIYAvondCustomer(cmd);
+                await _DIYManagamentAPI.RegisterDIYEveningCustomer(cmd);
                 return RedirectToAction("Index");
             }, View("Offline", new DIYManagementOfflineViewModel()));
         }

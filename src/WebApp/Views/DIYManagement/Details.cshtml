@@ -6,27 +6,44 @@
 <table class="table">
     <tbody>
         <tr>
-            <td width="150">Name :</td>
-            <td><b>@Model.DIYAvond.Title</b></td>
+            <td>Title :</td>
+            <td><b>@Model.DIYEvening.Title</b></td>
         </tr>
         <tr>
             <td>Description :</td>
-            <td><b>@Model.DIYAvond.ExtraInfo</b></td>
+            <td><b>@Model.DIYEvening.ExtraInfo</b></td>
         </tr>
         <tr>
             <td width="150">Start time :</td>
-            <td><b>@Model.DIYAvond.StartDate</b></td>
+            <td><b>@Model.DIYEvening.StartDate</b></td>
         </tr>
         <tr>
             <td width="150">End time :</td>
-            <td><b>@Model.DIYAvond.EndDate</b></td>
+            <td><b>@Model.DIYEvening.EndDate</b></td>
         </tr>
         <tr>
             <td width="150">Mechanic :</td>
-            <td><b>@Model.DIYAvond.Mechanic</b></td>
+            <td><b>@Model.DIYEvening.Mechanic</b></td>
         </tr>
     </tbody>
 </table>
-<a id="RegisterCustomerButton" asp-action="NewRegistration" asp-route-diyAvondId="@Model.DIYAvond.Id"
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name customer</th>
+            <th>Reparation(s)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var diyRegistration in Model.DIYRegistrations)
+        {
+            <tr>
+                <td>@diyRegistration.CustomerName</td>
+                <td>@diyRegistration.Reparations</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a id="RegisterCustomerButton" asp-action="NewRegistration" asp-route-DIYEveningId="@Model.DIYEvening.Id"
     asp-controller="DIYManagement" class="btn btn-default">Register customer</a>
 <a id="CancelButton" asp-action="Index" asp-controller="DIYManagement" class="btn btn-default">Cancel</a>
