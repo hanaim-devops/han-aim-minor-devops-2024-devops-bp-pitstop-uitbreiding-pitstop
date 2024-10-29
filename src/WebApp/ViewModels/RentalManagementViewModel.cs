@@ -2,6 +2,6 @@
 
 public class RentalManagementViewModel
 {
-    public List<Rentals> Rentals { get; set; }
+    public List<Rental> Rentals { get; set; }
     
 }

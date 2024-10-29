@@ -14,11 +14,11 @@ public class RentalManagementNewViewModel
     [DataType(DataType.Date)]
     public DateTime EndDate { get; set; }
 
-    public IEnumerable<SelectListItem> Vehicles { get; set; }
+    public IEnumerable<SelectListItem> RentalCars { get; set; }
 
-    [Required(ErrorMessage = "Vehicle is required")]
-    [Display(Name = "Vehicle")]
-    public string SelectedVehicleLicenseNumber { get; set; }
+    [Required(ErrorMessage = "Car is required")]
+    [Display(Name = "Car")]
+    public string SelectedRentalCarLicenseNumber { get; set; }
 
     public IEnumerable<SelectListItem> Customers { get; set; }
     

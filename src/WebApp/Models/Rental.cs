@@ -1,11 +1,11 @@
 ﻿namespace Pitstop.WebApp.Models;
 
-public class Rentals
+public class Rental
 {
     public Guid Id { get; set; }
 
-    [Display(Name = "Vehicle")]
-    public Vehicle Vehicle { get; set; }
+    [Display(Name = "Car")]
+    public RentalCar RentalCar { get; set; }
 
     [Display(Name = "Start At")]
     public DateTime? StartDate { get; set; }
