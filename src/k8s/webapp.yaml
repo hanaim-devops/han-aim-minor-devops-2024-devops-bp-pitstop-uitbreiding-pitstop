@@ -22,7 +22,7 @@ spec:
       - env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production
-        image: luukjp/pitstop/webapp:1.0
+        image: luukjp/webapp:1.0
         imagePullPolicy: IfNotPresent
         name: webapp
         ports:

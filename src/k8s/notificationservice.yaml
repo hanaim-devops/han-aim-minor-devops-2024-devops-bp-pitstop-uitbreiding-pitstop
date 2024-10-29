@@ -22,7 +22,7 @@ spec:
       - env:
         - name: DOTNET_ENVIRONMENT
           value: Production
-        image: luukjp/pitstop/notificationservice:1.0
+        image: luukjp/notificationservice:1.0
         imagePullPolicy: IfNotPresent
         name: notificationservice
       restartPolicy: Always
