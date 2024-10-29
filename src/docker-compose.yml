@@ -1,5 +1,102 @@
 services:
 
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - monitoring  
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - "./DIYManagementAPI/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+      - --storage.tsdb.min-block-duration=1m
+      - --storage.tsdb.max-block-duration=1m
+      - --storage.tsdb.retention.time=5m
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+    depends_on:
+      - diymanagementapi
+
+  thanos-sidecar:
+    image: quay.io/thanos/thanos:v0.32.2
+    container_name: thanos-sidecar
+    user: "0"  # Run as root user to avoid permission issues
+    command:
+      - sidecar
+      - --prometheus.url=http://prometheus:9090
+      - --grpc-address=0.0.0.0:10901
+      - --http-address=0.0.0.0:10902
+      - --tsdb.path=/prometheus
+      - --objstore.config-file=/etc/thanos/objstore.yml
+    volumes:
+      - prometheus-data:/prometheus
+      - ./thanos/objstore.yml:/etc/thanos/objstore.yml
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+      - minio
+
+  thanos-store:
+    image: quay.io/thanos/thanos:v0.32.2
+    container_name: thanos-store
+    user: "0"
+    command:
+      - store
+      - --grpc-address=0.0.0.0:10901
+      - --http-address=0.0.0.0:10902
+      - --data-dir=/data
+      - --objstore.config-file=/etc/thanos/objstore.yml
+    volumes:
+      - thanos-data:/data
+      - ./thanos/objstore.yml:/etc/thanos/objstore.yml
+    networks:
+      - monitoring
+    depends_on:
+      - minio
+
+  thanos-query:
+    image: quay.io/thanos/thanos:v0.32.2
+    container_name: thanos-query
+    command:
+      - query
+      - --http-address=0.0.0.0:9090
+      - --store=thanos-sidecar:10901
+      - --store=thanos-store:10901
+    ports:
+      - "19090:9090"
+    networks:
+      - monitoring
+    depends_on:
+      - thanos-sidecar
+      - thanos-store
+
+  node-exporter:
+    image: prom/node-exporter
+    networks:
+      - monitoring
+    ports:
+      - "9100:9100"
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
@@ -9,6 +106,8 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+    networks:
+      - backend
     environment:
       - RABBITMQ_CONFIG_FILE=/etc/pitstop/rabbitmq.conf
 
@@ -19,6 +118,8 @@ services:
       - sqlserverdata:/var/opt/mssql
     ports:
       - "1434:1433"
+    networks:
+      - backend
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Developer
@@ -30,12 +131,16 @@ services:
     ports:
       - "25:25"
       - "4000:80"
+    networks:
+      - backend
 
   logserver:
     image: datalust/seq:latest
     container_name: logserver
     ports:
       - "5341:80"
+    networks:
+      - backend
     environment:
       - ACCEPT_EULA=Y
 
@@ -45,6 +150,8 @@ services:
     depends_on:
       - rabbitmq
       - sqlserver
+    networks:
+      - backend
     ports:
       - "5000"
     environment:
@@ -56,6 +163,8 @@ services:
     depends_on:
       - rabbitmq
       - sqlserver
+    networks:
+      - backend
     ports:
       - "5100"
     environment:
@@ -67,6 +176,8 @@ services:
     depends_on:
       - rabbitmq
       - sqlserver
+    networks:
+      - backend
     ports:
       - "5200"
     environment:
@@ -78,6 +189,8 @@ services:
     container_name: auditlogservice
     depends_on:
       - rabbitmq
+    networks:
+      - backend
     environment:
       - DOTNET_ENVIRONMENT=Production
 
@@ -89,6 +202,8 @@ services:
       - rabbitmq
       - sqlserver
       - mailserver
+    networks:
+      - backend
     environment:
       - DOTNET_ENVIRONMENT=Production
 
@@ -100,6 +215,8 @@ services:
       - rabbitmq
       - sqlserver
       - mailserver
+    networks:
+      - backend
     environment:
       - DOTNET_ENVIRONMENT=Production
 
@@ -109,6 +226,8 @@ services:
     container_name: timeservice
     depends_on:
       - rabbitmq
+    networks:
+      - backend
     environment:
       - DOTNET_ENVIRONMENT=Production
 
@@ -119,6 +238,8 @@ services:
     depends_on:
       - rabbitmq
       - sqlserver
+    networks:
+      - backend
     environment:
       - DOTNET_ENVIRONMENT=Production
 
@@ -130,6 +251,9 @@ services:
       - customermanagementapi
       - vehiclemanagementapi
       - workshopmanagementapi
+    networks:
+      - backend
+      - frontend
     ports:
       - "7005:7005"
     environment:
@@ -141,25 +265,30 @@ services:
     depends_on:
       - rabbitmq
       - sqlserver
+    networks:
+      - backend
+      - monitoring
     ports:
       - "5300:5300"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
-  prometheus:
-    image: prom/prometheus
-    volumes:
-      - "./DIYManagementAPI/prometheus.yml:/etc/prometheus/prometheus.yml"
-    ports:
-      - 9090:9090
-
-  node-exporter:
-    image: prom/node-exporter
-    ports:
-      - 9100:9100
-
 volumes:
   sqlserverdata:
     external: true
+  prometheus-data:
+    driver: local
+  thanos-data:
+    driver: local
   rabbitmqdata:
     external: true
+  minio-data:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
+  monitoring:
+    driver: bridge

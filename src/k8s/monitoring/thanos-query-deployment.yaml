@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thanos-query
+  namespace: monitoring
+  labels:
+    app: thanos-query
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thanos-query
+  template:
+    metadata:
+      labels:
+        app: thanos-query
+    spec:
+      containers:
+        - name: thanos-query
+          image: quay.io/thanos/thanos:v0.32.2
+          args:
+            - query
+            - "--http-address=0.0.0.0:9090"
+            - "--grpc-address=0.0.0.0:10901"
+            - "--store=thanos-sidecar.monitoring.svc.cluster.local:10901"
+            - "--store=thanos-store.monitoring.svc.cluster.local:10901"
+          ports:
+            - containerPort: 9090
+              name: http
+            - containerPort: 10901
+              name: grpc

@@ -17,6 +17,10 @@ spec:
       labels:
         app: diymanagementapi
         version: "1.0"
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "5300"
     spec:
       containers:
       - env:
