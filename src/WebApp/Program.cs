@@ -23,6 +23,7 @@ builder.Services.AddHttpClient<ICustomerManagementAPI, CustomerManagementAPI>();
 builder.Services.AddHttpClient<IVehicleManagementAPI, VehicleManagementAPI>();
 builder.Services.AddHttpClient<IWorkshopManagementAPI, WorkshopManagementAPI>();
 builder.Services.AddHttpClient<IRentalCarManagementAPI, RentalCarManagementAPI>();
+builder.Services.AddHttpClient<IRentalManagementAPI, RentalManagementAPI>();
 
 var app = builder.Build();
 

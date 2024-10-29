@@ -2,15 +2,16 @@
 
 public class RentalManagementController : Controller
 {
-    // private IRentalManagementAPI _rentalManagementAPI;
+    private IRentalManagementAPI _rentalManagementAPI;
+    private IRentalCarManagementAPI _rentalCarManagementAPI;
     private ICustomerManagementAPI _customerManagementAPI;
     private readonly Microsoft.Extensions.Logging.ILogger _logger;
     private ResiliencyHelper _resiliencyHelper;
 
-    public RentalManagementController(ICustomerManagementAPI customerManagementAPI, ILogger<RentalManagementController> logger)
-    // public RentalManagementController(IRentalManagementAPI rentalManagementAPI, ICustomerManagementAPI customerManagementAPI, ILogger<RentalManagementController> logger)
+    public RentalManagementController(IRentalManagementAPI rentalManagementAPI, IRentalCarManagementAPI rentalCarManagementAPI, ICustomerManagementAPI customerManagementAPI, ILogger<RentalManagementController> logger)
     {
-        // _rentalManagementAPI = rentalManagementAPI;
+        _rentalManagementAPI = rentalManagementAPI;
+        _rentalCarManagementAPI = rentalCarManagementAPI;
         _customerManagementAPI = customerManagementAPI;
         _logger = logger;
         _resiliencyHelper = new ResiliencyHelper(_logger);
@@ -23,14 +24,14 @@ public class RentalManagementController : Controller
         {
             var model = new RentalManagementViewModel
             {
-                Rentals = new List<Rentals>()
+                Rentals = new List<Rental>()
             };
 
-            // Rentals rentals = await _rentalManagementAPI.GetRentals();
-            // if (rentals?.Count > 0)
-            // {
-            //     model.Rentals.AddRange(rentals.OrderBy(r => r.StartDate));
-            // }
+            List<Rental> rentals = await _rentalManagementAPI.GetRentals();
+            if (rentals?.Count > 0)
+            {
+                model.Rentals.AddRange(rentals.OrderBy(r => r.StartDate));
+            }
 
             return View(model);
         }, View("Offline", new RentalManagementOfflineViewModel()));
@@ -43,15 +44,16 @@ public class RentalManagementController : Controller
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
             DateTime currentDate = DateTime.Today;
-            var customers = await _customerManagementAPI.GetCustomers();
-
+            var customers = await GetCustomersList();
+            var availableRentalCars = await GetAvailableRentalCarsList();
+            
             var model = new RentalManagementNewViewModel
             {
                 Id = Guid.NewGuid(),
                 StartDate = currentDate,
                 EndDate = currentDate.AddDays(1),
-                // Vehicles = await GetAvailableVehiclesList()
-                Customers = customers.Select(c => new SelectListItem { Value = c.CustomerId, Text = c.Name })
+                RentalCars = availableRentalCars,
+                Customers = customers
             };
             return View(model);
         }, View("Offline", new RentalManagementOfflineViewModel()));
@@ -66,16 +68,9 @@ public class RentalManagementController : Controller
             {
                 try
                 {
-                    //     // register maintenance job
-                    //     DateTime startTime = inputModel.Date.Add(inputModel.StartTime.TimeOfDay);
-                    // DateTime endTime = inputModel.Date.Add(inputModel.EndTime.TimeOfDay);
-                    // Vehicle vehicle = await _workshopManagementAPI.GetVehicleByLicenseNumber(inputModel.SelectedVehicleLicenseNumber);
-                    // Customer customer = await _workshopManagementAPI.GetCustomerById(vehicle.OwnerId);
-                    //
-                    // PlanMaintenanceJob planMaintenanceJobCommand = new PlanMaintenanceJob(Guid.NewGuid(), Guid.NewGuid(), startTime, endTime,
-                    //     (customer.CustomerId, customer.Name, customer.TelephoneNumber),
-                    //     (vehicle.LicenseNumber, vehicle.Brand, vehicle.Type), inputModel.Description);
-                    // await _workshopManagementAPI.PlanMaintenanceJob(dateStr, planMaintenanceJobCommand);
+                    RegisterRental registerRentalCommand = new RegisterRental(Guid.NewGuid(), inputModel.SelectedRentalCarLicenseNumber,
+                        inputModel.SelectedCustomerId, inputModel.StartDate, inputModel.EndDate);
+                    await _rentalManagementAPI.RegisterRental(registerRentalCommand);
                 }
                 catch (ApiException ex)
                 {
@@ -86,7 +81,8 @@ public class RentalManagementController : Controller
                         inputModel.Error = content.ErrorMessage;
 
                             // repopulate list of available vehicles in the model
-                            inputModel.Vehicles = await GetAvailableVehiclesList();
+                            inputModel.RentalCars = await GetAvailableRentalCarsList();
+                            inputModel.Customers = await GetCustomersList();
 
                             // back to New view
                             return View("New", inputModel);
@@ -98,20 +94,26 @@ public class RentalManagementController : Controller
         }
         else
         {
-            // inputModel.Vehicles = await GetAvailableVehiclesList();
+            inputModel.RentalCars = await GetAvailableRentalCarsList();
+            inputModel.Customers = await GetCustomersList();
             return View("New", inputModel);
         }
     }
     
-    private async Task<IEnumerable<SelectListItem>> GetAvailableVehiclesList()
+    private async Task<IEnumerable<SelectListItem>> GetAvailableRentalCarsList()
     {
-        return null;
-        // var vehicles = await _rentalManagementAPI.GetVehicles();
-        // return vehicles.Select(v =>
-        //     new SelectListItem
-        //     {
-        //         Value = v.LicenseNumber,
-        //         Text = $"{v.Brand} {v.Type} [{v.LicenseNumber}]"
-        //     });
+        var vehicles = await _rentalCarManagementAPI.GetRentalCars();
+        return vehicles.Select(v =>
+            new SelectListItem
+            {
+                Value = v.LicenseNumber,
+                Text = $"{v.Model.Brand.Name} {v.Model.Name} [{v.LicenseNumber}]"
+            });
+    }
+    
+    private async Task<IEnumerable<SelectListItem>> GetCustomersList()
+    {
+        var customers = await _customerManagementAPI.GetCustomers();
+        return customers.Select(c => new SelectListItem { Value = c.CustomerId, Text = c.Name });
     }
 }
