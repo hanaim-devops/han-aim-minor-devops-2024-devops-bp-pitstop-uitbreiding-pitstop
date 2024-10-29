@@ -7,5 +7,7 @@ public class ReviewManagementNewViewModel
     
     public int Stars { get; set; }
     
+    public string ReviewComment { get; set; }
+    
     
 }
