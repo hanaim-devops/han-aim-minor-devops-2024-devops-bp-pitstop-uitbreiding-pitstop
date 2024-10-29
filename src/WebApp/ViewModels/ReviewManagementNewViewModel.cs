@@ -8,7 +8,4 @@ public class ReviewManagementNewViewModel
     public string ReviewComment { get; set; }
     public int Stars { get; set; }
     
-    public string ReviewComment { get; set; }
-    
-    
 }
