@@ -8,6 +8,6 @@ public interface IReviewManagementAPI
     [Get("/review/{id}")]
     Task<Review> GetReviewById([AliasAs("id")] string licenseNumber);
 
-    [Post("/review")]
+    [Post("/reviews")]
     Task CreateReview(CreateReview command);
 }

@@ -8,9 +8,9 @@
 
 <form asp-controller="ReviewManagement" asp-action="New" method="post">
     <div class="form-group">
-        <label asp-for="SelectedCustomerId">Customer</label>
-        <select asp-for="SelectedCustomerId" asp-items="Model.Customers" class="form-control"></select>
-        <span asp-validation-for="SelectedCustomerId" class="text-danger"></span>
+        <label asp-for="SelectedCustomer">Customer</label>
+        <select asp-for="SelectedCustomer" asp-items="Model.Customers" class="form-control"></select>
+        <span asp-validation-for="SelectedCustomer" class="text-danger"></span>
     </div>
     
     <div class="form-group">

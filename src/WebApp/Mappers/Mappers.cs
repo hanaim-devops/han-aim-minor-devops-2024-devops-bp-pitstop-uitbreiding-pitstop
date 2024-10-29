@@ -30,7 +30,7 @@ public static class Mappers
     );
     
     public static CreateReview MapToCreateReview(this ReviewManagementNewViewModel source) => new CreateReview(
-        source.SelectedCustomerId,  
+        source.SelectedCustomer,  
         $"Customer review with {source.Stars} stars", 
         source.Stars                
     );

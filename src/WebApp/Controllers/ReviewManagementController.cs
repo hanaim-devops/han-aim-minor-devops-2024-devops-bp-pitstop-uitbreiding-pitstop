@@ -41,7 +41,7 @@ public class ReviewManagementController : Controller
 
             var model = new ReviewManagementNewViewModel
             {
-                Customers = customers.Select(c => new SelectListItem { Value = c.CustomerId, Text = c.Name })
+                Customers = customers.Select(c => new SelectListItem { Value = c.Name, Text = c.Name })
             };
             return View(model);
         }, View("Offline", new ReviewManagementOfflineViewModel()));
