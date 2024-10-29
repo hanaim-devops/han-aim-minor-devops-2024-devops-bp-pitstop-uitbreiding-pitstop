@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Pitstop.Infrastructure.Messaging;
 using Pitstop.RentalCarManagementAPI.Commands;
+using Pitstop.RentalCarManagementAPI.Events;
 using Pitstop.RentalCarManagementAPI.Exceptions;
 using Pitstop.RentalCarManagementAPI.Services.Interfaces;
 using RentalCarManagementAPI;
@@ -11,10 +14,12 @@ using RentalCarManagementAPI.Models;
 
 namespace Pitstop.RentalCarManagementAPI.Services;
 
-public class RentalCarService(RentalCarManagementDBContext dbContext, IModelService modelService) : IRentalCarService
+public class RentalCarService(RentalCarManagementDBContext dbContext, IModelService modelService, IMessagePublisher publisher, IMapper mapper) : IRentalCarService
 {
     private RentalCarManagementDBContext _dbContext = dbContext;
     private IModelService _modelService = modelService;
+    private IMessagePublisher _publisher = publisher;
+    private IMapper _mapper = mapper;
     
     public RentalCar Add(RegisterRentalCar command)
     {
@@ -31,6 +36,9 @@ public class RentalCarService(RentalCarManagementDBContext dbContext, IModelServ
         
         _dbContext.RentalCars.Add(rentalCar);
         _dbContext.SaveChanges();
+        var @event = _mapper.Map<RentalCarRegistered>(rentalCar);
+        _publisher.PublishMessageAsync(@event.MessageType, @event, "");
+        
         return rentalCar;
     }
 
