@@ -22,27 +22,11 @@ public class ReviewManagementController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        Review review = new Review
-        {
-            ReviewId = "1",
-            Customer = new Customer
-            {
-                CustomerId = "1",
-                Name = "John Doe",
-                EmailAddress = "hi@hi.nl"
-            },
-            Title = "Great service",
-            Stars = 5
-        };
-        
-        IEnumerable<Review> reviews = new List<Review> { review };
-                    
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
             var model = new ReviewManagementViewModel
             {
                 Reviews = await _reviewManagementAPI.GetReviews()
-                //Reviews = reviews
             };
             return View(model);
         }, View("Offline", new ReviewManagementOfflineViewModel()));
@@ -74,9 +58,10 @@ public class ReviewManagementController : Controller
                 {
                     // Mapping the inputModel to a command that will be used for creating a new review.
                     CreateReview cmd = inputModel.MapToCreateReview();
-                
+
                     // Call the Review API (backend service) to register the review.
-                    await _reviewManagementAPI.CreateReview(cmd); // Uncomment and implement this call when backend is ready.
+                    await _reviewManagementAPI
+                        .CreateReview(cmd); // Uncomment and implement this call when backend is ready.
 
                     // Redirect to the Index view upon successful creation.
                     return RedirectToAction("Index");
@@ -85,15 +70,14 @@ public class ReviewManagementController : Controller
                 {
                     if (ex.StatusCode == HttpStatusCode.Conflict)
                     {
-                       return Conflict();
+                        return Conflict();
                     }
                 }
 
                 // Default fallback: redirect to Index if no conflict or error occurs.
                 return RedirectToAction("Index");
             }, View("Offline", new ReviewManagementOfflineViewModel()));
-        }
-        else
+        } else
         {
             // If the input model is invalid, return to the New view with the current model (validation errors).
             return View("New", inputModel);

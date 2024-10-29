@@ -2,16 +2,8 @@
 
 public class Review
 {
-    public string ReviewId { get; set; }
-    
-    [Display(Name = "Reviewer")]
-    public Customer Customer { get; set; }
-    
-    [Required]
-    [Display(Name = "Title")]
-    public string Title { get; set; }
-    
-    [Required]
-    [Display(Name = "Stars")]
-    public int Stars { get; set; }
+    public string Id { get; set; }
+    public string Content { get; set; }
+    public int Rating { get; set; }
+    public string ReviewerName { get; set; }
 }
