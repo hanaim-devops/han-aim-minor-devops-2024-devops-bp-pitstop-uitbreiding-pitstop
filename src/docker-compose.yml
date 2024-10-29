@@ -170,8 +170,23 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - sqlserver
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
 volumes:
   sqlserverdata:
     external: true
   rabbitmqdata:
     external: true
+  grafana-storage:
+    
