@@ -41,6 +41,15 @@ else
     echo "Starting Pitstop without service mesh."
 }
 
+# Apply Pitstop namespace
+kubectl apply -f ../pitstop-namespace$meshPostfix.yaml
+
+# Apply Monitoring namespace and resources
+kubectl apply -f ../monitoring-namespace.yaml
+kubectl apply -f ../monitoring/prometheus-configmap.yaml
+kubectl apply -f ../monitoring/prometheus-deployment.yaml
+kubectl apply -f ../monitoring/prometheus-service.yaml
+
 kubectl apply `
     -f ../pitstop-namespace$meshPostfix.yaml `
     -f ../rabbitmq.yaml `
