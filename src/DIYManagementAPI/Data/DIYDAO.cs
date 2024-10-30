@@ -31,7 +31,8 @@ namespace DIYManagementAPI.Data
         {
             var now = DateTime.Now;
             return await _context.DIYEvening
-                        .Where(e => e.EndDate > now)
+                        .Where(x => x.EndDate.Date > now.Date ||
+                              (x.EndDate.Date == now.Date && x.EndDate.TimeOfDay > now.TimeOfDay))
                         .OrderBy(e => e.StartDate)
                         .ToListAsync();
         }
