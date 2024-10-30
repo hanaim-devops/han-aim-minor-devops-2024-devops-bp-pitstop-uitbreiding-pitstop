@@ -42,7 +42,10 @@ Als de tijdens course onderzochte technologie wel toepasbaar is kun je dit uiter
 Competenties: *DevOps-7 - Attitude*, *DevOps-4 DevSecOps*
 
 Beschrijf hier en geef links naar de minimaal 2 en maximaal 4 grootste *review acties* die je gedaan hebt, bijvoorbeeld pull requests incl. opmerkingen. Het interessantst zijn natuurlijk gevallen waar code niet optimaal was. Zorg dat je minstens een aantal reviews hebt waar in gitlab voor een externe de kwestie ook duidelijk is, in plaats van dat je dit altijd mondeling binnen het team oplost.
- 
+
+https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-tbd/pull/30#pullrequestreview-2401757022
+https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-tbd/pull/31#pullrequestreview-2401839322
+
 ## 6. Bijdrage documentatie
 
 Competenties: *DevOps-6 Onderzoek*

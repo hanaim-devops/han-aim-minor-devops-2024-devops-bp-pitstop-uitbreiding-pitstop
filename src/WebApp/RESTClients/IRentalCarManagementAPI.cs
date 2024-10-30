@@ -6,7 +6,7 @@ public interface IRentalCarManagementAPI
     Task<List<RentalCar>> GetRentalCars();
 
     [Get("/rentalcars/{id}")]
-    Task<RentalCar> GetRentalCarByLicenseNumber([AliasAs("id")] string licenseNumber);
+    Task<RentalCar> GetRentalCarById([AliasAs("id")] string id);
 
     [Post("/rentalcars")]
     Task RegisterRentalCar(RegisterRentalCar command);

@@ -24,3 +24,7 @@ services:
   rentalmanagementapi:
     ports:
       - "5400:5400"
+
+  reviewmanagementapi:
+    ports:
+      - "5500:5500"

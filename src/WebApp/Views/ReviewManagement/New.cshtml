@@ -8,9 +8,9 @@
 
 <form asp-controller="ReviewManagement" asp-action="New" method="post">
     <div class="form-group">
-        <label asp-for="SelectedCustomerId">Customer</label>
-        <select asp-for="SelectedCustomerId" asp-items="Model.Customers" class="form-control"></select>
-        <span asp-validation-for="SelectedCustomerId" class="text-danger"></span>
+        <label asp-for="SelectedCustomer">Customer</label>
+        <select asp-for="SelectedCustomer" asp-items="Model.Customers" class="form-control"></select>
+        <span asp-validation-for="SelectedCustomer" class="text-danger"></span>
     </div>
     
     <div class="form-group">
@@ -24,6 +24,12 @@
             <option value="5">5</option>
         </select>
         <span asp-validation-for="Stars" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="ReviewComment">Review Comment</label>
+        <textarea asp-for="ReviewComment" class="form-control" rows="4" placeholder="Provide your comments here..."></textarea>
+        <span asp-validation-for="ReviewComment" class="text-danger"></span>
     </div>
     
     <span><button id="SubmitButton" type="submit" class="btn btn-default">Submit</button></span>

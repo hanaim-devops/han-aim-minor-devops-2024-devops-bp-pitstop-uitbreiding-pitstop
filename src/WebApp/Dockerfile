@@ -5,7 +5,7 @@ WORKDIR /app
 ENV NODE_VERSION=20.x
 RUN apt-get -y update \
     && apt-get install -y curl \
-    && curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | sh - \ 
+    && curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | sh - \
     && apt-get install -y nodejs \
     && apt-get clean
 

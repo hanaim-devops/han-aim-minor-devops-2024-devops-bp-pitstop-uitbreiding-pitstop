@@ -28,4 +28,10 @@ public static class Mappers
         source.RentalCar.Model.Brand.Name,
         source.RentalCar.Model.Name
     );
+    
+    public static CreateReview MapToCreateReview(this ReviewManagementNewViewModel source) => new CreateReview(
+        source.SelectedCustomer,  
+        source.ReviewComment,
+        source.Stars                
+    );
 }

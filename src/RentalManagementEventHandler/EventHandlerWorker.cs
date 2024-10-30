@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Linq;
 using Pitstop.Infrastructure.Messaging;
 using Pitstop.RentalManagementAPI.DataAccess;
+using Pitstop.RentalManagementAPI.EventHandlers;
 using Pitstop.RentalManagementAPI.Models;
 using Pitstop.RentalManagementEventHandler.Events;
 using Serilog;
@@ -13,10 +15,18 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
     RentalManagementDBContext _dbContext;
     IMessageHandler _messageHandler;
 
-    public EventHandlerWorker(IMessageHandler messageHandler, RentalManagementDBContext dbContext)
+    private IEnumerable<PitstopEventHandler> _handlers;
+
+    private PitstopEventHandler GetHandlerFor(string messageType)
+    {
+        return _handlers.First(h => h.MessageType == messageType);
+    }
+
+    public EventHandlerWorker(IMessageHandler messageHandler, RentalManagementDBContext dbContext, IEnumerable<PitstopEventHandler> handlers)
     {
         _messageHandler = messageHandler;
         _dbContext = dbContext;
+        _handlers = handlers;
     }
 
     public void Start()
@@ -44,45 +54,8 @@ public class EventHandlerWorker : IHostedService, IMessageHandlerCallback
     public async Task<bool> HandleMessageAsync(string messageType, string message)
     {
         JObject messageObject = MessageSerializer.Deserialize(message);
-        try
-        {
-            switch (messageType)
-            {
-                case "CustomerRegistered":
-                    await HandleAsync(messageObject.ToObject<CustomerRegistered>());
-                    break;
-            }
-        }
-        catch (Exception ex)
-        {
-            string messageId = messageObject.Property("MessageId") != null ? messageObject.Property("MessageId").Value<string>() : "[unknown]";
-            Log.Error(ex, "Error while handling {MessageType} message with id {MessageId}.", messageType, messageId);
-        }
-
-        // always akcnowledge message - any errors need to be dealt with locally.
-        return true;
-    }
-    
-    private async Task<bool> HandleAsync(CustomerRegistered e)
-    {
-        Log.Information("Register Customer: {CustomerId}, {Name}, {TelephoneNumber}",
-            e.CustomerId, e.Name, e.TelephoneNumber);
-
-        try
-        {
-            await _dbContext.Customers.AddAsync(new Customer
-            {
-                CustomerId = e.CustomerId,
-                Name = e.Name,
-                TelephoneNumber = e.TelephoneNumber
-            });
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (DbUpdateException)
-        {
-            Log.Warning("Skipped adding customer with customer id {CustomerId}.", e.CustomerId);
-        }
-
+        var handler = GetHandlerFor(messageType);
+        await handler.HandleAsync(messageObject);
         return true;
     }
 }

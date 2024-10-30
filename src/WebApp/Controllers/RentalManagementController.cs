@@ -68,7 +68,7 @@ public class RentalManagementController : Controller
             {
                 try
                 {
-                    RegisterRental registerRentalCommand = new RegisterRental(Guid.NewGuid(), inputModel.SelectedRentalCarLicenseNumber,
+                    RegisterRental registerRentalCommand = new RegisterRental(Guid.NewGuid(), inputModel.SelectedRentalCarId,
                         inputModel.SelectedCustomerId, inputModel.StartDate, inputModel.EndDate);
                     await _rentalManagementAPI.RegisterRental(registerRentalCommand);
                 }
@@ -106,7 +106,7 @@ public class RentalManagementController : Controller
         return vehicles.Select(v =>
             new SelectListItem
             {
-                Value = v.LicenseNumber,
+                Value = v.Id,
                 Text = $"{v.Model.Brand.Name} {v.Model.Name} [{v.LicenseNumber}]"
             });
     }

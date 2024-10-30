@@ -18,7 +18,7 @@ public class RentalManagementNewViewModel
 
     [Required(ErrorMessage = "Car is required")]
     [Display(Name = "Car")]
-    public string SelectedRentalCarLicenseNumber { get; set; }
+    public string SelectedRentalCarId { get; set; }
 
     public IEnumerable<SelectListItem> Customers { get; set; }
     

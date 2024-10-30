@@ -7,13 +7,13 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Title</th>
         <th>Stars</th>
+        <th>Review comment</th>
         <th>Reviewer</th>
     </tr>
     </thead>
     <tbody>
-    @if (Model.Reviews == null)
+    @if (Model.Reviews == null || Model.Reviews.Count() == 0)
     {
         <tr>
             <td colspan="3">No reviews found</td>
@@ -24,9 +24,9 @@
         @foreach (var review in Model.Reviews)
         {
             <tr>
-                <td>@review.Title</td>
-                <td>@review.Stars</td>
-                <td>@review.Customer.Name</td>
+                <td>@review.Rating</td>
+                <td>@review.Content</td>
+                <td>@review.ReviewerName</td>
             </tr>
         }
     }
