@@ -35,4 +35,10 @@ public class ReviewController : ControllerBase
     {
         return _reviewService.GetReviewById(id);
     }
+    
+    [HttpPost("{id}")]
+    public void Delete(string id)
+    {
+        _reviewService.Delete(id);
+    }
 }

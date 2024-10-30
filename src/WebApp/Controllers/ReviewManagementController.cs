@@ -83,14 +83,15 @@ public class ReviewManagementController : Controller
             return View("New", inputModel);
         }
     }
-    [HttpPost]
-    public async Task<IActionResult> Delete(int reviewId)
+
+    [HttpGet]
+    public async Task<IActionResult> Delete([FromRoute] string id) 
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
             try
             {
-                await _reviewManagementAPI.DeleteReview(reviewId);
+                
                 return RedirectToAction("Index");
             }
             catch (ApiException ex)
@@ -104,6 +105,5 @@ public class ReviewManagementController : Controller
             return RedirectToAction("Index");
         }, View("Offline", new ReviewManagementOfflineViewModel()));
     }
-
     
 }

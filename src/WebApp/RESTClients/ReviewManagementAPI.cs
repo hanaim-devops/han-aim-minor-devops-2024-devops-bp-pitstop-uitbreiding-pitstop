@@ -52,5 +52,10 @@ namespace WebApp.RESTClients
         {
             await _restClient.CreateReview(command);
         }
+        
+        public async Task Delete(string reviewId)
+        {
+            await _restClient.Delete(reviewId);
+        }
     }
 }
