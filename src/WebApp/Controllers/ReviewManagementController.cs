@@ -83,4 +83,27 @@ public class ReviewManagementController : Controller
             return View("New", inputModel);
         }
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> Edit(string id)
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            var review = await _reviewManagementAPI.GetReviewById(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ReviewManagementEditViewModel
+            {
+                ReviewId = review.Id,
+                ReviewerName = review.ReviewerName,
+                Rating = review.Rating,
+                Content = review.Content
+            };
+
+            return View(model);
+        }, View("Offline", new ReviewManagementOfflineViewModel()));
+    }
 }
