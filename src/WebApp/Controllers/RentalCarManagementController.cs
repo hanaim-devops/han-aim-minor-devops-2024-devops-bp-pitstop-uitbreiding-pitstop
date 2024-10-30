@@ -31,7 +31,7 @@ public class RentalCarManagementController : Controller
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
-            RentalCar rentalCar = await _rentalCarManagementApi.GetRentalCarByLicenseNumber(licenseNumber);
+            RentalCar rentalCar = await _rentalCarManagementApi.GetRentalCarById(licenseNumber);
 
             var model = new RentalCarManagementDetailsViewModel
             {
