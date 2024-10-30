@@ -31,6 +31,10 @@ public class RentalPlanningService(RentalManagementDbContext dbContext) : IRenta
     
     public List<RentalReservation> GetAll()
     {
-        return _dbContext.RentalReservations.ToList();
+        return _dbContext.RentalReservations
+            .Include(r => r.Car)
+            .ThenInclude(c => c.Model)
+            .ThenInclude(m => m.Brand)
+            .ToList();
     }
 }
