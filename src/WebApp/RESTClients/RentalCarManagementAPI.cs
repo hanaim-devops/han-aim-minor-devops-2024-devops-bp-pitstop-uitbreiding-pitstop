@@ -20,11 +20,11 @@ public class RentalCarManagementAPI : IRentalCarManagementAPI
     {
         return await _restClient.GetRentalCars();
     }
-    public async Task<RentalCar> GetRentalCarByLicenseNumber([AliasAs("id")] string licenseNumber)
+    public async Task<RentalCar> GetRentalCarById([AliasAs("id")] string id)
     {
         try
         {
-            return await _restClient.GetRentalCarByLicenseNumber(licenseNumber);
+            return await _restClient.GetRentalCarById(id);
         }
         catch (ApiException ex)
         {

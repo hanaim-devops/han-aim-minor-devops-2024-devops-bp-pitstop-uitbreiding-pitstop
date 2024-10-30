@@ -144,6 +144,16 @@ services:
       - rabbitmq
     environment:
       - DOTNET_ENVIRONMENT=Production
+        
+  rentalmanagementeventhandler:
+    image: pitstop/rentalmanagementeventhandler:1.0
+    build: RentalManagementEventHandler
+    container_name: rentalmanagementeventhandler
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    environment:
+      - DOTNET_ENVIRONMENT=Production
 
   workshopmanagementeventhandler:
     image: pitstop/workshopmanagementeventhandler:1.0
@@ -165,13 +175,29 @@ services:
       - workshopmanagementapi
       - rentalcarmanagementapi
       - rentalmanagementapi
+      - rentalmanagementeventhandler
     ports:
       - "7005:7005"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - sqlserver
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
 
 volumes:
   sqlserverdata:
     external: true
   rabbitmqdata:
     external: true
+  grafana-storage:
+    

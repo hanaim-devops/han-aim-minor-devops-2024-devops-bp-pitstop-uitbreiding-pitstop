@@ -1,23 +1,18 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
+﻿FROM pitstop-dotnet-sdk-base:1.0 AS build-env
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["RentalManagementEventHandler/RentalManagementEventHandler.csproj", "RentalManagementEventHandler/"]
-RUN dotnet restore "RentalManagementEventHandler/RentalManagementEventHandler.csproj"
-COPY . .
-WORKDIR "/src/RentalManagementEventHandler"
-RUN dotnet build "RentalManagementEventHandler.csproj" -c $BUILD_CONFIGURATION -o /app/build
+# Copy necessary files and restore as distinct layer
+COPY *.csproj ./
+RUN dotnet restore
 
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "RentalManagementEventHandler.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-FROM base AS final
+# Build runtime image
+FROM pitstop-dotnet-runtime-base:1.0
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "RentalManagementEventHandler.dll"]
+COPY --from=build-env /app/out .
+
+# Start
+ENTRYPOINT ["dotnet", "Pitstop.RentalManagementEventHandler.dll"]
