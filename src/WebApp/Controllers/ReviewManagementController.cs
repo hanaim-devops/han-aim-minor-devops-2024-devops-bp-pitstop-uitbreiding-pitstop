@@ -6,15 +6,15 @@ namespace Pitstop.WebApp.Controllers;
 
 public class ReviewManagementController : Controller
 {
-    private IReviewManagementAPI _reviewManagementAPI;
-    private ICustomerManagementAPI _customerManagementAPI;
+    private IReviewManagementAPI _reviewManagementApi;
+    private ICustomerManagementAPI _customerManagementApi;
     private readonly Microsoft.Extensions.Logging.ILogger _logger;
     private ResiliencyHelper _resiliencyHelper;
 
-    public ReviewManagementController(IReviewManagementAPI reviewManagementAPI, ICustomerManagementAPI customerManagementAPI, ILogger<ReviewManagementController> logger)
+    public ReviewManagementController(IReviewManagementAPI reviewManagementApi, ICustomerManagementAPI customerManagementAPI, ILogger<ReviewManagementController> logger)
     {
-        _reviewManagementAPI = reviewManagementAPI;
-        _customerManagementAPI = customerManagementAPI;
+        _reviewManagementApi = reviewManagementApi;
+        _customerManagementApi = customerManagementAPI;
         _logger = logger;
         _resiliencyHelper = new ResiliencyHelper(_logger);
     }
@@ -26,7 +26,7 @@ public class ReviewManagementController : Controller
         {
             var model = new ReviewManagementViewModel
             {
-                Reviews = await _reviewManagementAPI.GetReviews()
+                Reviews = await _reviewManagementApi.GetReviews()
             };
             return View(model);
         }, View("Offline", new ReviewManagementOfflineViewModel()));
@@ -37,7 +37,7 @@ public class ReviewManagementController : Controller
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
-            var customers = await _customerManagementAPI.GetCustomers();
+            var customers = await _customerManagementApi.GetCustomers();
 
             var model = new ReviewManagementNewViewModel
             {
@@ -60,7 +60,7 @@ public class ReviewManagementController : Controller
                     CreateReview cmd = inputModel.MapToCreateReview();
 
                     // Call the Review API (backend service) to register the review.
-                    await _reviewManagementAPI
+                    await _reviewManagementApi
                         .CreateReview(cmd); // Uncomment and implement this call when backend is ready.
 
                     // Redirect to the Index view upon successful creation.
@@ -84,16 +84,16 @@ public class ReviewManagementController : Controller
         }
     }
     
-    [HttpGet]
+    [HttpGet("/Edit/{id}")]
     public async Task<IActionResult> Edit(string id)
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
-            var review = await _reviewManagementAPI.GetReviewById(id);
-            if (review == null)
-            {
-                return NotFound();
-            }
+            var review = await _reviewManagementApi.GetReviewById(id);
+            // if (review == null)
+            // {
+            //     return NotFound();
+            // }
 
             var model = new ReviewManagementEditViewModel
             {
@@ -105,5 +105,41 @@ public class ReviewManagementController : Controller
 
             return View(model);
         }, View("Offline", new ReviewManagementOfflineViewModel()));
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> Edit([FromForm] ReviewManagementEditViewModel inputModel)
+    {
+        if (ModelState.IsValid)
+        {
+            return await _resiliencyHelper.ExecuteResilient(async () =>
+            {
+                try
+                {
+                    // Mapping the inputModel to a command that will be used for updating the review.
+                    var cmd = inputModel.MapToUpdateReview();
+
+                    // Call the Review API (backend service) to update the review.
+                    await _reviewManagementApi.UpdateReview(inputModel.ReviewId ,cmd);
+
+                    return RedirectToAction("Index");
+                }
+                catch (ApiException ex)
+                {
+                    if (ex.StatusCode == HttpStatusCode.Conflict)
+                    {
+                        return Conflict();
+                    }
+                }
+
+                // Default fallback: redirect to Index if no conflict or error occurs.
+                return RedirectToAction("Index");
+            }, View("Offline", new ReviewManagementOfflineViewModel()));
+        }
+        else
+        {
+            // If the input model is invalid, return to the Edit view with the current model (validation errors).
+            return View("Edit", inputModel);
+        }
     }
 }

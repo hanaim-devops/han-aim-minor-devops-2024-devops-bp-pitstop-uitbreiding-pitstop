@@ -52,5 +52,11 @@ namespace WebApp.RESTClients
         {
             await _restClient.CreateReview(command);
         }
+        
+        // Update een bestaande review
+        public async Task UpdateReview(string reviewId,UpdateReview command)
+        {
+            await _restClient.UpdateReview(reviewId, command);
+        }
     }
 }

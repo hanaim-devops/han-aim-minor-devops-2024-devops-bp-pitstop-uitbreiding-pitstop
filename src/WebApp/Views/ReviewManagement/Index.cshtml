@@ -27,6 +27,9 @@
                 <td>@review.Rating</td>
                 <td>@review.Content</td>
                 <td>@review.ReviewerName</td>
+                <td>
+                    <a asp-action="Edit" asp-controller="ReviewManagement" asp-route-id="@review.Id" class="btn btn-default">Edit</a>
+                    <a asp-action="Delete" asp-controller="ReviewManagement" asp-route-id="@review.Id" class="btn btn-default">Delete</a>
             </tr>
         }
     }
