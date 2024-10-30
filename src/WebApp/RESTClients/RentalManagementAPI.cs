@@ -20,11 +20,11 @@ public class RentalManagementAPI : IRentalManagementAPI
     {
         return await _restClient.GetRentals();
     }
-    public async Task<Rental> GetRentalByLicenseNumber([AliasAs("id")] string licenseNumber)
+    public async Task<Rental> GetRentalById([AliasAs("id")] string id)
     {
         try
         {
-            return await _restClient.GetRentalByLicenseNumber(licenseNumber);
+            return await _restClient.GetRentalById(id);
         }
         catch (ApiException ex)
         {
@@ -42,5 +42,20 @@ public class RentalManagementAPI : IRentalManagementAPI
     public async Task RegisterRental(RegisterRental command)
     {
         await _restClient.RegisterRental(command);
+    }
+    
+    public async Task ChangeCarRental([AliasAs("id")] string id, ChangeCarRental command)
+    {
+        await _restClient.ChangeCarRental(id, command);
+    }
+    
+    public async Task ExtendRental([AliasAs("id")] string id, ExtendRental command)
+    {
+        await _restClient.ExtendRental(id, command);
+    }
+
+    public async Task DeleteRental([AliasAs("id")] string id)
+    {
+        await _restClient.DeleteRental(id);
     }
 }

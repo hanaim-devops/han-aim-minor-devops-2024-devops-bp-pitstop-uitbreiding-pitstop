@@ -37,6 +37,19 @@ public class RentalManagementController : Controller
         }, View("Offline", new RentalManagementOfflineViewModel()));
     }
     
+    [HttpGet]
+    public async Task<IActionResult> Details(string rentalId)
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            var model = new RentalManagementDetailsViewModel
+            {
+                Rental = await _rentalManagementAPI.GetRentalById(rentalId)
+            };
+
+            return View(model);
+        }, View("Offline", new RentalManagementOfflineViewModel()));
+    }
     
     [HttpGet]
     public async Task<IActionResult> New()
@@ -49,9 +62,32 @@ public class RentalManagementController : Controller
             
             var model = new RentalManagementNewViewModel
             {
-                Id = Guid.NewGuid(),
                 StartDate = currentDate,
                 EndDate = currentDate.AddDays(1),
+                RentalCars = availableRentalCars,
+                Customers = customers
+            };
+            return View(model);
+        }, View("Offline", new RentalManagementOfflineViewModel()));
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> Edit(string rentalId)
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            Rental currentRental = await _rentalManagementAPI.GetRentalById(rentalId);
+            
+            var customers = await GetCustomersList();
+            var availableRentalCars = await GetAvailableRentalCarsList();
+            
+            var model = new RentalManagementNewViewModel
+            {
+                Id = currentRental.Id,
+                StartDate = currentRental.StartDate,
+                EndDate = currentRental.EndDate,
+                SelectedCustomerId = currentRental.Customer.CustomerId,
+                SelectedRentalCarId = currentRental.Car.Id,
                 RentalCars = availableRentalCars,
                 Customers = customers
             };
@@ -98,6 +134,68 @@ public class RentalManagementController : Controller
             inputModel.Customers = await GetCustomersList();
             return View("New", inputModel);
         }
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> UpdateCarRental([FromForm] RentalManagementNewViewModel inputModel)
+    {
+        if (ModelState.IsValid)
+        {
+            return await _resiliencyHelper.ExecuteResilient(async () =>
+            {
+                try
+                {
+                    Rental currentRental = await _rentalManagementAPI.GetRentalById(inputModel.Id);
+                    
+                    if(inputModel.EndDate != currentRental.EndDate)
+                    {
+                        ExtendRental extendRentalCommand = new ExtendRental(Guid.NewGuid(), inputModel.EndDate);
+                        await _rentalManagementAPI.ExtendRental(inputModel.Id, extendRentalCommand);
+                    }
+                    
+                    if(inputModel.SelectedRentalCarId != currentRental.Car.Id)
+                    {
+                        ChangeCarRental changeCarRentalCommand = new ChangeCarRental(Guid.NewGuid(), inputModel.SelectedRentalCarId);
+                        await _rentalManagementAPI.ChangeCarRental(inputModel.Id, changeCarRentalCommand);
+                    }
+                }
+                catch (ApiException ex)
+                {
+                    if (ex.StatusCode == HttpStatusCode.Conflict)
+                    {
+                        // add errormessage from API exception to model
+                        var content = await ex.GetContentAsAsync<BusinessRuleViolation>();
+                        inputModel.Error = content.ErrorMessage;
+
+                        // repopulate list of available vehicles in the model
+                        inputModel.RentalCars = await GetAvailableRentalCarsList();
+                        inputModel.Customers = await GetCustomersList();
+
+                        // back to New view
+                        return View("Edit", inputModel);
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }, View("Offline", new RentalManagementOfflineViewModel()));
+        }
+        else
+        {
+            inputModel.RentalCars = await GetAvailableRentalCarsList();
+            inputModel.Customers = await GetCustomersList();
+            return View("Edit", inputModel);
+        }
+    }
+    
+    [HttpDelete]
+    public async Task<IActionResult> Delete(string rentalId)
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            await _rentalManagementAPI.DeleteRental(rentalId);
+            
+            return RedirectToAction("Index");
+        }, View("Offline", new RentalManagementOfflineViewModel()));
     }
     
     private async Task<IEnumerable<SelectListItem>> GetAvailableRentalCarsList()

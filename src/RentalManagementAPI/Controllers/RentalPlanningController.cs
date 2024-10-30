@@ -36,14 +36,14 @@ public class RentalPlanningController(IRentalPlanningService rentalPlanningServi
         return mapper.Map<RentalReservationResponse>(reservation);
     }
     
-    [HttpPut("{id}/car")]
+    [HttpPatch("{id}/car")]
     public RentalReservationResponse UpdateCar(string id, ChangeCar command)
     {
         var reservation = _rentalPlanningService.ChangeCar(id, command);
         return mapper.Map<RentalReservationResponse>(reservation);
     }
     
-    [HttpPut("{id}/extend")]
+    [HttpPatch("{id}/extend")]
     public RentalReservationResponse Extend(string id, Extend command)
     {
         var reservation = _rentalPlanningService.Extend(id, command);
