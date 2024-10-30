@@ -10,4 +10,7 @@ public interface IReviewManagementAPI
 
     [Post("/reviews")]
     Task CreateReview(CreateReview command);
+    
+    [Post("/reviews/{id}")]
+    Task Delete(int reviewId);
 }
