@@ -1,7 +1,7 @@
 ﻿using DIYManagementAPI.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using System.Linq;
 
 namespace DIYManagementAPI.Data
 {
@@ -29,11 +29,11 @@ namespace DIYManagementAPI.Data
 
         public async Task<IEnumerable<DIYEveningModel>> GetFutureDIYEvenings()
         {
-            var now = DateTime.UtcNow; 
-            return await _context.DIYEvening
-                .Where(e => e.EndDate > now && !e.Cancelled)
-                .OrderBy(e => e.StartDate)
-                .ToListAsync();
+            var now = DateTime.Now;
+            var query = _context.DIYEvening
+                        .OrderBy(e => e.StartDate)
+                        .Where(e => e.EndDate > now);
+            return await query.ToListAsync();
         }
 
         public async Task<DIYEveningModel> GetDIYEveningById(int id)
