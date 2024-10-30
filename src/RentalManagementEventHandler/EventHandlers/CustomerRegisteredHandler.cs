@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using Pitstop.RentalManagementAPI.DataAccess;
 using Pitstop.RentalManagementAPI.Models;
@@ -7,7 +8,7 @@ using Serilog;
 
 namespace Pitstop.RentalManagementAPI.EventHandlers;
 
-public class CustomerRegisteredHandler(RentalManagementDBContext dbContext) : PitstopEventHandler("CustomerRegistered", dbContext)
+public class CustomerRegisteredHandler(RentalManagementDBContext dbContext, IMapper mapper) : PitstopEventHandler("CustomerRegistered", dbContext, mapper)
 {
     public override async Task<bool> HandleAsync(JObject e)
     {
