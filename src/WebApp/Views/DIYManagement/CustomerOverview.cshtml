@@ -1,9 +1,48 @@
 ﻿@model Pitstop.WebApp.ViewModels.DIYManagementCustomerOverviewViewModel
 @{
     ViewData["Title"] = "DIY Customer Overview";
+    var firstDiy = Model.DIYEvening.FirstOrDefault();
+
+    var otherDiys = Model.DIYEvening.Skip(1).ToList();
 }
 
 <h3 id="PageTitle">DIY Customer- overview</h3>
+<h4>Next DIY Evening</h4>
+<div class="row">
+    <!-- Left Column: DIY Evening Details -->
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@firstDiy.Title</h3>
+            </div>
+            <div class="panel-body">
+                <p>@firstDiy.ExtraInfo</p>
+                <p>Starts at: @firstDiy.StartDate</p>
+                <p>Ends at: @firstDiy.EndDate</p>
+                <p>Cancelled: @firstDiy.Cancelled</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Mechanic Details -->
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Mechanic</h3>
+            </div>
+            <div class="panel-body">
+                <p>Name: @firstDiy.Mechanic</p>
+            </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">Customers</h3>
+            </div>
+            <div class="panel-body">
+                <p>Amount of customers: @Model.DIYRegistrations.Count</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -15,7 +54,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var diy in Model.DIYEvening)
+        @foreach (var diy in otherDiys)
         {
             <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "DIYManagement", new { id = diy.Id }))'">
                 <td>@diy.Title</td>

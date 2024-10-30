@@ -157,9 +157,11 @@ public class DIYManagementController : Controller
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
+            var DIYEvening = await _DIYManagamentAPI.GetFutureDIYEvenings();
             var model = new DIYManagementCustomerOverviewViewModel
             {
-                DIYEvening = await _DIYManagamentAPI.GetFutureDIYEvenings()
+                DIYEvening = DIYEvening,
+                DIYRegistrations = await _DIYManagamentAPI.GetRegistrationsForDIYEvening(DIYEvening[0].Id.ToString())
             };
 
             return View(model);
