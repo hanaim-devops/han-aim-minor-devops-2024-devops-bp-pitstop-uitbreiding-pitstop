@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Pitstop.Infrastructure.Messaging.Configuration;
 using Pitstop.RentalCarManagementAPI.MappingProfiles;
 using Pitstop.RentalManagementAPI;

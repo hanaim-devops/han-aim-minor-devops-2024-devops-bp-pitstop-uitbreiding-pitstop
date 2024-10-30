@@ -15,4 +15,4 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 
 # Start
-ENTRYPOINT ["dotnet", "Pitstop.WorkshopManagementEventHandler.dll"]
+ENTRYPOINT ["dotnet", "Pitstop.RentalManagementEventHandler.dll"]

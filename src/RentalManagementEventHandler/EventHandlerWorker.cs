@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Linq;
 using Pitstop.Infrastructure.Messaging;
 using Pitstop.RentalManagementAPI.DataAccess;
