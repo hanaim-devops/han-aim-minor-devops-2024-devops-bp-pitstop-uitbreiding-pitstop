@@ -30,10 +30,10 @@ namespace DIYManagementAPI.Data
         public async Task<IEnumerable<DIYEveningModel>> GetFutureDIYEvenings()
         {
             var now = DateTime.Now;
-            var query = _context.DIYEvening
+            return await _context.DIYEvening
+                        .Where(e => e.EndDate > now)
                         .OrderBy(e => e.StartDate)
-                        .Where(e => e.EndDate > now);
-            return await query.ToListAsync();
+                        .ToListAsync();
         }
 
         public async Task<DIYEveningModel> GetDIYEveningById(int id)
