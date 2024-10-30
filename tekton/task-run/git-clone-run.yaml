@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: git-clone-taskrun
+spec:
+  taskRef:
+    name: git-clone
+  params:
+    - name: url
+      value: "https://github.com/hanaim-devops/devops-bp-pitstop-uitbreiding-team-tbd.git"
+    - name: revision
+      value: "main"
+    - name: submodules
+      value: "true"
+    - name: deleteExisting
+      value: "true"
+    - name: verbose
+      value: "true"
+  workspaces:
+    - name: output
+      emptyDir: {}

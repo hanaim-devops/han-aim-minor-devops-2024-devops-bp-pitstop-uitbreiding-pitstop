@@ -1,0 +1,155 @@
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+      - "./rabbitmq:/etc/pitstop/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_CONFIG_FILE=/etc/pitstop/rabbitmq.conf
+
+  sqlserver:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: sqlserver
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+    ports:
+      - "1434:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
+
+  mailserver:
+    image: maildev/maildev:1.1.0
+    container_name: mailserver
+    ports:
+      - "25:25"
+      - "4000:80"
+
+  logserver:
+    image: datalust/seq:latest
+    container_name: logserver
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+
+  vehiclemanagementapi:
+    image: luukjp/pitstop/vehiclemanagementapi:1.0
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  customermanagementapi:
+    image: luukjp/pitstop/customermanagementapi:1.0
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5100:5100"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  workshopmanagementapi:
+    image: luukjp/pitstop/workshopmanagementapi:1.0
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5200:5200"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  rentalcarmanagementapi:
+    image: luukjp/pitstop/rentalcarmanagementapi:1.0
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5300:5300"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  rentalmanagementapi:
+    image: luukjp/pitstop/rentalmanagementapi:1.0
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    ports:
+      - "5400:5400"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  auditlogservice:
+    image: luukjp/pitstop/auditlogservice:1.0
+    container_name: auditlogservice
+    depends_on:
+      - rabbitmq
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
+  invoiceservice:
+    image: luukjp/pitstop/invoiceservice:1.0
+    container_name: invoiceservice
+    depends_on:
+      - rabbitmq
+      - sqlserver
+      - mailserver
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
+  notificationservice:
+    image: luukjp/pitstop/notificationservice:1.0
+    container_name: notificationservice
+    depends_on:
+      - rabbitmq
+      - sqlserver
+      - mailserver
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
+  timeservice:
+    image: luukjp/pitstop/timeservice:1.0
+    container_name: timeservice
+    depends_on:
+      - rabbitmq
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
+  workshopmanagementeventhandler:
+    image: luukjp/pitstop/workshopmanagementeventhandler:1.0
+    container_name: workshopmanagementeventhandler
+    depends_on:
+      - rabbitmq
+      - sqlserver
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
+  webapp:
+    image: luukjp/pitstop/webapp:1.0
+    container_name: webapp
+    depends_on:
+      - customermanagementapi
+      - vehiclemanagementapi
+      - workshopmanagementapi
+      - rentalcarmanagementapi
+      - rentalmanagementapi
+    ports:
+      - "7005:7005"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+volumes:
+  sqlserverdata:
+    external: true
+  rabbitmqdata:
+    external: true
