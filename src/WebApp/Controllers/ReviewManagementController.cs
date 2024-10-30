@@ -84,8 +84,8 @@ public class ReviewManagementController : Controller
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Delete([FromRoute] string id) 
+    [HttpPost]
+    public async Task<IActionResult> Delete(string reviewId)
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
