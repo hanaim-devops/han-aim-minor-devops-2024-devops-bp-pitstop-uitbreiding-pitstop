@@ -27,6 +27,15 @@ namespace DIYManagementAPI.Data
             return await _context.DIYEvening.ToListAsync();
         }
 
+        public async Task<IEnumerable<DIYEveningModel>> GetFutureDIYEvenings()
+        {
+            var now = DateTime.UtcNow; 
+            return await _context.DIYEvening
+                .Where(e => e.EndDate > now && !e.Cancelled)
+                .OrderBy(e => e.StartDate)
+                .ToListAsync();
+        }
+
         public async Task<DIYEveningModel> GetDIYEveningById(int id)
         {
             return await _context.DIYEvening.FindAsync(id);

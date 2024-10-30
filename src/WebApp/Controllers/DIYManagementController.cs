@@ -157,9 +157,9 @@ public class DIYManagementController : Controller
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
-            var model = new DIYManagementViewModel
+            var model = new DIYManagementCustomerOverviewViewModel
             {
-                DIYEvening = await _DIYManagamentAPI.GetDIYEvening()
+                DIYEvening = await _DIYManagamentAPI.GetFutureDIYEvenings()
             };
 
             return View(model);

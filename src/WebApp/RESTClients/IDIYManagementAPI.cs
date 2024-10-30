@@ -5,6 +5,9 @@ public interface IDIYManagementAPI
     [Get("/diy")]
     Task<List<DIYEvening>> GetDIYEvening();
 
+    [Get("/diy/future")]
+    Task<List<DIYEvening>> GetFutureDIYEvenings();
+
     [Post("/diy/registercustomer")]
     Task RegisterDIYEveningCustomer(RegisterDIYRegistration command);
 

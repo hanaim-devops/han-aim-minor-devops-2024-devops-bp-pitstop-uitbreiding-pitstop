@@ -46,6 +46,13 @@ namespace DIYManagementAPI.Controllers
             var result = await _service.GetDIYEvenings();
             return Ok(result);
         }
+
+        [HttpGet("future")]
+        public async Task<ActionResult<IEnumerable<DIYEveningModel>>> GetFutureDIYEvenings()
+        {
+            var result = await _service.GetFutureDIYEvenings();
+            return Ok(result);
+        }
            
         [HttpGet("{id}")]
         public async Task<ActionResult<DIYEveningModel>> GetDIYEveningById(int id)

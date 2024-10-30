@@ -27,6 +27,11 @@ public class DIYManagementAPI : IDIYManagementAPI
         return await _restClient.GetDIYEvening();
     }
 
+    public async Task<List<DIYEvening>> GetFutureDIYEvenings()
+    {
+        return await _restClient.GetFutureDIYEvenings();
+    }
+
     public async Task RegisterDIYEveningCustomer(RegisterDIYRegistration command)
     {
         await _restClient.RegisterDIYEveningCustomer(command);
