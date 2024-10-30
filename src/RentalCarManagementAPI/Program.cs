@@ -7,6 +7,7 @@ using Pitstop.Infrastructure.Messaging.Configuration;
 using Pitstop.RentalCarManagementAPI.MappingProfiles;
 using Pitstop.RentalCarManagementAPI.Services;
 using Pitstop.RentalCarManagementAPI.Services.Interfaces;
+using Pitstop.RentalManagementAPI.Filters;
 using RentalCarManagementAPI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExceptionFilter>();
+});
 
 builder.Services.AddAutoMapper(typeof(RentalCarProfile), typeof(BrandProfile), typeof(ModelProfile));
 
