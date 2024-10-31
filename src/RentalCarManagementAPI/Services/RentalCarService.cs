@@ -57,4 +57,12 @@ public class RentalCarService(RentalCarManagementDBContext dbContext, IModelServ
         if (car != null) return car;
         throw new NotFoundException();
     }
+
+    public void DeleteRentalCar(string rentalCarId)
+    {
+        var reservation = _dbContext.RentalCars.FirstOrDefault(r => r.Id == rentalCarId);
+        if (reservation == null) throw new NotFoundException();
+        _dbContext.RentalCars.Remove(reservation);
+        _dbContext.SaveChanges();
+    }
 }

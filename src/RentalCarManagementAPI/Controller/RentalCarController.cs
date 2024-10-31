@@ -34,4 +34,10 @@ public class RentalCarController(IRentalCarService carService) : ControllerBase
     {
         return _carService.GetByLicenseNumber(licenseNumber);
     }
+    
+    [HttpDelete("{rentalCarId}")]
+    public void DeleteRentalCar(string rentalCarId)
+    {
+        _carService.DeleteRentalCar(rentalCarId);
+    }
 }

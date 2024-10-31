@@ -10,4 +10,7 @@ public interface IRentalCarManagementAPI
 
     [Post("/rentalcars")]
     Task RegisterRentalCar(RegisterRentalCar command);
+    
+    [Delete("/rentalcars/{rentalCarId}")]
+    Task DeleteReview(string rentalCarId);
 }

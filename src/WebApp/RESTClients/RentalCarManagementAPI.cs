@@ -43,4 +43,9 @@ public class RentalCarManagementAPI : IRentalCarManagementAPI
     {
         await _restClient.RegisterRentalCar(command);
     }
+
+    public async Task DeleteReview(string rentalCarId)
+    {
+        await _restClient.DeleteReview(rentalCarId);
+    }
 }
