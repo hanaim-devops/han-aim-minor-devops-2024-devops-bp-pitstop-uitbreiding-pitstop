@@ -43,5 +43,20 @@ namespace ReviewManagementAPI.Services
             if (review != null) return review;
             throw new Exception("Review not found");
         }
+
+
+        public void DeleteReview(string reviewId)
+        {
+            var review = _dbContext.Reviews.FirstOrDefault(r => r.Id == reviewId);
+            if (review != null)
+            {
+                _dbContext.Reviews.Remove(review);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Review not found");
+            }
+        }
     }
 }

@@ -83,4 +83,27 @@ public class ReviewManagementController : Controller
             return View("New", inputModel);
         }
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(string reviewId)
+    {
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            try
+            {
+                await _reviewManagementAPI.DeleteReview(reviewId);
+                return RedirectToAction("Index");
+            }
+            catch (ApiException ex)
+            {
+                if (ex.StatusCode == HttpStatusCode.NotFound)
+                    return NotFound("Review not found.");
+                else if (ex.StatusCode == HttpStatusCode.Conflict)
+                    return Conflict("Unable to delete review due to a conflict.");
+            }
+
+            return RedirectToAction("Index");
+        }, View("Offline", new ReviewManagementOfflineViewModel()));
+    }
+    
 }
