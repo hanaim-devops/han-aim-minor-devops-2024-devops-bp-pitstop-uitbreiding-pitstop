@@ -1,4 +1,4 @@
-namespace Pitstop.WebApp.RESTClients;
+namespace WebApp.RESTClients;
 
 public interface IReviewManagementAPI
 {

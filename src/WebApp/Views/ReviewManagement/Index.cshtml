@@ -10,10 +10,11 @@
         <th>Stars</th>
         <th>Review comment</th>
         <th>Reviewer</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
-    @if (Model.Reviews == null || Model.Reviews.Count() == 0)
+    @if (Model.Reviews == null || !Model.Reviews.Any())
     {
         <tr>
             <td colspan="3">No reviews found</td>
@@ -28,8 +29,8 @@
                 <td>@review.Content</td>
                 <td>@review.ReviewerName</td>
                 <td>
-                    <a asp-action="Edit" asp-controller="ReviewManagement" asp-route-id="@review.Id" class="btn btn-default">Edit</a>
-                    <a asp-action="Delete" asp-controller="ReviewManagement" asp-route-id="@review.Id" class="btn btn-default">Delete</a>
+                    <a id="EditReviewButton" asp-action="Edit" asp-controller="ReviewManagement" asp-route-id="@review.Id" class="btn btn-default">Edit</a>
+                </td>
             </tr>
         }
     }

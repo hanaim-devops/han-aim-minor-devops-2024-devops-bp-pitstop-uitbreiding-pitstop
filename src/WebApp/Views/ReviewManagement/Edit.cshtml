@@ -1,24 +1,26 @@
-﻿@model ReviewManagementEditViewModel
-
+﻿@model Pitstop.WebApp.ViewModels.ReviewManagementEditViewModel 
 @{
-ViewData["Title"] = "Review Edit";
-}
+    ViewData["Title"] = "Review Edit";
 
+    // Define the ratings list
+    var ratings = new List<SelectListItem>
+    {
+        new() { Value = "", Text = "Select a rating" },
+        new() { Value = "1", Text = "1" },
+        new() { Value = "2", Text = "2" },
+        new() { Value = "3", Text = "3" },
+        new() { Value = "4", Text = "4" },
+        new() { Value = "5", Text = "5" }
+    };
+}
 <h3 id="PageTitle">Review Management - edit review</h3>
 
 <form asp-controller="ReviewManagement" asp-action="Edit" method="post">
-    
-    <input type="hidden" asp-for="ReviewId"/>
+    <input type="hidden" asp-for="ReviewId" />
+    <input type="hidden" asp-for="ReviewerName" />
     <div class="form-group">
-        <label for="floatingSelect">Rate Pitstop from 1 to 5 stars</label><br/>
-        <select asp-for="Rating" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-            <option selected>Open this select menu</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
+        <label asp-for="Rating">Rate Pitstop from 1 to 5 stars</label><br />
+        <select asp-for="Rating" class="form-select" asp-items="ratings"></select>
         <span asp-validation-for="Rating" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -27,6 +29,5 @@ ViewData["Title"] = "Review Edit";
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" asp-controller="ReviewManagement" class="btn btn-default">Cancel</a>
 </form>
-<a asp-action="Index" asp-controller="ReviewManagement" class="btn btn-default">Cancel</a>
-

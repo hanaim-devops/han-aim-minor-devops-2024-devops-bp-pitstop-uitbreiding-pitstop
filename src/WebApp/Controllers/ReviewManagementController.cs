@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using PitStop.WebApp.Controllers;
-using Pitstop.WebApp.RESTClients;
-
-namespace Pitstop.WebApp.Controllers;
+﻿namespace PitStop.WebApp.Controllers;
 
 public class ReviewManagementController : Controller
 {
@@ -28,6 +24,7 @@ public class ReviewManagementController : Controller
             {
                 Reviews = await _reviewManagementApi.GetReviews()
             };
+            
             return View(model);
         }, View("Offline", new ReviewManagementOfflineViewModel()));
     }
@@ -84,7 +81,7 @@ public class ReviewManagementController : Controller
         }
     }
     
-    [HttpGet("/Edit/{id}")]
+    [HttpGet]
     public async Task<IActionResult> Edit(string id)
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
@@ -107,39 +104,33 @@ public class ReviewManagementController : Controller
         }, View("Offline", new ReviewManagementOfflineViewModel()));
     }
     
-    [HttpPut("/Edit/{id}")]
+    [HttpPost]
     public async Task<IActionResult> Edit([FromForm] ReviewManagementEditViewModel inputModel)
     {
-        if (ModelState.IsValid)
+        // If the input model is invalid, return to the Edit view with the current model (validation errors).
+        if (!ModelState.IsValid)
         {
-            return await _resiliencyHelper.ExecuteResilient(async () =>
-            {
-                try
-                {
-                    // Mapping the inputModel to a command that will be used for updating the review.
-                    var cmd = inputModel.MapToUpdateReview();
-
-                    // Call the Review API (backend service) to update the review.
-                    await _reviewManagementApi.UpdateReview(inputModel.ReviewId ,cmd);
-
-                    return RedirectToAction("Index");
-                }
-                catch (ApiException ex)
-                {
-                    if (ex.StatusCode == HttpStatusCode.Conflict)
-                    {
-                        return Conflict();
-                    }
-                }
-
-                // Default fallback: redirect to Index if no conflict or error occurs.
-                return RedirectToAction("Index");
-            }, View("Offline", new ReviewManagementOfflineViewModel()));
-        }
-        else
-        {
-            // If the input model is invalid, return to the Edit view with the current model (validation errors).
             return View("Edit", inputModel);
         }
+
+        return await _resiliencyHelper.ExecuteResilient(async () =>
+        {
+            try {
+                // Mapping the inputModel to a command that will be used for updating the review.
+                var cmd = inputModel.MapToUpdateReview();
+
+                // Call the Review API (backend service) to update the review.
+                await _reviewManagementApi.UpdateReview(inputModel.ReviewId, cmd);
+            }
+            catch (ApiException ex)
+            {
+                if (ex.StatusCode == HttpStatusCode.Conflict)
+                {
+                    return Conflict();
+                }
+            }
+            
+            return RedirectToAction("Index");
+        }, View("Offline", new ReviewManagementOfflineViewModel()));
     }
 }

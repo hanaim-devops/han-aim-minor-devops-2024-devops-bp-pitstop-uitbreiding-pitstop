@@ -11,10 +11,10 @@ public class ReviewManagementEditViewModel
     {
         return new UpdateReview
         {
-            ReviewId = this.ReviewId,
-            ReviewerName = this.ReviewerName,
-            Rating = this.Rating,
-            Content = this.Content
+            ReviewId = ReviewId,
+            ReviewerName = ReviewerName,
+            Rating = Rating,
+            Content = Content
         };
     }
 }
