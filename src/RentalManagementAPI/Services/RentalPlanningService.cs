@@ -17,7 +17,7 @@ public class RentalPlanningService(RentalManagementDbContext dbContext, IMapper 
 {
     private RentalManagementDbContext _dbContext = dbContext;
     private IMapper _mapper = mapper;
-    
+
     public List<RentalReservation> GetAll()
     {
         return _dbContext.RentalReservations
@@ -74,6 +74,14 @@ public class RentalPlanningService(RentalManagementDbContext dbContext, IMapper 
         reservation.CarId = command.CarId;
         _dbContext.SaveChanges();
         return reservation;
+    }
+    
+    public void Delete(string id)
+    {
+        var reservation = _dbContext.RentalReservations.FirstOrDefault(r => r.Id == id);
+        if (reservation == null) throw new NotFoundException("Reservation");
+        _dbContext.RentalReservations.Remove(reservation);
+        _dbContext.SaveChanges();
     }
 
     public RentalReservation Extend(string id, Extend command)

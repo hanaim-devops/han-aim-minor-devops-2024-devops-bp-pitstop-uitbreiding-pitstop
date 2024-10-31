@@ -187,7 +187,7 @@ public class RentalManagementController : Controller
         }
     }
     
-    [HttpDelete]
+    [HttpPost]
     public async Task<IActionResult> Delete(string rentalId)
     {
         return await _resiliencyHelper.ExecuteResilient(async () =>
