@@ -37,7 +37,7 @@ public class ReviewController : ControllerBase
     }
 
 
-    [HttpDelete]
+    [HttpDelete("{reviewId}")]
     public void DeleteReview(string reviewId)
     {
         _reviewService.DeleteReview(reviewId);
