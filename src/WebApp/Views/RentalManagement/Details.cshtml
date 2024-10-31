@@ -1,0 +1,38 @@
+﻿@model Pitstop.WebApp.ViewModels.RentalManagementDetailsViewModel
+@{
+    ViewData["Title"] = "Rental Details";
+}
+
+<h3 id="PageTitle">Rental Management - details</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td width="150">License Number :</td>
+            <td><b>@Model.Rental.Car.LicenseNumber</b></td>
+        </tr>
+        <tr>
+            <td width="150">Brand :</td>
+            <td><b>@Model.Rental.Car.Model.Brand.Name</b></td>
+        </tr>
+    <tr>
+        <td width="150">Type :</td>
+        <td><b>@Model.Rental.Car.Model.Name</b></td>
+    </tr>
+    <tr>
+        <td width="150">Start Date :</td>
+        <td><b>@Model.Rental.StartDate</b></td>
+    </tr>
+    <tr>
+        <td width="150">End Date :</td>
+        <td><b>@Model.Rental.EndDate</b></td>
+    </tr>
+        <tr>
+            <td width="150">Customer :</td>
+            <td><b>@Model.Rental.Customer.Name</b></td>
+        </tr>
+    </tbody>
+</table>
+<span><a id="BackButton" asp-action="Index" asp-controller="RentalManagement" class="btn btn-default">Back</a></span>
+<span><a id="DeleteButton" asp-action="Delete" asp-route-rentalId="@Model.Rental.Id" asp-controller="RentalManagement" class="btn btn-default">Delete</a></span>
+<span><a id="EditButton" asp-action="Edit" asp-route-rentalId="@Model.Rental.Id" asp-controller="RentalManagement" class="btn btn-default">Edit</a></span>

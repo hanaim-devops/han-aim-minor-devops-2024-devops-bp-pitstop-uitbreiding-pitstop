@@ -2,7 +2,7 @@
 
 public class RentalManagementNewViewModel
 {
-    public Guid Id { get; set; }
+    public string Id { get; set; }
     
     [Required]
     [DataType(DataType.Date)]

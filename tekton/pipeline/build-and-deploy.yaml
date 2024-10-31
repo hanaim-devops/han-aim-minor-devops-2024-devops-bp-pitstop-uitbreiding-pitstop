@@ -1,0 +1,56 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: build-and-deploy
+spec:
+  params:
+    - name: repo-url
+      description: "The Git repository URL to clone"
+      type: string
+    - name: revision
+      description: "The Git revision (branch, tag, commit) to check out"
+      type: string
+      default: "main"
+    - name: image-url
+      description: "The full image name to push (e.g., registry.com/user/repo:tag)"
+      type: string
+    - name: service
+      description: "The service to build (e.g., customermanagementapi)"
+      type: string
+
+  workspaces:
+    - name: output
+      description: "Temporary workspace for cloned source code, will be deleted after pipeline completion"
+    - name: dockerconfig
+      description: Includes a docker `config.json`
+
+  tasks:
+    - name: clone-repo
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.revision)
+      workspaces:
+        - name: output
+          workspace: output
+
+    - name: build-and-push-image
+      runAfter:
+        - clone-repo
+      taskRef:
+        name: kaniko
+      params:
+        - name: IMAGE
+          value: $(params.image-url)
+        - name: DOCKERFILE
+          value: $(workspaces.output.path)/src/$(params.service)/Dockerfile
+        - name: CONTEXT
+          value: $(workspaces.output.path)/src/$(params.service)
+      workspaces:
+        - name: output
+          workspace: output
+        - name: dockerconfig
+          workspace: dockerconfig

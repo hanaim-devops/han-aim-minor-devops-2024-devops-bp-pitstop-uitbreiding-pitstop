@@ -10,10 +10,10 @@ public class Rental
     public RentalCar Car { get; set; }
 
     [Display(Name = "Start At")]
-    public DateTime? StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
     [Display(Name = "Ends At")]
-    public DateTime? EndDate { get; set; }
+    public DateTime EndDate { get; set; }
 
     public string CustomerId { get; set; }
 
