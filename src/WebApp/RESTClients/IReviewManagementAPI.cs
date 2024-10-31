@@ -5,7 +5,7 @@ public interface IReviewManagementAPI
     [Get("/reviews")]
     Task<List<Review>> GetReviews();
 
-    [Get("/review/{id}")]
+    [Get("/reviews/{id}")]
     Task<Review> GetReviewById([AliasAs("id")] string reviewId);
 
     [Post("/reviews")]

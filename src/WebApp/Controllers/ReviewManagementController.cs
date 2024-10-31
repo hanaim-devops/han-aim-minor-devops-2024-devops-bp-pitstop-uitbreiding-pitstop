@@ -90,10 +90,10 @@ public class ReviewManagementController : Controller
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
             var review = await _reviewManagementApi.GetReviewById(id);
-            // if (review == null)
-            // {
-            //     return NotFound();
-            // }
+            if (review == null)
+            {
+                return NotFound();
+            }
 
             var model = new ReviewManagementEditViewModel
             {
