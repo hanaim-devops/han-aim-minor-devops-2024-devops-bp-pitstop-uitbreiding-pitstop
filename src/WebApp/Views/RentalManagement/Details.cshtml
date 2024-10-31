@@ -34,5 +34,8 @@
     </tbody>
 </table>
 <span><a id="BackButton" asp-action="Index" asp-controller="RentalManagement" class="btn btn-default">Back</a></span>
-<span><a id="DeleteButton" asp-action="Delete" asp-route-rentalId="@Model.Rental.Id" asp-controller="RentalManagement" class="btn btn-default">Delete</a></span>
+<form asp-controller="RentalManagement" asp-action="Delete" method="post">
+    <input id="DeleteButton" type="submit" value="Delete" class="btn btn-danger" />
+    <input type="hidden" name="rentalId" value="@Model.Rental.Id" />
+</form>
 <span><a id="EditButton" asp-action="Edit" asp-route-rentalId="@Model.Rental.Id" asp-controller="RentalManagement" class="btn btn-default">Edit</a></span>
