@@ -71,10 +71,10 @@ Tijdens het testen kan er een redirect-probleem optreden, waarbij de ArgoCD-serv
    ```
 
    ![Change config](images/config-file.png)  
-   _Figuur 0: aanpassen van de config file
+   _Figuur 1: aanpassen van de config file
 
    ![Redirect Error Pagina](images/redirect_error.png)  
-   _Figuur 1: De redirect error die verschijnt in de browser wanneer ArgoCD probeert om te leiden naar HTTPS._
+   _Figuur 2: De redirect error die verschijnt in de browser wanneer ArgoCD probeert om te leiden naar HTTPS._
 
 3. **Herstart de ArgoCD Server**: Sla de wijzigingen op en herstart de ArgoCD-server:
 
@@ -85,7 +85,7 @@ Tijdens het testen kan er een redirect-probleem optreden, waarbij de ArgoCD-serv
    Na de herstart zou ArgoCD toegankelijk moeten zijn zonder redirect-problemen. Als alles correct is ingesteld, zou je nu het ArgoCD login-scherm moeten zien:
 
    ![ArgoCD Login Scherm](images/argocd_login.png)  
-   _Figuur 2: ArgoCD login-scherm._
+   _Figuur 3: ArgoCD login-scherm._
 
 ---
 
@@ -96,7 +96,7 @@ Zodra ArgoCD is ingesteld, kun je een repository toevoegen om de deployment te b
 1. **Open ArgoCD en Log in**: Na inloggen kun je de optie kiezen om een nieuwe applicatie toe te voegen en een Git-repository toe te wijzen. 
 
    ![ArgoCD Repo Configuratie Scherm](images/argocd_repo_config.png)  
-   _Figuur 3: Het scherm in ArgoCD waarin je de repository URL en branch kunt configureren._
+   _Figuur 4: Het scherm in ArgoCD waarin je de repository URL en branch kunt configureren._
 
 2. **Voorbeeld NGINX Configuratie**: Voeg de volgende configuratie toe aan je repository om een NGINX Deployment, Service, en Ingress-resource aan te maken:
 
@@ -164,7 +164,7 @@ Zodra ArgoCD is ingesteld, kun je een repository toevoegen om de deployment te b
 3. **De Repository Synchroniseren**: Klik op "Sync" in ArgoCD om de applicatie te synchroniseren en de NGINX-applicatie uit te rollen.
 
    ![ArgoCD Repo Ingeladen Scherm](images/argocd_repo_synced.png)  
-   _Figuur 4: Het overzichtsscherm waarin de repository succesvol is ingeladen en gesynchroniseerd._
+   _Figuur 5: Het overzichtsscherm waarin de repository succesvol is ingeladen en gesynchroniseerd._
 
 ---
 
