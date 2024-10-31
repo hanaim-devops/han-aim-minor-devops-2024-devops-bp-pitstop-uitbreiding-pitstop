@@ -107,7 +107,7 @@ public class ReviewManagementController : Controller
         }, View("Offline", new ReviewManagementOfflineViewModel()));
     }
     
-    [HttpPut]
+    [HttpPut("/Edit/{id}")]
     public async Task<IActionResult> Edit([FromForm] ReviewManagementEditViewModel inputModel)
     {
         if (ModelState.IsValid)

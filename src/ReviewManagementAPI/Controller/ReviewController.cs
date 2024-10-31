@@ -35,4 +35,10 @@ public class ReviewController : ControllerBase
     {
         return _reviewService.GetReviewById(id);
     }
+    
+    [HttpPut("{id}")]
+    public Review UpdateReview(string id, [FromBody] UpdateReview command)
+    {
+        return _reviewService.UpdateReview(id, command);
+    }
 }

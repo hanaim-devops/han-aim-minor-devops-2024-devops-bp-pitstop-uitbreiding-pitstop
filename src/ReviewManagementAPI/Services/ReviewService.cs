@@ -46,5 +46,19 @@ namespace ReviewManagementAPI.Services
             } 
             throw new Exception("Review not found");
         }
+        
+        public Review UpdateReview(string id, UpdateReview command)
+        {
+            var review = _dbContext.Reviews.FirstOrDefault(r => r.Id == id);
+            if (review != null)
+            {
+                review.ReviewerName = command.ReviewerName;
+                review.Rating = command.Rating;
+                review.Content = command.Content;
+                _dbContext.SaveChanges();
+                return review;
+            }
+            throw new Exception("Review not found");
+        }
     }
 }
