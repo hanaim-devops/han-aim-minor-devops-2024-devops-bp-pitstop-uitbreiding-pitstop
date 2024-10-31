@@ -10,5 +10,6 @@ public interface IRentalPlanningService
     public RentalReservation GetById(string id);
     public RentalReservation ChangeCar(string id, ChangeCar command);
     public RentalReservation Extend(string id, Extend command);
+    public void Delete(string id);
     public List<RentalReservation> GetAll();
 }

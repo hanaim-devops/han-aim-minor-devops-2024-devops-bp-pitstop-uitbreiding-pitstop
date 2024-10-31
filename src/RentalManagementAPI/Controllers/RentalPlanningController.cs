@@ -49,4 +49,10 @@ public class RentalPlanningController(IRentalPlanningService rentalPlanningServi
         var reservation = _rentalPlanningService.Extend(id, command);
         return mapper.Map<RentalReservationResponse>(reservation);
     }
+
+    [HttpDelete("{id}")]
+    public void Delete(string id)
+    {
+        _rentalPlanningService.Delete(id);
+    }
 }
